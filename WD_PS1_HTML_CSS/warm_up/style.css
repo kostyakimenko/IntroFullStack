@@ -1,0 +1,111 @@
+body {
+    margin: 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.column {
+    font-size: 4rem;
+    color: white;
+    font-weight: bold;
+    font-family: Helvetica;
+    text-align: center;
+    padding: 1rem;
+}
+
+/*
+"Floats" section elements style
+*/
+.floats {
+    overflow: hidden;
+}
+
+.floats__element1 {
+    background-color: #1abc9c;
+    float: left;
+    width: 33.333%;
+}
+
+.floats__element2 {
+    background-color: #2ecc71;
+    float: left;
+    width: 33.333%;
+}
+
+.floats__element3 {
+    background-color: #3498db;
+    float: left;
+    width: 33.333%;
+}
+
+/*
+"Blocks" section elements style.
+*/
+.blocks {
+    overflow: hidden;
+}
+
+.blocks__element1 {
+    background-color: #f39c12;
+    display: inline-block;
+    width: 33.333%;
+}
+
+.blocks__element2 {
+    background-color: #d35400;
+    display: inline-block;
+    width: 33.333%;
+}
+
+.blocks__element3 {
+    background-color: #c0392b;
+    display: inline-block;
+    width: 33.333%;
+}
+
+/*
+"Flexbox" section elements style.
+*/
+.flexbox {
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+}
+
+.flexbox__element1 {
+    background-color: #16a085;
+    flex-grow: 1;
+}
+
+.flexbox__element2 {
+    background-color: #27ae60;
+    flex-grow: 1;
+}
+
+.flexbox__element3 {
+    background-color: #2980b9;
+    flex-grow: 1;
+}
+
+/*
+"Grid" section elements style.
+*/
+.grid {
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
+.grid__element1 {
+    background-color: #f1c40f;
+}
+
+.grid__element2 {
+    background-color: #e67e22;
+}
+
+.grid__element3 {
+    background-color: #e74c3c;
+}

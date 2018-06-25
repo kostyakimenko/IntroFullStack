@@ -1,0 +1,210 @@
+html {
+    height: 100%;
+}
+
+body {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+/*
+This style block describes the header
+and all inner elements: logo, text and links.
+*/
+header {
+    background-color: #f1f2f6;
+    display: flex;
+    flex-direction: row;
+    flex-basis: 100px;
+}
+
+.header__logo {
+    flex-basis: 50%;
+}
+
+.header__image {
+    width: 49px;
+    height: 76px;
+    float: left;
+    margin: 7px 0 0 50px;
+}
+
+.header__text {
+    font-family: ‘Trebuchet MS’, Helvetica, sans-serif;
+    margin-top: 35px;
+}
+
+.header__menu {
+    flex-basis: 50%;
+    line-height: 100px;
+}
+
+.header__link {
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 14px;
+    color: #000000;
+    text-decoration: none;
+    float: right;
+    margin-right: 50px;
+}
+
+.header__link:hover {
+    color: #2d98da;
+}
+
+/*
+Info block and its inner elements:
+image, title and paragraph.
+*/
+.info {
+    background-color: #2d98da;
+    padding: 40px 0 40px 0;
+    display: flex;
+    flex-direction: row;
+}
+
+.info__image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-basis: 50%;
+}
+
+.info__text-block {
+    display: flex;
+    align-items: center;
+    flex-basis: 50%;
+}
+
+.info__head {
+    font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+    font-size: 28px;
+    color: #f1f2f6;
+    margin: 0;
+}
+
+.info__paragraph {
+    font-family: Verdana, Geneva, sans-serif;
+    color: #f1f2f6;
+    text-align: justify;
+    padding: 20px 60px 20px 0;
+}
+
+/*
+Services block and its inner elements:
+icon, title and paragraph.
+*/
+.services {
+    background-color: #f1f2f6;
+    display: flex;
+    flex-direction: row;
+    padding: 50px 10px 50px 10px;
+}
+
+.services__block {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 20px 0 20px;
+    font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+}
+
+.services__icon {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.services__head {
+    font-size: 24px;
+}
+
+.services__paragraph {
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
+
+/*
+Feedback block and its inner elements:
+form, title, label, input and buttons.
+*/
+.feedback {
+    background-color: #2d98da;
+    display: flex;
+    flex-direction: row;
+    padding: 50px 0 50px 0;
+}
+
+.feedback__form {
+    flex-basis: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #f1f2f6;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.feedback__head {
+    font-size: 24px;
+    text-decoration: underline;
+    color: #f1f2f6;
+    margin-top: 0;
+}
+
+.feedback__label {
+    color: #f1f2f6;
+}
+
+.feedback__input_field {
+    width: 410px;
+    height: 35px;
+    border: 0;
+    padding: 0;
+}
+
+.feedback__button_submit {
+    float: left;
+    margin-left: 70px;
+    width: 120px;
+}
+
+.feedback__button_reset {
+    float: right;
+    margin-right: 70px;
+    width: 120px;
+}
+
+.feedback__button_go {
+    width: 150px;
+    margin-left: 125px;
+}
+
+/*
+Basic style of the buttons.
+*/
+.button {
+    background-color: #2d98da;
+    border: 2px solid white;
+    border-radius: 5px;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    color: #f1f2f6;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+.button:hover {
+    background-color: #45aaf2;
+}
+
+
+
+

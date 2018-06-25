@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="style.css" rel="stylesheet" type="text/css">
+    <title>First Landing</title>
+</head>
+<body>
+    <header>
+        <div class="header__logo">
+            <img class="header__image" src="images/logo.png">
+            <h2 class="header__text">TAKE MORE...</h2>
+        </div>
+        <div class="header__menu">
+            <a class="header__link" href="#">CONTACTS</a>
+            <a class="header__link" href="#">ABOUT US</a>
+            <a class="header__link" href="#">PRODUCTS</a>
+        </div>
+    </header>
+    <section class="info">
+        <div class="info__image">
+            <img src="images/iphone.png">
+        </div>
+        <div class="info__text-block">
+            <div>
+                <h1 class="info__head">Our awesome app is ready to use!</h1>
+                <p class="info__paragraph">Lorem ipsum dolor sit amet, in duis metus,
+                    inceptos sit sit, sapien donec, vestibulum neque laoreet sed, id urna ac per vivamus sed libero.
+                    Metus sed fusce augue, ac sociis libero massa mi wisi. Integer nunc libero sed. Libero lacus.
+                    Tempus amet eget, primis fermentum malesuada eu.</p>
+                <button class="button">Buy now!</button>
+            </div>
+        </div>
+    </section>
+    <section class="services">
+        <div class="services__block">
+            <img class="services__icon" src="images/web_dev.jpg">
+            <h2 class="services__head">Web development</h2>
+            <p class="services__paragraph">Lorem ipsum dolor sit amet, in duis metus,
+                inceptos sit sit, sapien donec, vestibulum neque laoreet sed, id urna ac per vivamus sed libero.
+                Metus sed fusce augue, ac sociis libero massa mi wisi. Integer nunc libero sed.</p>
+        </div>
+        <div class="services__block">
+            <img class="services__icon" src="images/mobile_dev.png">
+            <h2 class="services__head">Mobile development</h2>
+            <p class="services__paragraph">Lorem ipsum dolor sit amet, in duis metus,
+                inceptos sit sit, sapien donec, vestibulum neque laoreet sed, id urna ac per vivamus sed libero.
+                Metus sed fusce augue, ac sociis libero massa mi wisi. Integer nunc libero sed.</p>
+        </div>
+        <div class="services__block">
+            <img class="services__icon" src="images/hightload.png">
+            <h2 class="services__head">Hightload</h2>
+            <p class="services__paragraph">Lorem ipsum dolor sit amet, in duis metus,
+                inceptos sit sit, sapien donec, vestibulum neque laoreet sed, id urna ac per vivamus sed libero.
+                Metus sed fusce augue, ac sociis libero massa mi wisi. Integer nunc libero sed.</p>
+        </div>
+    </section>
+    <section class="feedback">
+        <div class="feedback__form">
+            <h2 class="feedback__head">Registration</h2>
+            <form>
+                <label class="feedback__label" for="username">Username:</label><br>
+                <input class="feedback__input_field" type="text" name="username" id="username"><br><br>
+                <label class="feedback__label" for="email">Email:</label><br>
+                <input class="feedback__input_field" type="email" name="email" id="email"><br><br>
+                <label class="feedback__label" for="website">Website</label><br>
+                <input class="feedback__input_field" type="url" name="site" id="website"><br><br>
+                <label class="feedback__label" for="telephone">Telephone:</label><br>
+                <input class="feedback__input_field" type="tel" name="telephone" id="telephone"><br><br>
+                <label class="feedback__label" for="male">Gender:</label><br>
+                <input type="radio" name="male" id="male" checked>Male<br>
+                <input type="radio" name="female" id="female">Female<br><br>
+                <label class="feedback__label" for="birthday">Birthday:</label><br>
+                <input class="feedback__input_field" type="date" name="bday" id="birthday"><br><br>
+                <label class="feedback__label" for="favcolor">Favorite color:</label>
+                <input type="color" name="favcolor" id="favcolor"><br><br>
+                <label class="feedback__label" for="userfoto">Your foto:</label>
+                <input type="file" name="userfoto" id="userfoto"><br><br>
+                <label class="feedback__label" for="password">Password:</label><br>
+                <input class="feedback__input_field" type="password" name="password" id="password"><br><br>
+                <input class="button feedback__button_submit" type="submit" value="Sign up">
+                <input class="button feedback__button_reset" type="reset" value="Reset">
+            </form>
+        </div>
+        <div class="feedback__form">
+            <h2 class="feedback__head">Work with us</h2>
+            <form>
+                <label class="feedback__label" for="java" >Language:</label><br>
+                <input type="checkbox" name="java" id="java">Java<br>
+                <input type="checkbox" name="javaScript" id="javascript">JavaScript<br>
+                <input type="checkbox" name="php" id="php">PHP<br>
+                <input type="checkbox" name="python" id="python">Python<br><br>
+                <label class="feedback__label" for="pro-level">Professional level:</label>
+                <input type="range" name="pro-level" min="0" max="10" id="pro-level"><br><br>
+                <label class="feedback__label" for="month">Start to work (month):</label><br>
+                <input class="feedback__input_field" type="month" name="month" id="month"><br><br>
+                <label class="feedback__label" for="week">Start to work (week):</label><br>
+                <input class="feedback__input_field" type="week" name="week" id="week"><br><br>
+                <label class="feedback__label" for="datetime">Start to work (date and time):</label><br>
+                <input class="feedback__input_field" type="datetime-local" name="datetime" id="datetime"><br><br>
+                <label class="feedback__label" for="wakeup-time">Wake-up time:</label><br>
+                <input class="feedback__input_field" type="time" name="wuptime" id="wakeup-time"><br><br>
+                <label class="feedback__label" for="salary">Salary:</label><br>
+                <input class="feedback__input_field" type="number" name="salary" min="0" max="10000" step="100" value="1000" id="salary"><br><br>
+                <label class="feedback__label" for="vac-search">Vacancy search:</label><br>
+                <input class="feedback__input_field" type="search" name="vac-search" id="vac-search"><br><br>
+                <input class="button feedback__button_go" type="button" value="Go to work!">
+            </form>
+        </div>
+    </section>
+</body>
+</html>
