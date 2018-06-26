@@ -11,7 +11,7 @@ body {
 
 /*
 This style block describes the header
-and all inner elements: logo, text and links.
+and all inner elements: logo and menu.
 */
 header {
     background-color: #f1f2f6;
@@ -22,16 +22,17 @@ header {
 
 .header__logo {
     flex-basis: 50%;
+    display: flex;
+    flex-direction: row;
 }
 
-.header__image {
+.header__logo > img {
     width: 49px;
     height: 76px;
-    float: left;
     margin: 7px 0 0 50px;
 }
 
-.header__text {
+.header__logo > h2 {
     font-family: ‘Trebuchet MS’, Helvetica, sans-serif;
     margin-top: 35px;
 }
@@ -41,7 +42,7 @@ header {
     line-height: 100px;
 }
 
-.header__link {
+.header__menu > a {
     font-family: Verdana, Geneva, sans-serif;
     font-size: 14px;
     color: #000000;
@@ -50,13 +51,13 @@ header {
     margin-right: 50px;
 }
 
-.header__link:hover {
+.header__menu > a:hover {
     color: #2d98da;
 }
 
 /*
 Info block and its inner elements:
-image, title and paragraph.
+image and text block.
 */
 .info {
     background-color: #2d98da;
@@ -78,14 +79,14 @@ image, title and paragraph.
     flex-basis: 50%;
 }
 
-.info__head {
+.info__text-block h1 {
     font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
     font-size: 28px;
     color: #f1f2f6;
     margin: 0;
 }
 
-.info__paragraph {
+.info__text-block p {
     font-family: Verdana, Geneva, sans-serif;
     color: #f1f2f6;
     text-align: justify;
@@ -94,7 +95,7 @@ image, title and paragraph.
 
 /*
 Services block and its inner elements:
-icon, title and paragraph.
+icons, titles and paragraphs.
 */
 .services {
     background-color: #f1f2f6;
@@ -113,17 +114,17 @@ icon, title and paragraph.
     font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
 }
 
-.services__icon {
+.services__block > img {
     width: 100px;
     height: 100px;
     border-radius: 50%;
 }
 
-.services__head {
+.services__block > h2 {
     font-size: 24px;
 }
 
-.services__paragraph {
+.services__block > p {
     text-align: center;
     padding: 0;
     margin: 0;
@@ -140,7 +141,7 @@ form, title, label, input and buttons.
     padding: 50px 0 50px 0;
 }
 
-.feedback__form {
+.feedback__block {
     flex-basis: 50%;
     display: flex;
     flex-direction: column;
@@ -149,14 +150,14 @@ form, title, label, input and buttons.
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.feedback__head {
+.feedback__block > h2 {
     font-size: 24px;
     text-decoration: underline;
     color: #f1f2f6;
     margin-top: 0;
 }
 
-.feedback__label {
+.feedback__block label {
     color: #f1f2f6;
 }
 
@@ -179,7 +180,7 @@ form, title, label, input and buttons.
     width: 120px;
 }
 
-.feedback__button_go {
+.feedback__button_work {
     width: 150px;
     margin-left: 125px;
 }
