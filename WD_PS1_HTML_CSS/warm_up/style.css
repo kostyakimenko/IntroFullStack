@@ -44,6 +44,7 @@ body {
 */
 .blocks {
     overflow: hidden;
+    font-size: 0;
 }
 
 .blocks > .column {
