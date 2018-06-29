@@ -8,6 +8,7 @@ body {
     display: flex;
     flex-direction: column;
     text-align: center;
+    font-family: Verdana, Geneva, sans-serif;
     font-size: 24px;
     color: #ffffff;
 }
@@ -32,13 +33,11 @@ footer {
 }
 
 .sidebar {
-    overflow-x: hidden;
     background-color: #00b894;
     flex-basis: 30%;
 }
 
 .content {
-    overflow-x: hidden;
     background-color: #55efc4;
     flex-basis: 70%;
 }
