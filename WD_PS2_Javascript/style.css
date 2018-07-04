@@ -20,10 +20,10 @@ header {
 }
 
 .workspace {
-display: flex;
-flex-direction: column;
-align-items: center;
-margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40px;
 }
 
 .workspace > form {
@@ -31,17 +31,17 @@ margin-top: 40px;
 }
 
 .workspace_in {
-width: 200px;
-height: 30px;
-border: 0;
-border-radius: 5px;
-margin: 0;
-padding-left: 5px;
-font-size: 14px;
+    width: 200px;
+    height: 30px;
+    border: 0;
+    border-radius: 5px;
+    margin: 0;
+    padding-left: 5px;
+    font-size: 14px;
 }
 
 .workspace_out {
-margin: 16px 0 16px 0;
+    margin: 16px 0 16px 0;
 }
 
 #task3_out {
