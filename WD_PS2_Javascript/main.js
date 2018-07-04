@@ -11,8 +11,8 @@ function sumAll() {
 
     const min = Math.min(values[0], values[1]);
     const max = Math.max(values[0], values[1]);
-    let result = 0;
 
+    let result = 0;
     for (let i = min; i <= max; i++)
         result += i;
 
