@@ -17,10 +17,10 @@
         <div class="workspace" id="task1">
             <h2>Assignment 1</h2>
             <p>Сalculate a sum of all numbers from "start number" to "end number"</p>
-            <form>
+            <form onsubmit="return false;">
                 <input type="text" class="workspace_in" id="task1_in1" title="start number" value="-1000" placeholder="start number">
                 <input type="text" class="workspace_in" id="task1_in2" title="end number" value="1000" placeholder="end number">
-                <input type="button" class="button" onclick="sumAll()" value="Get sum">
+                <input type="button" class="button" onclick="sumAll('task1_in1', 'task1_in2', 'task1_out')" value="Get sum">
             </form>
             <div class="workspace_out" id="task1_out"></div>
         </div>
@@ -29,10 +29,10 @@
         <div class="workspace" id="task2">
             <h2>Assignment 2</h2>
             <p>Сalculate a sum of all numbers from "start number" to "end number"<br>in which last digits ends in 2, 3, or 7</p>
-            <form>
+            <form onsubmit="return false;">
                 <input type="text" class="workspace_in" id="task2_in1" title="start number" value="-1000" placeholder="start number">
                 <input type="text" class="workspace_in" id="task2_in2" title="end number" value="1000" placeholder="end number">
-                <input type="button" class="button" onclick="sumAllOf()" value="Get sum">
+                <input type="button" class="button" onclick="sumAllOf('task2_in1', 'task2_in2', 'task2_out')" value="Get sum">
             </form>
             <div class="workspace_out" id="task2_out"></div>
         </div>
@@ -41,9 +41,9 @@
         <div class="workspace" id="task3">
             <h2>Assignment 3</h2>
             <p>Draw a half of pyramid</p>
-            <form>
+            <form onsubmit="return false;">
                 <input type="text" class="workspace_in" id="task3_in" title="numbers of rows" value="50" placeholder="number of rows">
-                <input type="button" class="button" onclick="drawPyramid()" value="Draw pyramid">
+                <input type="button" class="button" onclick="drawPyramid('task3_in', 'task3_out')" value="Draw pyramid">
             </form>
             <div class="workspace_out" id="task3_out"></div>
         </div>
@@ -52,9 +52,9 @@
         <div class="workspace" id="task4">
             <h2>Assignment 4</h2>
             <p>Convert seconds to time format "hh:mm:ss"</p>
-            <form>
+            <form onsubmit="return false;">
                 <input type="text" class="workspace_in" id="task4_in" title="seconds" placeholder="seconds">
-                <input type="button" class="button" onclick="formatTime()" value="Get time format">
+                <input type="button" class="button" onclick="formatTime('task4_in', 'task4_out')" value="Get time format">
             </form>
             <div class="workspace_out" id="task4_out"></div>
         </div>
@@ -63,9 +63,9 @@
         <div class="workspace" id="task5">
             <h2>Assignment 5</h2>
             <p>To specified age add to string "год", "года" or "лет"</p>
-            <form>
+            <form onsubmit="return false;">
                 <input type="text" class="workspace_in" id="task5_in" title="student's age" placeholder="student's age">
-                <input type="button" class="button" onclick="studentAge()" value="Get student's age">
+                <input type="button" class="button" onclick="studentAge('task5_in', 'task5_out')" value="Get student's age">
             </form>
             <div class="workspace_out" id="task5_out"></div>
         </div>
@@ -74,10 +74,10 @@
         <div class="workspace" id="task6">
             <h2>Assignment 6</h2>
             <p>Calculate a time interval between two dates<br>entered in the format "October 13, 2014 11:13:00"</p>
-            <form>
+            <form onsubmit="return false;">
                 <input type="text" class="workspace_in" id="task6_in1" title="first date" placeholder="first date">
                 <input type="text" class="workspace_in" id="task6_in2" title="second date" placeholder="second date">
-                <input type="button" class="button" onclick="timeInterval()" value="Get time interval">
+                <input type="button" class="button" onclick="timeInterval('task6_in1', 'task6_in2', 'task6_out')" value="Get time interval">
             </form>
             <div class="workspace_out" id="task6_out"></div>
         </div>
@@ -86,9 +86,9 @@
         <div class="workspace" id="task7">
             <h2>Assignment 7</h2>
             <p>Find a zodiac sign by date which entered in the format "2014-12-31"</p>
-            <form>
+            <form onsubmit="return false;">
                 <input type="text" class="workspace_in" id="task7_in" title="date" placeholder="date">
-                <input type="button" class="button" onclick="findZodiac()" value="Get zodiac sign">
+                <input type="button" class="button" onclick="findZodiac('task7_in', 'task7_out')" value="Get zodiac sign">
             </form>
             <div class="workspace_out" id="task7_out"></div>
         </div>
@@ -96,10 +96,11 @@
         <!--Assignment_8 block-->
         <div class="workspace" id="task8">
             <h2>Assignment 8</h2>
-            <p>Draw a chessboard with size in the format "8x8"</p>
-            <form>
-                <input type="text" class="workspace_in" id="task8_in" title="chessboard size" placeholder="chessboard size">
-                <input type="button" class="button" onclick="drawChessboard()" value="Draw chessboard">
+            <p>Draw a chessboard of a given size</p>
+            <form onsubmit="return false;">
+                <input type="text" class="workspace_in" id="task8_in1" title="chessboard rows" placeholder="chessboard rows">
+                <input type="text" class="workspace_in" id="task8_in2" title="chessboard columns" placeholder="chessboard columns">
+                <input type="button" class="button" onclick="drawChessboard('task8_in1', 'task8_in2', 'task8_out')" value="Draw chessboard">
             </form>
             <div class="workspace_out" id="task8_out"></div>
         </div>
@@ -108,12 +109,12 @@
         <div class="workspace" id="task9">
             <h2>Assignment 9</h2>
             <p>Find a number of a porch and a floor by a room number</p>
-            <form>
+            <form onsubmit="return false;">
                 <input type="text" class="workspace_in" id="task9_in1" title="number of porches" placeholder="number of porches">
                 <input type="text" class="workspace_in" id="task9_in2" title="number of floors" placeholder="number of floors">
                 <input type="text" class="workspace_in" id="task9_in3" title="rooms on floor" placeholder="rooms on floor"><br><br>
                 <input type="text" class="workspace_in" id="task9_in4" title="room number" placeholder="room number">
-                <input type="button" class="button" onclick="roomNumber()" value="Get porch and floor">
+                <input type="button" class="button" onclick="roomNumber('task9_in1', 'task9_in2', 'task9_in3', 'task9_in4', 'task9_out')" value="Get porch and floor">
             </form>
             <div class="workspace_out" id="task9_out"></div>
         </div>
@@ -122,9 +123,9 @@
         <div class="workspace" id="task10">
             <h2>Assignment 10</h2>
             <p>Calculate a sum of digits of input number</p>
-            <form>
+            <form onsubmit="return false;">
                 <input type="text" class="workspace_in" id="task10_in" title="number" placeholder="number">
-                <input type="button" class="button" onclick="sumDigit()" value="Get sum of digits">
+                <input type="button" class="button" onclick="sumDigit('task10_in', 'task10_out')" value="Get sum of digits">
             </form>
             <div class="workspace_out" id="task10_out"></div>
         </div>
@@ -133,7 +134,7 @@
         <div class="workspace" id="task11">
             <h2>Assignment 11</h2>
             <p>Remove from references "https://" and "http://"<br>and display corrected links in the sorted list</p>
-            <textarea id="task11_in" rows="10" cols="50" onblur="sortLinks()" title="links area" placeholder="enter links separated by commas"></textarea>
+            <textarea id="task11_in" rows="10" cols="50" onblur="sortLinks('task11_in', 'task11_out')" title="links area" placeholder="enter links separated by commas"></textarea>
             <ul id="task11_out"></ul>
         </div>
 
