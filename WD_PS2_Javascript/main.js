@@ -484,7 +484,7 @@ function errMessage(elementId, message) {
  * @returns {boolean} true - values is integer, false - values isn't integer
  */
 function isIntegers() {
-    for (let i = 0; i < arguments.length; i++) {
+    for (let i = 0, length = arguments.length; i < length; i++) {
         if (arguments[i] === "" || !Number.isInteger(Number(arguments[i])))
             return false;
     }
@@ -498,7 +498,7 @@ function isIntegers() {
  * @returns {boolean} true - values is positive integer, false - values isn't positive integer
  */
 function isPositiveIntegers() {
-    for (let i = 0; i < arguments.length; i++) {
+    for (let i = 0, length = arguments.length; i < length; i++) {
         if (!Number.isInteger(Number(arguments[i])) || arguments[i] <= 0)
             return false;
     }
@@ -510,7 +510,7 @@ function isPositiveIntegers() {
  * Clear element value by ID.
  */
 function clearValue() {
-    for (let i = 0; i < arguments.length; i++)
+    for (let i = 0, length = arguments.length; i < length; i++)
         document.getElementById(arguments[i]).value = "";
 }
 
