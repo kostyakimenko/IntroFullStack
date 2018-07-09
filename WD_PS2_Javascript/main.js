@@ -14,6 +14,7 @@ const NUMBER = /^-?\d+(.\d+)?$/;
 const ERR_MSG_INTEGER = "input value must be an integer";
 const ERR_MSG_POSITIVE_INTEGER = "input value must be an integer and more then '0'";
 const ERR_MSG_DATE = "input date is incorrect";
+const ERR_MSG_DATE_FORMAT = "date format is incorrect";
 const ERR_MSG_NAN = "input value must be a number";
 const ERR_MSG_BIG_NUMBER = "input number is too big";
 const ERR_MSG_ROOM_NUMBER = "in the house there is no such room";
@@ -161,8 +162,10 @@ function timeInterval(input1, input2, output) {
     const date1 = new Date(inputDate1);
     const date2 = new Date(inputDate2);
 
-    if (!LONG_DATE_FORMAT.test(inputDate1) || !LONG_DATE_FORMAT.test(inputDate2)
-        || date1.getDate() != inputDate1.match(/\d+/) || date2.getDate() != inputDate2.match(/\d+/))
+    if (!LONG_DATE_FORMAT.test(inputDate1) || !LONG_DATE_FORMAT.test(inputDate2))
+        return errMessage(output, ERR_MSG_DATE_FORMAT);
+
+    if (date1.getDate() != inputDate1.match(/\d+/) || date2.getDate() != inputDate2.match(/\d+/))
         return errMessage(output, ERR_MSG_DATE);
 
     /* Find of earlier and later date */
@@ -272,7 +275,10 @@ function findZodiac(input, output) {
     const inputDate = document.getElementById(input).value;
     const date = new Date(inputDate);
 
-    if (!ISO_DATE_FORMAT.test(inputDate) || date.getDate() != inputDate.substr(-2))
+    if (!ISO_DATE_FORMAT.test(inputDate))
+        return errMessage(output, ERR_MSG_DATE_FORMAT);
+
+    if (date.getDate() != inputDate.substr(-2))
         return errMessage(output, ERR_MSG_DATE);
 
     const month = date.getMonth();
@@ -426,15 +432,9 @@ function sumDigit(input, output) {
     if (!NUMBER.test(number))
         return errMessage(output, ERR_MSG_NAN);
 
-    const integer = number.replace(/\./g, "");
-    const arrDigits = integer.split("");
-
-    if (arrDigits[0] === "-") {
-        arrDigits[1] = "-" + arrDigits[1];
-        arrDigits.splice(0, 1);
-    }
-
-    const result = arrDigits.reduce((sum, num) => sum + Number(num), 0);
+    const result = number.replace(/[.-]/g, "")
+        .split("")
+        .reduce((sum, num) => sum + Number(num), 0);
 
     document.getElementById(output).innerText = "Sum of digit for number " + number + " is " + result;
     clearValue(input);
