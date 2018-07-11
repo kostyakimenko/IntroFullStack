@@ -10,6 +10,8 @@ const LONG_DATE_FORMAT = /^[a-z]+\s\d+,?\s\d+\s[0-2]\d:[0-5]\d:[0-5]\d$/i;
 const ISO_DATE_FORMAT = /^\d{4}-\d{2}-\d{2}$/;
 /* Pattern for number */
 const NUMBER = /^-?\d+(.\d+)?$/;
+/* Pattern for correct links line */
+const PROTOCOL_OR_SPACE = /(http:\/\/)|(https:\/\/)|(\s+)/g;
 /* Error messages */
 const ERR_MSG_INTEGER = "input value must be an integer";
 const ERR_MSG_POSITIVE_INTEGER = "input value must be an integer and more then '0'";
@@ -32,15 +34,17 @@ function sumAll(input1, input2, output) {
     const startNumber = document.getElementById(input1).value;
     const endNumber = document.getElementById(input2).value;
 
-    if (!isIntegers(startNumber, endNumber))
+    if (!isIntegers(startNumber, endNumber)) {
         return errMessage(output, ERR_MSG_INTEGER);
+    }
 
     const min = Math.min(startNumber, endNumber);
     const max = Math.max(startNumber, endNumber);
 
     let result = 0;
-    for (let i = min; i <= max; i++)
+    for (let i = min; i <= max; i++) {
         result += i;
+    }
 
     document.getElementById(output).innerText = "Sum all numbers from " + min + " to " + max + " is " + result;
     clearValue(input1, input2);
@@ -60,8 +64,9 @@ function sumAllOf(input1, input2, output) {
     const startNumber = document.getElementById(input1).value;
     const endNumber = document.getElementById(input2).value;
 
-    if (!isIntegers(startNumber, endNumber))
+    if (!isIntegers(startNumber, endNumber)) {
         return errMessage(output, ERR_MSG_INTEGER);
+    }
 
     const min = Math.min(startNumber, endNumber);
     const max = Math.max(startNumber, endNumber);
@@ -69,8 +74,9 @@ function sumAllOf(input1, input2, output) {
     let result = 0;
     for (let i = min; i <= max; i++) {
         const lastDigit = i % 10;
-        if (lastDigit === 2 || lastDigit === 3 || lastDigit === 7)
+        if (lastDigit === 2 || lastDigit === 3 || lastDigit === 7) {
             result += i;
+        }
     }
 
     document.getElementById(output).innerText = "Sum all numbers (with last digit is 2, 3 or 7) from "
@@ -89,8 +95,9 @@ function sumAllOf(input1, input2, output) {
 function drawPyramid(input, output) {
     const rowNum = document.getElementById(input).value;
 
-    if (!isPositiveIntegers(rowNum))
+    if (!isPositiveIntegers(rowNum)) {
         return errMessage(output, ERR_MSG_POSITIVE_INTEGER);
+    }
 
     let row = "";
     let pyramid = "";
@@ -114,11 +121,13 @@ function formatTime(input, output) {
     const inputSeconds = document.getElementById(input).value;
     const ms = inputSeconds * MS_IN_SEC;
 
-    if (!isPositiveIntegers(inputSeconds))
+    if (!isPositiveIntegers(inputSeconds)) {
         return errMessage(output, ERR_MSG_POSITIVE_INTEGER);
+    }
 
-    if (ms > MAX_TIME_MS)
+    if (ms > MAX_TIME_MS) {
         return errMessage(output, ERR_MSG_BIG_NUMBER);
+    }
 
     const date = new Date(ms);
     const hours = Math.floor(ms / MS_IN_HOUR).toString().padStart(2, "0");
@@ -140,8 +149,9 @@ function formatTime(input, output) {
 function studentAge(input, output) {
     const years = document.getElementById(input).value;
 
-    if (!isPositiveIntegers(years))
+    if (!isPositiveIntegers(years)) {
         return errMessage(output, ERR_MSG_POSITIVE_INTEGER);
+    }
 
     document.getElementById(output).innerText = "Студенту " + timeStr(years, "year");
     clearValue(input);
@@ -162,11 +172,13 @@ function timeInterval(input1, input2, output) {
     const date1 = new Date(inputDate1);
     const date2 = new Date(inputDate2);
 
-    if (!LONG_DATE_FORMAT.test(inputDate1) || !LONG_DATE_FORMAT.test(inputDate2))
+    if (!LONG_DATE_FORMAT.test(inputDate1) || !LONG_DATE_FORMAT.test(inputDate2)) {
         return errMessage(output, ERR_MSG_DATE_FORMAT);
+    }
 
-    if (date1.getDate() != inputDate1.match(/\d+/) || date2.getDate() != inputDate2.match(/\d+/))
+    if (date1.getDate() != inputDate1.match(/\d+/) || date2.getDate() != inputDate2.match(/\d+/)) {
         return errMessage(output, ERR_MSG_DATE);
+    }
 
     /* Find of earlier and later date */
     const sortedTime = [date1.getTime(), date2.getTime()].sort();
@@ -176,11 +188,11 @@ function timeInterval(input1, input2, output) {
     const daysInMonth = new Date(firstDate.getFullYear(), firstDate.getMonth() + 1, 0).getDate();
 
     const arrTimeDiff = [lastDate.getFullYear() - firstDate.getFullYear(),
-                       lastDate.getMonth() - firstDate.getMonth(),
-                       lastDate.getDate() - firstDate.getDate(),
-                       lastDate.getHours() - firstDate.getHours(),
-                       lastDate.getMinutes() - firstDate.getMinutes(),
-                       lastDate.getSeconds() - firstDate.getSeconds()];
+                         lastDate.getMonth() - firstDate.getMonth(),
+                         lastDate.getDate() - firstDate.getDate(),
+                         lastDate.getHours() - firstDate.getHours(),
+                         lastDate.getMinutes() - firstDate.getMinutes(),
+                         lastDate.getSeconds() - firstDate.getSeconds()];
 
     correctTime(arrTimeDiff, daysInMonth);
 
@@ -275,11 +287,13 @@ function findZodiac(input, output) {
     const inputDate = document.getElementById(input).value;
     const date = new Date(inputDate);
 
-    if (!ISO_DATE_FORMAT.test(inputDate))
+    if (!ISO_DATE_FORMAT.test(inputDate)) {
         return errMessage(output, ERR_MSG_DATE_FORMAT);
+    }
 
-    if (date.getDate() != inputDate.substr(-2))
+    if (date.getDate() != inputDate.substr(-2)) {
         return errMessage(output, ERR_MSG_DATE);
+    }
 
     const month = date.getMonth();
     const day = date.getDate();
@@ -340,16 +354,18 @@ function drawChessboard(input1, input2, output) {
     const rows = document.getElementById(input1).value;
     const cols = document.getElementById(input2).value;
 
-    if (!isPositiveIntegers(rows, cols))
+    if (!isPositiveIntegers(rows, cols)) {
         return errMessage(output, ERR_MSG_POSITIVE_INTEGER);
+    }
 
     document.getElementById(output).innerText = "";
     clearValue(input1, input2);
 
     for (let row = 0; row < rows; row++) {
         const chessRow = createChessRow();
-        for (let col = 0; col < cols; col++)
+        for (let col = 0; col < cols; col++) {
             chessRow.appendChild(createChessCell(row, col));
+        }
         document.getElementById(output).appendChild(chessRow);
     }
 }
@@ -405,15 +421,17 @@ function roomNumber(input1, input2, input3, input4, output) {
     const roomOnFloor = document.getElementById(input3).value;
     const room = document.getElementById(input4).value;
 
-    if (!isPositiveIntegers(porchNum, floorNum, roomOnFloor, room))
+    if (!isPositiveIntegers(porchNum, floorNum, roomOnFloor, room)) {
         return errMessage(output, ERR_MSG_POSITIVE_INTEGER);
+    }
 
     const maxFloor = Math.ceil(room / roomOnFloor);
     const porch = Math.ceil(maxFloor / floorNum);
     const floor = (maxFloor == floorNum) ? maxFloor : maxFloor % floorNum;
 
-    if (porch > porchNum)
+    if (porch > porchNum) {
         return errMessage(output, ERR_MSG_ROOM_NUMBER);
+    }
 
     document.getElementById(output).innerText = "Room " + room + " located on porch " + porch + " and " + "floor " + floor;
     clearValue(input1, input2, input3, input4);
@@ -429,8 +447,9 @@ function roomNumber(input1, input2, input3, input4, output) {
 function sumDigit(input, output) {
     const number = document.getElementById(input).value;
 
-    if (!NUMBER.test(number))
+    if (!NUMBER.test(number)) {
         return errMessage(output, ERR_MSG_NAN);
+    }
 
     const result = number.replace(/[.-]/g, "")
         .split("")
@@ -449,14 +468,12 @@ function sumDigit(input, output) {
  * @param output Output element ID
  */
 function sortLinks(input, output) {
-    const line = document.getElementById(input).value
-        .replace(/http:\/\//g, "")
-        .replace(/https:\/\//g, "")
-        .replace(/\s+/g, "");
+    const linksLine = document.getElementById(input).value
+        .replace(PROTOCOL_OR_SPACE, "");
 
     document.getElementById(output).innerText = "";
 
-    const links = line.split(",")
+    const links = linksLine.split(",")
         .sort()
         .map((item) => "<li><a href=http://" + item + ">" + item + "</a></li>");
 
@@ -485,8 +502,9 @@ function errMessage(elementId, message) {
  */
 function isIntegers() {
     for (let i = 0, length = arguments.length; i < length; i++) {
-        if (arguments[i] === "" || !Number.isInteger(Number(arguments[i])))
+        if (arguments[i] === "" || !Number.isInteger(Number(arguments[i]))) {
             return false;
+        }
     }
 
     return true;
@@ -499,8 +517,9 @@ function isIntegers() {
  */
 function isPositiveIntegers() {
     for (let i = 0, length = arguments.length; i < length; i++) {
-        if (!Number.isInteger(Number(arguments[i])) || arguments[i] <= 0)
+        if (!Number.isInteger(Number(arguments[i])) || arguments[i] <= 0) {
             return false;
+        }
     }
 
     return true;
@@ -510,8 +529,9 @@ function isPositiveIntegers() {
  * Clear element value by ID.
  */
 function clearValue() {
-    for (let i = 0, length = arguments.length; i < length; i++)
+    for (let i = 0, length = arguments.length; i < length; i++) {
         document.getElementById(arguments[i]).value = "";
+    }
 }
 
 
