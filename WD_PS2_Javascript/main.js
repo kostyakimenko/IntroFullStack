@@ -11,7 +11,7 @@ const ISO_DATE_FORMAT = /^\d{4}-\d{2}-\d{2}$/;
 /* Pattern for number */
 const NUMBER = /^-?\d+(.\d+)?$/;
 /* Pattern for correct links line */
-const PROTOCOL_OR_SPACE = /(http:\/\/)|(https:\/\/)|(\s+)/g;
+const PROTOCOL = /http(s)?:\/\//g;
 /* Error messages */
 const ERR_MSG_INTEGER = "input value must be an integer";
 const ERR_MSG_POSITIVE_INTEGER = "input value must be an integer and more then '0'";
@@ -46,8 +46,7 @@ function sumAll(input1, input2, output) {
         result += i;
     }
 
-    document.getElementById(output).innerText = "Sum all numbers from " + min + " to " + max + " is " + result;
-    clearValue(input1, input2);
+    document.getElementById(output).innerText = `Sum all numbers from ${min} to ${max} is ${result}`;
 }
 
 /**
@@ -73,15 +72,14 @@ function sumAllOf(input1, input2, output) {
 
     let result = 0;
     for (let i = min; i <= max; i++) {
-        const lastDigit = i % 10;
+        const lastDigit = Math.abs(i) % 10;
         if (lastDigit === 2 || lastDigit === 3 || lastDigit === 7) {
             result += i;
         }
     }
 
-    document.getElementById(output).innerText = "Sum all numbers (with last digit is 2, 3 or 7) from "
-                                                 + min + " to " + max + " is " + result;
-    clearValue(input1, input2);
+    document.getElementById(output).innerText = `Sum all numbers (with last digit is 2, 3 or 7)\
+                                                 from ${min} to ${max} is ${result}`;
 }
 
 /**
@@ -99,15 +97,14 @@ function drawPyramid(input, output) {
         return errMessage(output, ERR_MSG_POSITIVE_INTEGER);
     }
 
-    let row = "";
-    let pyramid = "";
+    let row = '';
+    let pyramid = '';
     for (let i = 0; i < rowNum; i++) {
-        row += "*";
-        pyramid += row + "\n";
+        row += '*';
+        pyramid += row + '\n';
     }
 
     document.getElementById(output).innerText = pyramid;
-    clearValue(input);
 }
 
 /**
@@ -130,13 +127,11 @@ function formatTime(input, output) {
     }
 
     const date = new Date(ms);
-    const hours = Math.floor(ms / MS_IN_HOUR).toString().padStart(2, "0");
-    const minutes = date.getMinutes().toString().padStart(2, "0");
-    const seconds = date.getSeconds().toString().padStart(2, "0");
+    const hours = Math.floor(ms / MS_IN_HOUR).toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    const seconds = date.getSeconds().toString().padStart(2, '0');
 
-    document.getElementById(output).innerText = inputSeconds + "s " + "convert to "
-                                                + hours + ":" + minutes + ":" + seconds;
-    clearValue(input);
+    document.getElementById(output).innerText = `${inputSeconds}s convert to ${hours}:${minutes}:${seconds}`;
 }
 
 /**
@@ -153,8 +148,7 @@ function studentAge(input, output) {
         return errMessage(output, ERR_MSG_POSITIVE_INTEGER);
     }
 
-    document.getElementById(output).innerText = "Студенту " + timeStr(years, "year");
-    clearValue(input);
+    document.getElementById(output).innerText = `Студенту ${timeStr(years, 'year')}`;
 }
 
 /**
@@ -196,14 +190,13 @@ function timeInterval(input1, input2, output) {
 
     correctTime(arrTimeDiff, daysInMonth);
 
-    document.getElementById(output).innerText = "Между датами прошло "
-                                                 + timeStr(arrTimeDiff[0], "year") + ", "
-                                                 + timeStr(arrTimeDiff[1], "month") + ", "
-                                                 + timeStr(arrTimeDiff[2], "day") + ", "
-                                                 + timeStr(arrTimeDiff[3], "hour") + ", "
-                                                 + timeStr(arrTimeDiff[4], "minute") + ", "
-                                                 + timeStr(arrTimeDiff[5], "second");
-    clearValue(input1, input2);
+    document.getElementById(output).innerText = `Между датами прошло\
+                                                 ${timeStr(arrTimeDiff[0], 'year')},\
+                                                 ${timeStr(arrTimeDiff[1], 'month')},\
+                                                 ${timeStr(arrTimeDiff[2], 'day')},\
+                                                 ${timeStr(arrTimeDiff[3], 'hour')},\
+                                                 ${timeStr(arrTimeDiff[4], 'minute')},\
+                                                 ${timeStr(arrTimeDiff[5], 'second')}`;
 }
 
 /**
@@ -246,32 +239,32 @@ function timeStr(time, typeOfTime) {
     let postfix;
 
     switch (typeOfTime) {
-        case "year":
-            postfix = ["год", "года", "лет"];
+        case 'year':
+            postfix = ['год', 'года', 'лет'];
             break;
-        case "month":
-            postfix = ["месяц", "месяца", "месяцев"];
+        case 'month':
+            postfix = ['месяц', 'месяца', 'месяцев'];
             break;
-        case "day":
-            postfix = ["день", "дня", "дней"];
+        case 'day':
+            postfix = ['день', 'дня', 'дней'];
             break;
-        case "hour":
-            postfix = ["час", "часа", "часов"];
+        case 'hour':
+            postfix = ['час', 'часа', 'часов'];
             break;
-        case "minute":
-            postfix = ["минута", "минуты", "минут"];
+        case 'minute':
+            postfix = ['минута', 'минуты', 'минут'];
             break;
-        case "second":
-            postfix = ["секунда", "секунды", "секунд"];
+        case 'second':
+            postfix = ['секунда', 'секунды', 'секунд'];
             break;
     }
 
     if (lastDigit === 1 && lastTwoDigits !== 11) {
-        return time + " " + postfix[0];
+        return `${time} ${postfix[0]}`;
     } else if (pattern1.indexOf(lastDigit) !== -1 && pattern2.indexOf(lastTwoDigits) === -1) {
-        return time + " " + postfix[1];
+        return `${time} ${postfix[1]}`;
     } else {
-        return time + " " + postfix[2];
+        return `${time} ${postfix[2]}`;
     }
 }
 
@@ -301,45 +294,44 @@ function findZodiac(input, output) {
 
     switch (month) {
         case 0:
-            html = (day >= 20) ? "<p>Aquarius</p><img src='images/aquarius.png'>" : "<p>Capricorn</p><img src='images/capricorn.png'>";
+            html = (day >= 20) ? '<p>Aquarius</p><img src=images/aquarius.png>' : '<p>Capricorn</p><img src=images/capricorn.png>';
             break;
         case 1:
-            html = (day >= 19) ? "<p>Pisces</p><img src='images/pisces.png'>" : "<p>Aquarius</p><img src='images/aquarius.png'>";
+            html = (day >= 19) ? '<p>Pisces</p><img src=images/pisces.png>' : '<p>Aquarius</p><img src=images/aquarius.png>';
             break;
         case 2:
-            html = (day >= 21) ? "<p>Aries</p><img src='images/aries.png'>" : "<p>Pisces</p><img src='images/pisces.png'>";
+            html = (day >= 21) ? '<p>Aries</p><img src=images/aries.png>' : '<p>Pisces</p><img src=images/pisces.png>';
             break;
         case 3:
-            html = (day >= 20) ? "<p>Taurus</p><img src='images/taurus.png'>" : "<p>Aries</p><img src='images/aries.png'>";
+            html = (day >= 20) ? '<p>Taurus</p><img src=images/taurus.png>' : '<p>Aries</p><img src=images/aries.png>';
             break;
         case 4:
-            html = (day >= 21) ? "<p>Gemini</p><img src='images/gemini.png'>" : "<p>Taurus</p><img src='images/taurus.png'>";
+            html = (day >= 21) ? '<p>Gemini</p><img src=images/gemini.png>' : '<p>Taurus</p><img src=images/taurus.png>';
             break;
         case 5:
-            html = (day >= 21) ? "<p>Cancer</p><img src='images/cancer.png'>" : "<p>Gemini</p><img src='images/gemini.png'>";
+            html = (day >= 21) ? '<p>Cancer</p><img src=images/cancer.png>' : '<p>Gemini</p><img src=images/gemini.png>';
             break;
         case 6:
-            html = (day >= 23) ? "<p>Leo</p><img src='images/leo.png'>" : "<p>Cancer</p><img src='images/cancer.png'>";
+            html = (day >= 23) ? '<p>Leo</p><img src=images/leo.png>' : '<p>Cancer</p><img src=images/cancer.png>';
             break;
         case 7:
-            html = (day >= 23) ? "<p>Virgo</p><img src='images/virgo.png'>" : "<p>Leo</p><img src='images/leo.png'>";
+            html = (day >= 23) ? '<p>Virgo</p><img src=images/virgo.png>' : '<p>Leo</p><img src=images/leo.png>';
             break;
         case 8:
-            html = (day >= 23) ? "<p>Libra</p><img src='images/libra.png'>" : "<p>Virgo</p><img src='images/virgo.png'>";
+            html = (day >= 23) ? '<p>Libra</p><img src=images/libra.png>' : '<p>Virgo</p><img src=images/virgo.png>';
             break;
         case 9:
-            html = (day >= 23) ? "<p>Scorpio</p><img src='images/scorpio.png'>" : "<p>Libra</p><img src='images/libra.png'>";
+            html = (day >= 23) ? '<p>Scorpio</p><img src=images/scorpio.png>' : '<p>Libra</p><img src=images/libra.png>';
             break;
         case 10:
-            html = (day >= 22) ? "<p>Sagittarius</p><img src='images/sagittarius.png'>" : "<p>Scorpio</p><img src='images/scorpio.png'>";
+            html = (day >= 22) ? '<p>Sagittarius</p><img src=images/sagittarius.png>' : '<p>Scorpio</p><img src=images/scorpio.png>';
             break;
         case 11:
-            html = (day >= 22) ? "<p>Capricorn</p><img src='images/capricorn.png'>" : "<p>Sagittarius</p><img src='images/sagittarius.png'>";
+            html = (day >= 22) ? '<p>Capricorn</p><img src=images/capricorn.png>' : '<p>Sagittarius</p><img src=images/sagittarius.png>';
             break;
     }
 
     document.getElementById(output).innerHTML = html;
-    clearValue(input);
 }
 
 /**
@@ -358,8 +350,7 @@ function drawChessboard(input1, input2, output) {
         return errMessage(output, ERR_MSG_POSITIVE_INTEGER);
     }
 
-    document.getElementById(output).innerText = "";
-    clearValue(input1, input2);
+    document.getElementById(output).innerText = '';
 
     for (let row = 0; row < rows; row++) {
         const chessRow = createChessRow();
@@ -376,8 +367,8 @@ function drawChessboard(input1, input2, output) {
  * @returns {HTMLDivElement} chessboard row.
  */
 function createChessRow() {
-    const chessRow = document.createElement("div");
-    chessRow.setAttribute("class", "chessboard__row");
+    const chessRow = document.createElement('div');
+    chessRow.setAttribute('class', 'chessboard__row');
 
     return chessRow;
 }
@@ -390,16 +381,16 @@ function createChessRow() {
  * @returns {HTMLDivElement} chessboard cell
  */
 function createChessCell(row, col) {
-    const cell = document.createElement("div");
+    const cell = document.createElement('div');
     let className;
 
     if (row % 2 === 0) {
-        className = (col % 2 === 0) ? "chessboard__col_black" : "chessboard__col_white";
+        className = (col % 2 === 0) ? 'chessboard__col_black' : 'chessboard__col_white';
     } else {
-        className = (col % 2 !== 0) ? "chessboard__col_black" : "chessboard__col_white";
+        className = (col % 2 !== 0) ? 'chessboard__col_black' : 'chessboard__col_white';
     }
 
-    cell.setAttribute("class", className);
+    cell.setAttribute('class', className);
 
     return cell;
 }
@@ -433,8 +424,7 @@ function roomNumber(input1, input2, input3, input4, output) {
         return errMessage(output, ERR_MSG_ROOM_NUMBER);
     }
 
-    document.getElementById(output).innerText = "Room " + room + " located on porch " + porch + " and " + "floor " + floor;
-    clearValue(input1, input2, input3, input4);
+    document.getElementById(output).innerText = `Room ${room} located on porch ${porch} and floor ${floor}`;
 }
 
 /**
@@ -451,12 +441,11 @@ function sumDigit(input, output) {
         return errMessage(output, ERR_MSG_NAN);
     }
 
-    const result = number.replace(/[.-]/g, "")
-        .split("")
+    const result = number.replace(/[.-]/g, '')
+        .split('')
         .reduce((sum, num) => sum + Number(num), 0);
 
-    document.getElementById(output).innerText = "Sum of digit for number " + number + " is " + result;
-    clearValue(input);
+    document.getElementById(output).innerText = `Sum of digit for number ${number} is ${result}`;
 }
 
 /**
@@ -469,16 +458,16 @@ function sumDigit(input, output) {
  */
 function sortLinks(input, output) {
     const linksLine = document.getElementById(input).value
-        .replace(PROTOCOL_OR_SPACE, "");
+        .replace(PROTOCOL, '');
 
-    document.getElementById(output).innerText = "";
+    document.getElementById(output).innerText = '';
 
-    const links = linksLine.split(",")
+    const links = linksLine.split(',')
+        .map((item) => item.trim())
         .sort()
-        .map((item) => "<li><a href=http://" + item + ">" + item + "</a></li>");
+        .map((item) => `<li><a href=http://${item}>${item}</a></li>`);
 
-    document.getElementById(output).innerHTML = links.join("");
-    clearValue(input);
+    document.getElementById(output).innerHTML = links.join('');
 }
 
 /**
@@ -488,10 +477,10 @@ function sortLinks(input, output) {
  * @param message Message text
  */
 function errMessage(elementId, message) {
-    const err = document.createElement("span");
-    err.setAttribute("class", "error");
-    err.innerText = "Error: " + message;
-    document.getElementById(elementId).innerText = "";
+    const err = document.createElement('span');
+    err.setAttribute('class', 'error');
+    err.innerText = `Error: ${message}`;
+    document.getElementById(elementId).innerText = '';
     document.getElementById(elementId).appendChild(err);
 }
 
@@ -502,7 +491,7 @@ function errMessage(elementId, message) {
  */
 function isIntegers() {
     for (let i = 0, length = arguments.length; i < length; i++) {
-        if (arguments[i] === "" || !Number.isInteger(Number(arguments[i]))) {
+        if (arguments[i] === '' || !Number.isInteger(Number(arguments[i]))) {
             return false;
         }
     }
@@ -524,16 +513,3 @@ function isPositiveIntegers() {
 
     return true;
 }
-
-/**
- * Clear element value by ID.
- */
-function clearValue() {
-    for (let i = 0, length = arguments.length; i < length; i++) {
-        document.getElementById(arguments[i]).value = "";
-    }
-}
-
-
-
-
