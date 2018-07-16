@@ -5,9 +5,9 @@ const PAGE = $('html, body');
 
 /* Functions for scrolling page with mouse click listeners */
 scrollPage($('#scroll-up, .fa-angle-double-up'), 0);
-scrollPage($('#info-link'), calcPos($('#info')));
-scrollPage($('#services-link'), calcPos($('#services')));
-scrollPage($('#contact-link'), calcPos($('#feedback')));
+scrollPage($('#info-link'), calcPos($('#main-info')));
+scrollPage($('#services-link'), calcPos($('#dev-highload')));
+scrollPage($('#contact-link'), calcPos($('#reg')));
 
 /* Stop animation when mousedown event will occur on the document */
 $(document).mousedown(function(e) {
