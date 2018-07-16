@@ -37,9 +37,9 @@ body {
 }
 
 .dropdown_select > span {
-    opacity: 0.5;
+    opacity: 0.4;
 }
 
-.dropdown_item:not(#title):hover {
+.dropdown_item:not(.dropdown_title):hover {
     background-color: #dcdde1;
 }

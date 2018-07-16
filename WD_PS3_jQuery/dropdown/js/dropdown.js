@@ -1,7 +1,7 @@
 /* Speed of the animation (in milliseconds) */
 const SLIDE_SPEED = 200;
 /* Dropdown list element */
-const LIST = $('#friend-list');
+const LIST = $('.dropdown');
 /* List item element */
 const ITEM = $('.dropdown_item');
 /* List of the friends with image sources */
@@ -32,7 +32,7 @@ const maxHeight = minHeight * (Object.keys(FRIENDS).length + 1);
  * Listener for slider.
  */
 $(document).mousedown(function(event) {
-    if ($('#title, #select, #arrow').is(event.target)) {
+    if ($('.dropdown *').is(event.target)) {
         slide();
     } else if (LIST.height() > minHeight) {
         LIST.animate({height: minHeight}, SLIDE_SPEED);
@@ -42,8 +42,8 @@ $(document).mousedown(function(event) {
 /**
  * Listener for selected item.
  */
-$('.dropdown_item:not(#title)').mousedown(function() {
-    $('#select').html($(this).html());
+$('.dropdown_item:not(.dropdown_title)').mousedown(function() {
+    $('.dropdown_select').html($(this).html());
 });
 
 /**
