@@ -16,8 +16,8 @@ $(document).mousedown(function(e) {
     }
 });
 
-/* Stop animation when mousewheel event will occur on the document */
-$(document).on('mousewheel', function() {
+/* Stop animation when mouse wheel event will occur on the document */
+$(document).on('wheel', function() {
     PAGE.stop();
 });
 
