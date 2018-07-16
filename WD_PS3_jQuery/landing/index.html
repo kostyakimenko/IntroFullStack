@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/fontawesome-free-5.1.0-web/css/all.css" rel="stylesheet">
+    <title>Landing</title>
+</head>
+<body>
+    <header>
+        <div class="header__logo">
+            <img src="images/logo.png">
+            <h2>TAKE MORE...</h2>
+        </div>
+        <div class="header__menu">
+            <a href="#" id="contact-link">CONTACT US</a>
+            <a href="#" id="services-link">SERVICES</a>
+            <a href="#" id="info-link">INFO</a>
+        </div>
+    </header>
+    <section class="info" id="info">
+        <div class="info__image">
+            <img src="images/iphone.png">
+        </div>
+        <div class="info__text-block">
+            <div>
+                <h1>Our awesome app is ready to use!</h1>
+                <p>Lorem ipsum dolor sit amet, in duis metus,
+                    inceptos sit sit, sapien donec, vestibulum neque laoreet sed, id urna ac per vivamus sed libero.
+                    Metus sed fusce augue, ac sociis libero massa mi wisi. Integer nunc libero sed. Libero lacus.
+                    Tempus amet eget, primis fermentum malesuada eu.</p>
+                <button class="button">Buy now!</button>
+            </div>
+        </div>
+    </section>
+    <section class="services" id="services">
+        <div class="services__block">
+            <div class="services__icon">
+                <i class="fas fa-code"></i>
+            </div>
+            <h2>Web development</h2>
+            <p>Lorem ipsum dolor sit amet, in duis metus,
+                inceptos sit sit, sapien donec, vestibulum neque laoreet sed, id urna ac per vivamus sed libero.
+                Metus sed fusce augue, ac sociis libero massa mi wisi. Integer nunc libero sed.</p>
+        </div>
+        <div class="services__block">
+            <div class="services__icon">
+                <i class="fab fa-android"></i>
+            </div>
+            <h2>Mobile development</h2>
+            <p>Lorem ipsum dolor sit amet, in duis metus,
+                inceptos sit sit, sapien donec, vestibulum neque laoreet sed, id urna ac per vivamus sed libero.
+                Metus sed fusce augue, ac sociis libero massa mi wisi. Integer nunc libero sed.</p>
+        </div>
+        <div class="services__block">
+            <div class="services__icon">
+                <i class="fas fa-cloud-upload-alt"></i>
+            </div>
+            <h2>Hightload</h2>
+            <p>Lorem ipsum dolor sit amet, in duis metus,
+                inceptos sit sit, sapien donec, vestibulum neque laoreet sed, id urna ac per vivamus sed libero.
+                Metus sed fusce augue, ac sociis libero massa mi wisi. Integer nunc libero sed.</p>
+        </div>
+    </section>
+    <section class="feedback" id="feedback">
+        <div class="feedback__block">
+            <h2>Registration</h2>
+            <form>
+                <label for="username">Username:</label><br>
+                <input class="feedback__input_field" type="text" name="username" id="username"><br><br>
+                <label for="email">Email:</label><br>
+                <input class="feedback__input_field" type="email" name="email" id="email"><br><br>
+                <label for="website">Website</label><br>
+                <input class="feedback__input_field" type="url" name="site" id="website"><br><br>
+                <label for="telephone">Telephone:</label><br>
+                <input class="feedback__input_field" type="tel" name="telephone" id="telephone"><br><br>
+                <label for="male">Gender:</label><br>
+                <input type="radio" name="male" id="male" checked>Male<br>
+                <input type="radio" name="female" id="female">Female<br><br>
+                <label for="birthday">Birthday:</label><br>
+                <input class="feedback__input_field" type="date" name="bday" id="birthday"><br><br>
+                <label for="favcolor">Favorite color:</label>
+                <input type="color" name="favcolor" id="favcolor"><br><br>
+                <label for="userfoto">Your foto:</label>
+                <input type="file" name="userfoto" id="userfoto"><br><br>
+                <label for="password">Password:</label><br>
+                <input class="feedback__input_field" type="password" name="password" id="password"><br><br>
+                <input class="button feedback__button_submit" type="submit" value="Sign up">
+                <input class="button feedback__button_reset" type="reset" value="Reset">
+            </form>
+        </div>
+        <div class="feedback__block">
+            <h2>Work with us</h2>
+            <form>
+                <label for="java">Language:</label><br>
+                <input type="checkbox" name="java" id="java">Java<br>
+                <input type="checkbox" name="javaScript" id="javascript">JavaScript<br>
+                <input type="checkbox" name="php" id="php">PHP<br>
+                <input type="checkbox" name="python" id="python">Python<br><br>
+                <label for="pro-level">Professional level:</label>
+                <input type="range" name="pro-level" min="0" max="10" id="pro-level"><br><br>
+                <label for="month">Start to work (month):</label><br>
+                <input class="feedback__input_field" type="month" name="month" id="month"><br><br>
+                <label for="week">Start to work (week):</label><br>
+                <input class="feedback__input_field" type="week" name="week" id="week"><br><br>
+                <label for="datetime">Start to work (date and time):</label><br>
+                <input class="feedback__input_field" type="datetime-local" name="datetime" id="datetime"><br><br>
+                <label for="wakeup-time">Wake-up time:</label><br>
+                <input class="feedback__input_field" type="time" name="wuptime" id="wakeup-time"><br><br>
+                <label for="salary">Salary:</label><br>
+                <input class="feedback__input_field" type="number" name="salary" min="0" max="10000" step="100" value="1000" id="salary"><br><br>
+                <label for="vac-search">Vacancy search:</label><br>
+                <input class="feedback__input_field" type="search" name="vac-search" id="vac-search"><br><br>
+                <input class="button feedback__button_work" type="button" value="Go to work!">
+            </form>
+        </div>
+    </section>
+    <div class="scroll-up" id="scroll-up">
+        <i class="fas fa-angle-double-up"></i>
+    </div>
+    <script src="js/jquery-3.3.1.js" type="text/javascript"></script>
+    <script src="js/scroll-page.js" type="text/javascript"></script>
+</body>
+</html>
