@@ -40,13 +40,7 @@ const ATM = {
     /* All operations */
     reports: [],
 
-    /**
-     * Authorization.
-     *
-     * @param number User number
-     * @param pin User pin
-     * @returns {boolean} Authorization result
-     */
+    /* Authorization */
     auth: function(number, pin) {
         if (this.is_auth) {
             this.addReport(this.message.reportQueueErr);
@@ -76,11 +70,7 @@ const ATM = {
         return false;
     },
 
-    /**
-     * Check current debet.
-     *
-     * @returns {boolean} Operation result
-     */
+    /* Check current debet */
     check: function() {
         if (!this.is_auth) {
             this.addReport(this.message.reportUnauthorized);
@@ -93,14 +83,9 @@ const ATM = {
         return true;
     },
 
-    /**
-     * Get cash - available for user only.
-     *
-     * @param amount Amount of money
-     * @returns {boolean} Operation result
-     */
+    /* Get cash - available for user only */
     getCash: function(amount) {
-        if (!this.is_auth || this.current_type !== 'user') {
+        if (this.current_type !== 'user') {
             this.addReport(this.message.reportAccessErr);
             console.warn(this.message.userAccessErr);
             return false;
@@ -132,14 +117,9 @@ const ATM = {
         return true;
     },
 
-    /**
-     * Load cash - available for user only.
-     *
-     * @param amount amount of money
-     * @returns {boolean} Operation result
-     */
+    /* Load cash - available for user only */
     loadCash: function(amount){
-        if (!this.is_auth || this.current_type !== 'user') {
+        if (this.current_type !== 'user') {
             this.addReport(this.message.reportAccessErr);
             console.warn(this.message.userAccessErr);
             return false;
@@ -159,14 +139,9 @@ const ATM = {
         return true;
     },
 
-    /**
-     * Load cash to ATM - available for admin only.
-     *
-     * @param addition Amount of money for addition
-     * @returns {boolean} Operation result
-     */
+    /* Load cash to ATM - available for admin only */
     load_cash: function(addition) {
-        if (!this.is_auth || this.current_type !== 'admin') {
+        if (this.current_type !== 'admin') {
             this.addReport(this.message.reportAccessErr);
             console.warn(this.message.adminAccessErr);
             return false;
@@ -184,13 +159,9 @@ const ATM = {
         return true;
     },
 
-    /**
-     * Get report about cash actions - available for admin only.
-     *
-     * @returns {boolean} Operation result
-     */
+    /* Get report about cash actions - available for admin only */
     getReport: function() {
-        if (!this.is_auth || this.current_type !== 'admin') {
+        if (this.current_type !== 'admin') {
             console.warn(this.message.adminAccessErr);
             return false;
         }
@@ -199,11 +170,7 @@ const ATM = {
         return true;
     },
 
-    /**
-     * Log out.
-     *
-     * @returns {boolean} Operation result
-     */
+    /* Log out */
     logout: function() {
         if (!this.is_auth) {
             this.addReport(this.message.reportUnauthorized);
@@ -218,12 +185,8 @@ const ATM = {
         return true;
     },
 
-    /**
-     * Add report.
-     *
-     * @param message Message for report
-     */
+    /* Add report */
     addReport: function(message) {
-        this.reports.push({date: new Date().toLocaleString('en-US'), event: message});
+        this.reports.push({date: new Date().toLocaleString('en-GB'), event: message});
     }
 };
