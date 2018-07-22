@@ -20,8 +20,7 @@ const ATM = {
         queueErr: 'Authorization is not possible until the previous user is logout',
         unauthorized: 'You are not authorized',
         logOut: 'You are logout',
-        userAccessErr: 'This function available for authorized user only',
-        adminAccessErr: 'This function available for admin only',
+        accessErr: 'You do not access to this function',
         amountErr: 'The amount must be a positive integer',
         atmCashDeficit: 'In ATM not enough cash',
         userCashDeficit: 'On your account not enough cash',
@@ -75,7 +74,7 @@ const ATM = {
     /* Get cash - available for user only */
     getCash: function(amount) {
         if (this.current_type !== 'user') {
-            return this.logging(`getCash ${this.message.reportAccessErr}`, this.message.userAccessErr, false);
+            return this.logging(`getCash ${this.message.reportAccessErr}`, this.message.accessErr, false);
         }
 
         if (!Number.isInteger(amount) || amount < 0) {
@@ -98,39 +97,18 @@ const ATM = {
 
     /* Load cash - available for user only */
     loadCash: function(amount){
-        if (this.current_type !== 'user') {
-            return this.logging(`loadCash ${this.message.reportAccessErr}`, this.message.userAccessErr, false);
-        }
-
-        if (!Number.isInteger(amount) || amount < 0) {
-            return this.logging(this.message.reportAmountErr, this.message.amountErr, false);
-        }
-
-        this.current_user.debet += amount;
-        this.cash += amount;
-
-        return this.logging(`user ${this.current_user.number} load ${amount}`, `You load ${amount}`, true);
+        return this.addCash('user', 'loadCash', amount);
     },
 
     /* Load cash to ATM - available for admin only */
     load_cash: function(addition) {
-        if (this.current_type !== 'admin') {
-            return this.logging(`load_cash ${this.message.reportAccessErr}`, this.message.adminAccessErr, false);
-        }
-
-        if (!Number.isInteger(addition) || addition < 0) {
-            return this.logging(this.message.reportAmountErr, this.message.amountErr, false);
-        }
-
-        this.cash += addition;
-
-        return this.logging(`admin load ${addition}`, `Admin load ${addition}`, true);
+        return this.addCash('admin', 'load_cash', addition);
     },
 
     /* Get report about cash actions - available for admin only */
     getReport: function() {
         if (this.current_type !== 'admin') {
-            return this.logging(`getReport ${this.message.reportAccessErr}`, this.message.adminAccessErr, false);
+            return this.logging(`getReport ${this.message.reportAccessErr}`, this.message.accessErr, false);
         }
 
         this.reports.forEach((item) => (console.info(`${item.date}: ${item.event}`)));
@@ -148,6 +126,25 @@ const ATM = {
         this.is_auth = this.current_user = this.current_type = false;
 
         return true;
+    },
+
+    /* Load cash to ATM */
+    addCash: function(userType, funcName, amount) {
+        if (this.current_type !== userType) {
+            return this.logging(`${funcName} ${this.message.reportAccessErr}`, this.message.accessErr, false);
+        }
+
+        if (!Number.isInteger(amount) || amount < 0) {
+            return this.logging(this.message.reportAmountErr, this.message.amountErr, false);
+        }
+
+        if (userType === 'user') {
+            this.current_user.debet += amount;
+        }
+
+        this.cash += amount;
+
+        return this.logging(`${userType} ${this.current_user.number} load ${amount}`, `You load ${amount}`, true);
     },
 
     /* Add report and console logging */
