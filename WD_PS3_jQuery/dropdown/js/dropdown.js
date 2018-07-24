@@ -35,7 +35,7 @@ $(document).mousedown(function(event) {
     if ($('.dropdown *').is(event.target)) {
         slide();
     } else if (LIST.height() > minHeight) {
-        LIST.animate({height: minHeight}, SLIDE_SPEED);
+        slide(true);
     }
 });
 
@@ -51,12 +51,12 @@ $('.dropdown_item:not(.dropdown_title)').mousedown(function() {
  * If current dropdown height is minimum - list move down,
  * if current dropdown height is maximum - list move up.
  */
-function slide() {
+function slide(close = false) {
     const currentHeight = LIST.height();
 
-    if (currentHeight === minHeight) {
-        LIST.animate({height: maxHeight}, SLIDE_SPEED);
-    } else if (currentHeight === maxHeight) {
+    if (close || currentHeight === maxHeight) {
         LIST.animate({height: minHeight}, SLIDE_SPEED);
+    } else if (currentHeight === minHeight) {
+        LIST.animate({height: maxHeight}, SLIDE_SPEED);
     }
 }
