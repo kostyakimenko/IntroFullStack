@@ -1,10 +1,10 @@
-/* Speed of the animation (in milliseconds) */
+// Speed of the animation (in milliseconds)
 const SLIDE_SPEED = 200;
-/* Dropdown list element */
+// Dropdown list element
 const LIST = $('.dropdown');
-/* List item element */
+// List item element
 const ITEM = $('.dropdown_item');
-/* List of the friends with image sources */
+// List of the friends with image sources
 const FRIENDS = {
     Bob:'img/bob.png',
     Samantha:'img/samantha.png',
@@ -13,13 +13,11 @@ const FRIENDS = {
     Sam:'img/sam.png'
 };
 
-/* Minimum and maximum height of dropdown list */
+// Minimum and maximum height of dropdown list
 const minHeight = ITEM.height();
 const maxHeight = minHeight * (Object.keys(FRIENDS).length + 1);
 
-/**
- * Add dropdown list items on based friend-list.
- */
+// Add dropdown list items on based friend-list
 (function() {
     LIST.height(minHeight);
 
@@ -28,28 +26,27 @@ const maxHeight = minHeight * (Object.keys(FRIENDS).length + 1);
     }
 })();
 
-/**
- * Listener for slider.
- */
-$(document).mousedown(function(event) {
-    if ($('.dropdown *').is(event.target)) {
-        slide();
-    } else if (LIST.height() > minHeight) {
+// Listener for dropdown
+$('.dropdown *').click(function() {
+    slide();
+});
+
+//listener for body
+$('body').click(function() {
+    if (LIST.height() === maxHeight) {
         slide(true);
     }
 });
 
-/**
- * Listener for selected item.
- */
-$('.dropdown_item:not(.dropdown_title)').mousedown(function() {
+// Listener for selected item
+$('.dropdown_item:not(.dropdown_title)').click(function() {
     $('.dropdown_select').html($(this).html());
 });
 
-/**
- * Up or down slide process.
- * If current dropdown height is minimum - list move down,
- * if current dropdown height is maximum - list move up.
+/*
+ Up or down slide process.
+ If current dropdown height is minimum - list move down,
+ if current dropdown height is maximum - list move up.
  */
 function slide(close = false) {
     const currentHeight = LIST.height();
