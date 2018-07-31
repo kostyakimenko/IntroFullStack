@@ -40,6 +40,10 @@ body {
     height: 17px;
 }
 
+.vote__select label,input:hover {
+    cursor: pointer;
+}
+
 .vote__btn {
     background-color: #006266;
     border: 1px solid #f1f2f6;

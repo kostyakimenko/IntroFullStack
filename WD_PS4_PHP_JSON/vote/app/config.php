@@ -1,6 +1,6 @@
 <?php
 
-$jsonPath = __DIR__ . DIRECTORY_SEPARATOR . '../app/table.json';
+$jsonPath = __DIR__ . '/../app/table.json';
 $defaultTable = array(
         'Traveling' => 0,
         'Sports' => 0,

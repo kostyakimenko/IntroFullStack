@@ -1,14 +1,14 @@
 <?php
 
-include __DIR__ . DIRECTORY_SEPARATOR . '../app/config.php';
-include __DIR__ . DIRECTORY_SEPARATOR . '../app/Reader.php';
-include __DIR__ . DIRECTORY_SEPARATOR . '../app/Writer.php';
+include __DIR__ . '/../app/config.php';
+include __DIR__ . '/../app/Reader.php';
+include __DIR__ . '/../app/Writer.php';
 
 use app\Reader;
 use app\Writer;
 
 session_start();
-$item = htmlspecialchars($_POST['activity']) ?? null;
+$item = htmlspecialchars($_POST['activity']);
 
 /*
  * Read table, change result, write new data
