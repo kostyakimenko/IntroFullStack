@@ -1,0 +1,132 @@
+html {
+    height: 100%;
+}
+
+body {
+    min-height: 100%;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+}
+
+header {
+    text-align: center;
+}
+
+header > h1 {
+    color: #2c3e50;
+}
+
+.main-content {
+    margin: -20px 0 50px 0;
+}
+
+.tabs {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    background-color: #2c3e50;
+}
+
+.tabs > button {
+    color: #fff;
+    background-color: #2c3e50;
+    border: 0;
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+    width: 80px;
+    height: 40px;
+    font-size: 16px;
+
+}
+
+.tabs > button:hover {
+    background-color: #fff;
+    color: #2c3e50;
+}
+
+.workspace {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.workspace > h2 {
+    color: #2c3e50;
+}
+
+.workspace > p {
+    text-align: center;
+    margin-top: 0;
+    color: #2c3e50;
+    font-weight: bold;
+}
+
+.workspace > form {
+    text-align: center;
+}
+
+.workspace_in {
+    width: 200px;
+    height: 30px;
+    border: 1px solid #2c3e50;
+    border-radius: 5px;
+    margin: 0 0 5px 0;
+    padding-left: 5px;
+    font-size: 14px;
+}
+
+.workspace_out {
+    margin: 16px 0 16px 0;
+    text-align: center;
+    color: #2c3e50;
+    font-weight: bold;
+}
+
+.workspace_save {
+    display: none;
+}
+
+.workspace_btn {
+    background-color: #7f8c8d;
+    height: 32px;
+    width: 160px;
+    border: 1px solid #2c3e50;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 14px;
+    cursor: pointer;
+    color: #fff;
+    font-weight: bold;
+}
+
+.workspace_btn:hover {
+    background-color: #6f7c7d;
+}
+
+#task3_out {
+    text-align: left;
+}
+
+.chessboard__row {
+    display: flex;
+    flex-direction: row;
+}
+
+.chessboard__col_black {
+    width: 20px;
+    height: 20px;
+    background-color: #000000;
+}
+
+.chessboard__col_white {
+    width: 20px;
+    height: 20px;
+    background-color: #fdcb6e;
+}
+

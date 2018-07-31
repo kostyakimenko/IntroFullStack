@@ -1,0 +1,11 @@
+body {
+    display: flex;
+    justify-content: center;
+}
+
+.chart {
+    width: 900px;
+    height: 500px;
+}
+
+
