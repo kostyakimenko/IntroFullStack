@@ -27,7 +27,7 @@ session_destroy();
     <title>PHP tasks</title>
 </head>
 
-<body onload="openTask('<?php echo $session['taskName']; ?>')">
+<body onload="openTask('<?php echo $session['taskName'] ?? null; ?>')">
 
     <header>
         <h1>WD_PS4_PHP</h1>
@@ -49,10 +49,11 @@ session_destroy();
             <h2>Task 1</h2>
             <p>Сalculate a sum of all numbers from -1000 to 1000</p>
             <form action="handler.php" method="post">
-                <input type="submit" class="workspace_btn" name="task1_submit" value="Get sum">
+                <input type="hidden" name="taskName" value="task1">
+                <input type="submit" class="workspace_btn" value="Get sum">
             </form>
             <div class="workspace_out">
-                <?php echo $session['task1']; ?>
+                <?php echo (isset($session['task1'])) ? 'Result: ' . $session['task1'] : null; ?>
             </div>
         </div>
 
@@ -61,10 +62,11 @@ session_destroy();
             <h2>Task 2</h2>
             <p>Сalculate a sum of all numbers from -1000 to 1000<br>in which last digits ends in 2, 3, or 7</p>
             <form action="handler.php" method="post">
-                <input type="submit" class="workspace_btn" name="task2_submit" value="Get sum">
+                <input type="hidden" name="taskName" value="task2">
+                <input type="submit" class="workspace_btn" value="Get sum">
             </form>
             <div class="workspace_out">
-                <?php echo $session['task2']; ?>
+                <?php echo (isset($session['task2'])) ? 'Result: ' . $session['task2'] : null; ?>
             </div>
         </div>
 
@@ -73,10 +75,11 @@ session_destroy();
             <h2>Task 3</h2>
             <p>Draw a half of pyramid (50 rows)</p>
             <form action="handler.php" method="post">
-                <input type="submit" class="workspace_btn" name="task3_submit" value="Draw pyramid">
+                <input type="hidden" name="taskName" value="task3">
+                <input type="submit" class="workspace_btn" value="Draw pyramid">
             </form>
             <div class="workspace_out" id="task3_out">
-                <?php echo $session['task3']; ?>
+                <?php echo $session['task3'] ?? null; ?>
             </div>
         </div>
 
@@ -85,12 +88,18 @@ session_destroy();
             <h2>Task 4</h2>
             <p>Draw a chessboard of a given size</p>
             <form action="handler.php" method="post">
+                <input type="hidden" name="taskName" value="task4">
                 <input type="text" class="workspace_in" name="rows" title="chessboard rows" placeholder="chessboard rows">
                 <input type="text" class="workspace_in" name="cols" title="chessboard columns" placeholder="chessboard columns">
-                <input type="submit" class="workspace_btn" name="task4_submit" value="Draw chessboard">
+                <input type="submit" class="workspace_btn" value="Draw chessboard">
             </form>
             <div class="workspace_out">
-                <?php echo $session['task4']; ?>
+                <?php echo str_replace(['{black}', '{white}', '{start}', '{end}'],
+                                       ['<div class=chessboard__col_black></div>',
+                                        '<div class=chessboard__col_white></div>',
+                                        '<div class=chessboard__row>', '</div>'],
+                                $session['task4'] ?? null); ?>
+                <span class="error"><?php echo $session['errTask4'] ?? null; ?></span>
             </div>
         </div>
 
@@ -99,11 +108,13 @@ session_destroy();
             <h2>Task 5</h2>
             <p>Calculate a sum of digits of input number</p>
             <form action="handler.php" method="post">
+                <input type="hidden" name="taskName" value="task5">
                 <input type="text" class="workspace_in" name="number" title="number" placeholder="number">
-                <input type="submit" class="workspace_btn" name="task5_submit" value="Get sum of digits">
+                <input type="submit" class="workspace_btn" value="Get sum of digits">
             </form>
             <div class="workspace_out">
-                <?php echo $session['task5']; ?>
+                <?php echo (isset($session['task5'])) ? 'Result: ' . $session['task5'] : null; ?>
+                <span class="error"><?php echo $session['errTask5'] ?? null; ?></span>
             </div>
         </div>
 
@@ -112,10 +123,11 @@ session_destroy();
             <h2>Task 6</h2>
             <p>Get array of random numbers, get unique numbers, sort and reverse array</p>
             <form action="handler.php" method="post">
-                <input type="submit" class="workspace_btn" name="task6_submit" value="Get sorted array">
+                <input type="hidden" name="taskName" value="task6">
+                <input type="submit" class="workspace_btn" value="Get sorted array">
             </form>
             <div class="workspace_out">
-                <?php print_r($session['task6']); ?>
+                <?php print_r($session['task6'] ?? null); ?>
             </div>
         </div>
 
