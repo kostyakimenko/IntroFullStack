@@ -130,3 +130,8 @@ header > h1 {
     background-color: #fdcb6e;
 }
 
+.error {
+    color: red;
+    font-weight: normal;
+}
+
