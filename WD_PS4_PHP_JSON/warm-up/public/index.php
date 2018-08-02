@@ -98,7 +98,7 @@ session_destroy();
                                        ['<div class=chessboard__col_black></div>',
                                         '<div class=chessboard__col_white></div>',
                                         '<div class=chessboard__row>', '</div>'],
-                                $session['task4'] ?? null); ?>
+                                       $session['task4'] ?? null); ?>
                 <span class="error"><?php echo $session['errTask4'] ?? null; ?></span>
             </div>
         </div>
