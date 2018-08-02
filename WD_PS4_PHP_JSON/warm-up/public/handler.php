@@ -1,46 +1,47 @@
 <?php
 
-include __DIR__ . '/../app/WarmUp.php';
-
-use app\WarmUp;
+require __DIR__ . '/../app/WarmUp.php';
 
 session_start();
-$key = end(array_keys(($_POST))); // last key in post array
+
+$taskName = htmlspecialchars($_POST['taskName']);
+$_SESSION['taskName'] = $taskName;
 
 /*
- * Select of the object for solving problem.
+ * Select of the function for solving problem.
  * The result is written to the session array
  * and sent to the main page using header().
  */
-switch ($key) {
-    case 'task1_submit':
+switch ($taskName) {
+    case 'task1':
         $_SESSION['task1'] = WarmUp::sumAll();
-        $_SESSION['taskName'] = 'task1';
         break;
-    case 'task2_submit':
+    case 'task2':
         $_SESSION['task2'] = WarmUp::sumAllOf();
-        $_SESSION['taskName'] = 'task2';
         break;
-    case 'task3_submit':
+    case 'task3':
         $_SESSION['task3'] = WarmUp::drawPyramid();
-        $_SESSION['taskName'] = 'task3';
         break;
-    case 'task4_submit':
+    case 'task4':
         $rows = htmlspecialchars($_POST['rows']);
         $cols = htmlspecialchars($_POST['cols']);
-        $_SESSION['task4'] = WarmUp::drawChessboard($rows, $cols);
-        $_SESSION['taskName'] = 'task4';
+        try {
+            $_SESSION['task4'] = WarmUp::drawChessboard($rows, $cols);
+        } catch (Exception $ex) {
+            $_SESSION['errTask4'] = $ex->getMessage();
+        }
         break;
-    case 'task5_submit':
+    case 'task5':
         $number = htmlspecialchars($_POST['number']);
-        $_SESSION['task5'] = WarmUp::sumDigits($number);
-        $_SESSION['taskName'] = 'task5';
+        try {
+            $_SESSION['task5'] = WarmUp::sumDigits($number);
+        } catch (Exception $ex) {
+            $_SESSION['errTask5'] = $ex->getMessage();
+        }
         break;
-    case 'task6_submit':
+    case 'task6':
         $_SESSION['task6'] = WarmUp::randomArray();
-        $_SESSION['taskName'] = 'task6';
         break;
 }
 
 header('location: index.php');
-
