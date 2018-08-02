@@ -1,7 +1,5 @@
 <?php
 
-namespace app;
-
 /**
  * Class WarmUp.
  * @package app
@@ -10,12 +8,14 @@ class WarmUp
 {
     const MIN_NUMBER = -1000; // for sumAll (task1) and sumAllOf (task2)
     const MAX_NUMBER = 1000; // for sumAll (task1) and sumAllOf (task2)
+    const LAST_DIGITS = [2, 3, 7]; // for sumAllOf (task2)
     const PYRAMID_ROWS = 50; // for pyramid (task3)
     const ARR_LENGTH = 100; // for random array (task6)
-    const CHESS_BLACK = '<div class="chessboard__col_black"></div>'; // for chessboard (task4)
-    const CHESS_WHITE = '<div class="chessboard__col_white"></div>'; // for chessboard (task4)
-    const CHESS_ROW_START_TAG = '<div class="chessboard__row">'; // for chessboard (task4)
-    const CHESS_ROW_END_TAG = '</div>'; // for chessboard (task4)
+    const CHESS_SIZE_LIMIT = 50; // for chessboard (task4)
+
+    const ERR_POS_INT = 'Error: input parameters must be a positive integer';
+    const ERR_NUMBER = 'Error: Input parameter must be a number';
+    const ERR_CHESS_SIZE_LIMIT = 'Error: chessboard size limit is ' . self::CHESS_SIZE_LIMIT;
 
     /**
      * Task1.
@@ -24,9 +24,7 @@ class WarmUp
      */
     public static function sumAll()
     {
-        $sumOfRange = array_sum(range(self::MIN_NUMBER, self::MAX_NUMBER));
-
-        return "Result: $sumOfRange";
+        return array_sum(range(self::MIN_NUMBER, self::MAX_NUMBER));
     }
 
     /**
@@ -40,13 +38,13 @@ class WarmUp
         $sumOfRange = 0;
 
         for ($i = self::MIN_NUMBER; $i <= self::MAX_NUMBER; $i++) {
-            $endDigit = abs($i) % 10;
-            if ($endDigit === 2 || $endDigit === 3 || $endDigit === 7) {
+            $lastDigit = abs($i) % 10;
+            if (in_array($lastDigit, self::LAST_DIGITS)) {
                 $sumOfRange += $i;
             }
         }
 
-        return "Result: $sumOfRange";
+        return $sumOfRange;
     }
 
     /**
@@ -56,10 +54,10 @@ class WarmUp
      */
     public static function drawPyramid()
     {
-        $row = $pyramid = '';
+        $pyramid = '';
 
-        for ($i = 0; $i < self::PYRAMID_ROWS; $i++) {
-            $row .= '*';
+        for ($i = 1; $i <= self::PYRAMID_ROWS; $i++) {
+            $row = str_repeat('*', $i);
             $pyramid .= "$row\n";
         }
 
@@ -69,52 +67,56 @@ class WarmUp
     /**
      * Task4.
      * Draw a chessboard of a given size.
-     * @param $rows string Rows number
-     * @param $cols string Cols number
+     * @param string $rows Rows number
+     * @param string $cols Cols number
      * @return string Chessboard as html
+     * @throws Exception Input value isn't a positive integer
+     *         Exception Chessboard size limit is exceeded
      */
     public static function drawChessboard($rows, $cols)
     {
         if (!is_int($rows * 1) || !is_int($cols * 1) || $rows < 1 || $cols < 1) {
-            return 'Error: input parameters must be a positive integer';
+            throw new Exception(self::ERR_POS_INT);
         }
 
-        $chessBoard = '';
+        if ($rows > self::CHESS_SIZE_LIMIT || $cols > self::CHESS_SIZE_LIMIT) {
+            throw new Exception(self::ERR_CHESS_SIZE_LIMIT);
+        }
+
+        $chessboard = '';
+        $startRow = '{start}';
+        $endRow = '{end}';
+        $blackCell = '{black}';
+        $whiteCell = '{white}';
 
         for ($row = 0; $row < $rows; $row++) {
-            $newRow = self::CHESS_ROW_START_TAG;
+            $newRow = $startRow;
             for ($col = 0; $col < $cols; $col++) {
-                if ($row % 2 === 0) {
-                    $newRow = ($col % 2 === 0) ? $newRow . self::CHESS_BLACK
-                        : $newRow . self::CHESS_WHITE;
-                } else {
-                    $newRow = ($col % 2 === 0) ? $newRow . self::CHESS_WHITE
-                        : $newRow . self::CHESS_BLACK;
-                }
+                $newRow .= (($row + $col) % 2 === 0) ? $blackCell : $whiteCell;
             }
-            $chessBoard .= $newRow . self::CHESS_ROW_END_TAG;
+            $chessboard .= $newRow . $endRow;
         }
 
-        return $chessBoard;
+        return $chessboard;
     }
 
     /**
      * Task5.
      * Calculate a sum of digits of input number.
-     * @param $number string Input number
+     * @param string $number Input number
      * @return string Sum of digits
+     * @throws Exception Input value isn't a number
      */
     public static function sumDigits($number)
     {
         if (!is_numeric($number)) {
-            return 'Error: Input parameter must be a number';
+            throw new Exception(self::ERR_NUMBER);
         }
 
         $formatNumber = preg_replace('/\-|\./', '', $number);
         $digits = str_split($formatNumber);
-        $result = array_sum($digits);
 
-        return "Result: $result";
+        return array_sum($digits);
     }
 
     /**
@@ -125,10 +127,10 @@ class WarmUp
      */
     public static function randomArray()
     {
-        $randomNumbers = array();
+        $randomNumbers = [];
 
         for ($i = 0; $i < self::ARR_LENGTH; $i++) {
-            array_push($randomNumbers, rand(1, 10));
+            array_push($randomNumbers, mt_rand(1, 10));
         }
 
         $uniqueNumbers = array_unique($randomNumbers);
