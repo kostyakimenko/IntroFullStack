@@ -1,6 +1,7 @@
 <?php
 
-require __DIR__ . '/../app/WarmUp.php';
+// Include main class with functions for solving problem
+require __DIR__ . DIRECTORY_SEPARATOR . '..' .DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'WarmUp.php';
 
 session_start();
 
