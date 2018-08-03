@@ -1,6 +1,6 @@
 <?php
 session_start();
-$table = $_SESSION['table'];
+$table = $_SESSION['table'] ?? null;
 ?>
 
 <!DOCTYPE html>
@@ -34,9 +34,11 @@ $table = $_SESSION['table'];
             let jsonTable = <?php echo json_encode($table); ?>;
             let formatTable = [];
 
-            for (let key in jsonTable) {
-                let entry = [key, jsonTable[key]];
-                formatTable.push(entry);
+            if (jsonTable) {
+                for (let key in jsonTable) {
+                    let entry = [key, jsonTable[key]];
+                    formatTable.push(entry);
+                }
             }
 
             return formatTable;

@@ -1,7 +1,5 @@
 <?php
 
-namespace app;
-
 /**
  * Class Writer writes the data in json-file.
  * @package app
@@ -25,11 +23,16 @@ class Writer
     /**
      * Write a table in a json-file.
      * If file is not found create new file.
+     * @throws Exception Could not create new file
      */
     public function writeTable()
     {
-        if (file_exists($this->file) === false) {
+        if (!file_exists($this->file)) {
             fopen($this->file, 'w');
+        }
+
+        if (!file_exists($this->file)) {
+            throw new Exception('Error: could not create file for data table');
         }
 
         file_put_contents($this->file, json_encode($this->table, JSON_PRETTY_PRINT));

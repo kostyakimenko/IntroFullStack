@@ -1,6 +1,6 @@
 <?php
 session_start();
-$errMsg = $_SESSION['error'];
+$errMsg = $_SESSION['error'] ?? null;
 session_destroy();
 ?>
 

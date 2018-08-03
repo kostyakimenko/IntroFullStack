@@ -1,14 +1,14 @@
 <?php
 
-include __DIR__ . '/../app/config.php';
-include __DIR__ . '/../app/Reader.php';
-include __DIR__ . '/../app/Writer.php';
+// Include the configuration file
+$config = require __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR
+                  . 'app' . DIRECTORY_SEPARATOR . 'config.php';
 
-use app\Reader;
-use app\Writer;
+// Include the classes (Reader and Writer)
+require $config['reader'];
+require $config['writer'];
 
 session_start();
-$item = htmlspecialchars($_POST['activity']);
 
 /*
  * Read table, change result, write new data
@@ -16,11 +16,17 @@ $item = htmlspecialchars($_POST['activity']);
  * If input data is not correct throw error in start page.
  */
 try {
-    $reader = new Reader($item, $jsonPath, $defaultTable);
+    if (!isset($_POST['activity'])) {
+        throw new Exception('Error: transfer of vote result to the server did not occur');
+    }
+
+    $item = htmlspecialchars($_POST['activity']);
+
+    $reader = new Reader($item, $config['json'], $config['defaultTable']);
     $table = $reader->readTable();
     $table[$item]++;
 
-    $writer = new Writer($table, $jsonPath);
+    $writer = new Writer($table, $config['json']);
     $writer->writeTable();
 
     $_SESSION['table'] = $table;
