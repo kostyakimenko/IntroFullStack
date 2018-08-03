@@ -11,8 +11,8 @@ class Writer
 
     /**
      * Writer constructor.
-     * @param $table array Table as associative array
-     * @param $file string Path to file
+     * @param array $table Table as associative array
+     * @param string $file Path to file
      */
     public function __construct($table, $file)
     {

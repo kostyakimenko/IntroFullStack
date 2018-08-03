@@ -13,9 +13,9 @@ class Reader
 
     /**
      * Reader constructor.
-     * @param $item string Item of the table
-     * @param $file string Path to json-file
-     * @param $defaultTable array Default table
+     * @param string $item Item of the table
+     * @param string $file Path to json-file
+     * @param array $defaultTable Default table
      */
     public function __construct($item, $file, $defaultTable)
     {
