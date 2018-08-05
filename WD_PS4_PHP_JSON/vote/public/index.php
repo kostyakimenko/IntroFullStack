@@ -1,6 +1,5 @@
 <?php
 session_start();
-$errMsg = $_SESSION['error'] ?? null;
 session_destroy();
 ?>
 
@@ -18,39 +17,52 @@ session_destroy();
         <h1 class="vote__header">Your favorite activity</h1>
 
         <form class="vote__form" action="handler.php" method="post">
-            <table>
-                <tr class="vote__select">
-                    <th><label for="trav"><i class="fas fa-globe-americas"></i></label></th>
-                    <th><label for="trav">Traveling</label></th>
-                    <th><input type="radio" name="activity" id="trav" value="Traveling" checked></th>
-                </tr>
-                <tr class="vote__select">
-                    <th><label for="sports"><i class="fas fa-futbol"></i></label></th>
-                    <th><label for="sports">Sports</label></th>
-                    <th><input type="radio" name="activity" id="sports" value="Sports"></th>
-                </tr>
-                <tr class="vote__select">
-                    <th><label for="game"><i class="fas fa-gamepad"></i></label></th>
-                    <th><label for="game">Gaming</label></th>
-                    <th><input type="radio" name="activity" id="game" value="Gaming"></th>
-                </tr>
-                <tr class="vote__select">
-                    <th><label for="party"><i class="fas fa-cocktail"></i></label></th>
-                    <th><label for="party">Partying</th>
-                    <th><input type="radio" name="activity" id="party" value="Partying"></th>
-                </tr>
-                <tr class="vote__select">
-                    <th><label for="sleep"><i class="fas fa-bed"></i></label></th>
-                    <th><label for="sleep">Sleeping</label></th>
-                    <th><input type="radio" name="activity" id="sleep" value="Sleeping"></th>
-                </tr>
-            </table>
+            <div class="vote__select">
+                <div class="vote__icon">
+                    <label for="trav"><i class="fas fa-globe-americas"></i></label>
+                </div>
+                <label for="trav">Traveling</label>
+                <input type="radio" name="activity" id="trav" value="Traveling" checked>
+            </div>
+
+            <div class="vote__select">
+                <div class="vote__icon">
+                    <label for="sports"><i class="fas fa-futbol"></i></label>
+                </div>
+                <label for="sports">Sports</label>
+                <input type="radio" name="activity" id="sports" value="Sports">
+            </div>
+
+            <div class="vote__select">
+                <div class="vote__icon">
+                    <label for="game"><i class="fas fa-gamepad"></i></label>
+                </div>
+                <label for="game">Gaming</label>
+                <input type="radio" name="activity" id="game" value="Gaming">
+            </div>
+
+            <div class="vote__select">
+                <div class="vote__icon">
+                    <label for="party"><i class="fas fa-cocktail"></i></label>
+                </div>
+                <label for="party">Partying</label>
+                <input type="radio" name="activity" id="party" value="Partying">
+            </div>
+
+            <div class="vote__select">
+                <div class="vote__icon">
+                    <label for="sleep"><i class="fas fa-bed"></i></label>
+                </div>
+                <label for="sleep">Sleeping</label>
+                <input type="radio" name="activity" id="sleep" value="Sleeping">
+            </div>
+
             <input class="vote__btn" type="submit" value="Vote">
         </form>
 
-        <div class="vote__error">
-            <?php echo $errMsg; ?>
-        </div>
+        <?php if (isset($_SESSION['error'])): ?>
+        <div class="vote__error"><?php echo $_SESSION['error']; ?></div>
+        <?php endif; ?>
     </section>
 
 </body>

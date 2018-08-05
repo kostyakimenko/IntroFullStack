@@ -49,8 +49,12 @@ header > h1 {
     color: #2c3e50;
 }
 
-.workspace {
+.invisible {
     display: none;
+}
+
+.workspace {
+    display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 40px;
@@ -75,15 +79,16 @@ header > h1 {
     width: 200px;
     height: 30px;
     border: 1px solid #2c3e50;
-    /*border-radius: 5px;*/
     margin: 0 0 5px 0;
     padding-left: 5px;
     font-size: 14px;
 }
 
 .workspace_out {
-    margin: 16px 0 16px 0;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    margin-top: 16px;
+    align-items: center;
     color: #2c3e50;
     font-weight: bold;
 }
@@ -97,7 +102,6 @@ header > h1 {
     height: 32px;
     width: 160px;
     border: 1px solid #2c3e50;
-    /*border-radius: 5px;*/
     text-align: center;
     font-size: 14px;
     cursor: pointer;
@@ -131,7 +135,8 @@ header > h1 {
 }
 
 .error {
+    display: block;
     color: red;
-    font-weight: normal;
+    margin-top: 16px;
 }
 

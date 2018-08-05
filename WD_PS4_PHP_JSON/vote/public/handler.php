@@ -2,34 +2,37 @@
 
 // Include the configuration file
 $config = require __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR
-                  . 'app' . DIRECTORY_SEPARATOR . 'config.php';
+                  . 'config' . DIRECTORY_SEPARATOR . 'config.php';
 
-// Include the classes (Reader and Writer)
-require $config['reader'];
+// Include the classes (JsonChecker and JsonWriter)
+require $config['checker'];
 require $config['writer'];
 
 session_start();
 
 /*
- * Read table, change result, write new data
- * and visualization data in chart page.
- * If input data is not correct throw error in start page.
+ * Check json and read table.
+ * If json valid get current table,
+ * else get default table.
+ */
+$checker = new JsonChecker($config['json']);
+
+if ($checker->isValidFile()) {
+    $table = $checker->getTable();
+    $newFile = false;
+} else {
+    $table = $config['defaultTable'];
+    $newFile = true;
+}
+
+/*
+ * Change vote and write table.
+ * If the write was successful send data to chart page,
+ * else return error to main page.
  */
 try {
-    if (!isset($_POST['activity'])) {
-        throw new Exception('Error: transfer of vote result to the server did not occur');
-    }
-
-    $item = htmlspecialchars($_POST['activity']);
-
-    $reader = new Reader($item, $config['json'], $config['defaultTable']);
-    $table = $reader->readTable();
-    $table[$item]++;
-
-    $writer = new Writer($table, $config['json']);
+    $writer = new JsonWriter($table, $config['json'], $newFile);
     $writer->writeTable();
-
-    $_SESSION['table'] = $table;
     header('Location: chart.php');
 } catch (Exception $ex) {
     $_SESSION['error'] = $ex->getMessage();

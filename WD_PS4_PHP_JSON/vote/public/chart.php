@@ -1,6 +1,10 @@
 <?php
-session_start();
-$table = $_SESSION['table'] ?? null;
+$config = include __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR
+                  . 'config' . DIRECTORY_SEPARATOR . 'config.php';
+
+if (file_exists($config['json'])) {
+    $dataTable = file_get_contents($config['json']);
+}
 ?>
 
 <!DOCTYPE html>
@@ -31,12 +35,12 @@ $table = $_SESSION['table'] ?? null;
         }
 
         function addTable() {
-            let jsonTable = <?php echo json_encode($table); ?>;
+            let dataTable = <?php echo $dataTable ?? 0; ?>;
             let formatTable = [];
 
-            if (jsonTable) {
-                for (let key in jsonTable) {
-                    let entry = [key, jsonTable[key]];
+            if (dataTable) {
+                for (let key in dataTable) {
+                    let entry = [key, dataTable[key]];
                     formatTable.push(entry);
                 }
             }
@@ -48,5 +52,6 @@ $table = $_SESSION['table'] ?? null;
 </head>
 <body>
     <div class="chart" id="piechart"></div>
+    <button class="back-btn" onclick="location.href='/index.php'">Back to home</button>
 </body>
 </html>
