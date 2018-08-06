@@ -16,14 +16,7 @@ session_start();
  * else get default table.
  */
 $checker = new JsonChecker($config['json']);
-
-if ($checker->isValidFile()) {
-    $table = $checker->getTable();
-    $newFile = false;
-} else {
-    $table = $config['defaultTable'];
-    $newFile = true;
-}
+$table = ($checker->isValidFile()) ? $checker->getTable() : $config['defaultTable'];
 
 /*
  * Change vote and write table.
@@ -31,7 +24,8 @@ if ($checker->isValidFile()) {
  * else return error to main page.
  */
 try {
-    $writer = new JsonWriter($table, $config['json'], $newFile);
+    $item = (isset($_POST['activity'])) ? htmlspecialchars($_POST['activity']) : null;
+    $writer = new JsonWriter($table, $item, $config['json']);
     $writer->writeTable();
     header('Location: chart.php');
 } catch (Exception $ex) {

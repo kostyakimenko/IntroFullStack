@@ -9,20 +9,18 @@ class JsonWriter
     private $dataTable;
     private $item;
     private $jsonPath;
-    private $newFile;
 
     /**
      * JsonWriter constructor.
      * @param array $table Table as associative array
+     * @param string $item Item of the table
      * @param string $jsonPath Path to json file
-     * @param boolean $newFile Flag to create new file
      */
-    public function __construct($table, $jsonPath, $newFile)
+    public function __construct($table, $item, $jsonPath)
     {
         $this->dataTable = $table;
-        $this->item = (isset($_POST['activity'])) ? htmlspecialchars($_POST['activity']) : null;
+        $this->item = $item;
         $this->jsonPath = $jsonPath;
-        $this->newFile = $newFile;
     }
 
     /**
@@ -34,13 +32,9 @@ class JsonWriter
     {
         $this->addVote();
 
-        if ($this->newFile) {
-            fopen($this->jsonPath, 'w');
-        }
+        $isWrite = file_put_contents($this->jsonPath, json_encode($this->dataTable, JSON_PRETTY_PRINT));
 
-        if (is_writable($this->jsonPath)) {
-            file_put_contents($this->jsonPath, json_encode($this->dataTable, JSON_PRETTY_PRINT));
-        } else {
+        if ($isWrite === false) {
             throw new Exception('Error: could not create file or failed write a data table');
         }
     }
