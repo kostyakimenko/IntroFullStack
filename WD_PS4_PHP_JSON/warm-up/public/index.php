@@ -15,9 +15,7 @@ session_destroy();
 
 <body onload="openTask('<?php echo $_SESSION['taskName'] ?? null; ?>')">
 
-    <header>
-        <h1>WD_PS4_PHP</h1>
-    </header>
+    <header><h1>WD_PS4_PHP</h1></header>
 
     <div class="tabs">
         <button onclick="openTask('task1')">Task1</button>
@@ -29,7 +27,6 @@ session_destroy();
     </div>
 
     <section class="main-content">
-
         <!--Task_1-->
         <div class="invisible" id="task1">
             <h2>Task 1</h2>
@@ -120,7 +117,6 @@ session_destroy();
             <div class="workspace_out"><?php print_r($_SESSION['task6']); ?></div>
             <?php endif; ?>
         </div>
-
     </section>
 
     <script>
