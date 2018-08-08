@@ -1,3 +1,3 @@
-### Requirements
+### Application requirement
 
-* PHP >= 7.0
+* PHP version 7.0 or higher

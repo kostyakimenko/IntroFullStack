@@ -13,7 +13,7 @@ session_destroy();
     <title>PHP tasks</title>
 </head>
 
-<body onload="openTask('<?php echo $_SESSION['taskName'] ?? null; ?>')">
+<body onload="openTask('<?= $_SESSION['taskName'] ?? null; ?>')">
 
     <header><h1>WD_PS4_PHP</h1></header>
 
@@ -36,7 +36,7 @@ session_destroy();
                 <input type="submit" class="workspace_btn" value="Get sum">
             </form>
             <?php if (isset($_SESSION['task1'])): ?>
-            <div class="workspace_out"><?php echo 'Result: ' . $_SESSION['task1']; ?></div>
+            <div class="workspace_out"><?= "Result: {$_SESSION['task1']}"; ?></div>
             <?php endif; ?>
         </div>
 
@@ -49,7 +49,7 @@ session_destroy();
                 <input type="submit" class="workspace_btn" value="Get sum">
             </form>
             <?php if (isset($_SESSION['task2'])): ?>
-            <div class="workspace_out"><?php echo 'Result: ' . $_SESSION['task2']; ?></div>
+            <div class="workspace_out"><?= "Result: {$_SESSION['task2']}" ?></div>
             <?php endif; ?>
         </div>
 
@@ -62,7 +62,7 @@ session_destroy();
                 <input type="submit" class="workspace_btn" value="Draw pyramid">
             </form>
             <?php if (isset($_SESSION['task3'])): ?>
-            <div class="workspace_out" id="task3_out"><?php echo $_SESSION['task3']; ?></div>
+            <div class="workspace_out" id="task3_out"><?= $_SESSION['task3']; ?></div>
             <?php endif; ?>
         </div>
 
@@ -78,14 +78,14 @@ session_destroy();
             </form>
             <?php if (isset($_SESSION['task4'])): ?>
             <div class="workspace_out">
-                <?php echo str_replace(['{black}', '{white}', '{start}', '{end}'],
-                    ['<div class=chessboard__col_black></div>',
-                        '<div class=chessboard__col_white></div>',
-                        '<div class=chessboard__row>', '</div>'],
-                    $_SESSION['task4']); ?>
+            <?= str_replace(
+                ['{black}', '{white}', '{start}', '{end}'],
+                ['<div class=chessboard__col_black></div>', '<div class=chessboard__col_white></div>', '<div class=chessboard__row>', '</div>'],
+                $_SESSION['task4']
+            ); ?>
             </div>
             <?php elseif (isset($_SESSION['errTask4'])): ?>
-            <div class="error"><?php echo $_SESSION['errTask4']; ?></div>
+            <div class="error"><?= $_SESSION['errTask4']; ?></div>
             <?php endif; ?>
         </div>
 
@@ -99,9 +99,9 @@ session_destroy();
                 <input type="submit" class="workspace_btn" value="Get sum of digits">
             </form>
             <?php if (isset($_SESSION['task5'])): ?>
-            <div class="workspace_out"><?php echo 'Result: ' . $_SESSION['task5']; ?></div>
+            <div class="workspace_out"><?= "Result: {$_SESSION['task5']}"; ?></div>
             <?php elseif (isset($_SESSION['errTask5'])): ?>
-            <div class="error"><?php echo $_SESSION['errTask5'] ?></div>
+            <div class="error"><?= $_SESSION['errTask5'] ?></div>
             <?php endif; ?>
         </div>
 
