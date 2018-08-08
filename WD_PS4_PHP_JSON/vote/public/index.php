@@ -61,7 +61,7 @@ session_destroy();
         </form>
 
         <?php if (isset($_SESSION['error'])): ?>
-        <div class="vote__error"><?php echo $_SESSION['error']; ?></div>
+        <div class="vote__error"><?= $_SESSION['error']; ?></div>
         <?php endif; ?>
     </section>
 

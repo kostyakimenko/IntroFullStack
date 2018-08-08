@@ -2,7 +2,7 @@
 $config = include __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR
                   . 'config' . DIRECTORY_SEPARATOR . 'config.php';
 
-if (file_exists($config['json'])) {
+if (is_readable($config['json'])) {
     $dataTable = file_get_contents($config['json']);
 }
 ?>
@@ -26,7 +26,7 @@ if (file_exists($config['json'])) {
             const options = {
                 title: 'Activity rating',
                 legend: 'left',
-                fontSize: 18,
+                fontSize: 18
             };
 
             const chart = new google.visualization.PieChart(document.getElementById('piechart'));

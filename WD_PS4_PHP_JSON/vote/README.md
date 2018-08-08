@@ -1,4 +1,4 @@
-### Requirements
+### Application requirements
 
-* PHP >= 7.0
-* Permission for the database directory -> 'create and delete files'
+* PHP version 7.0 or higher
+* The database directory must have permission for create files
