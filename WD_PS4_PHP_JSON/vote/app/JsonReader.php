@@ -50,5 +50,4 @@ class JsonReader
             return empty($tableDiff);
         }
     }
-
 }
