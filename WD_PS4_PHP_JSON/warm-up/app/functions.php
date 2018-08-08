@@ -74,16 +74,17 @@ function drawChessboard($rows, $cols)
         throw new Exception('Error: chessboard size limit is ' . CHESS_SIZE_LIMIT);
     }
 
+    $rows = intval($rows);
     $chessboard = '';
     $startRow = '{start}';
     $endRow = '{end}';
     $blackCell = '{black}';
     $whiteCell = '{white}';
 
-    for ($row = 0; $row < $rows; $row++) {
+    for (; $rows > 0; $rows--) {
         $newRow = $startRow;
         for ($col = 0; $col < $cols; $col++) {
-            $newRow .= (($row + $col) % 2 === 0) ? $blackCell : $whiteCell;
+            $newRow .= (($rows + $col) % 2 === 0) ? $blackCell : $whiteCell;
         }
         $chessboard .= $newRow . $endRow;
     }
