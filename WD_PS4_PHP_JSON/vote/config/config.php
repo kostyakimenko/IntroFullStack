@@ -5,7 +5,7 @@ return [
     'reader' => __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'JsonReader.php',
     'json' =>  __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR . 'table.json',
 
-    'defaultKey' => [
+    'defaultKeys' => [
         'Traveling',
         'Sports',
         'Gaming',

@@ -6,7 +6,7 @@
 class JsonReader
 {
     private $jsonPath;
-    private $defaultKey;
+    private $defaultKeys;
     private $currentTable;
 
     /**
@@ -16,7 +16,7 @@ class JsonReader
     public function __construct($config)
     {
         $this->jsonPath = $config['json'];
-        $this->defaultKey = $config['defaultKey'];
+        $this->defaultKeys = $config['defaultKeys'];
         $this->currentTable = [];
     }
 
@@ -29,7 +29,7 @@ class JsonReader
         if ($this->isValidTable()) {
             return $this->currentTable;
         } else {
-            return array_fill_keys($this->defaultKey, 0);
+            return array_fill_keys($this->defaultKeys, 0);
         }
     }
 
@@ -46,7 +46,7 @@ class JsonReader
         if (empty($this->currentTable)) {
             return false;
         } else {
-            $tableDiff = array_diff($this->defaultKey, array_keys($this->currentTable));
+            $tableDiff = array_diff($this->defaultKeys, array_keys($this->currentTable));
             return empty($tableDiff);
         }
     }
