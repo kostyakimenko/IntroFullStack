@@ -4,22 +4,32 @@
 $config = require __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR
                   . 'config' . DIRECTORY_SEPARATOR . 'config.php';
 
-// Include the classes (JsonReader and JsonWriter)
-require $config['reader'];
-require $config['writer'];
+// Include the classes (JsonChecker and VoteCounter)
+require $config['jsonChecker'];
+require $config['voteCounter'];
 
 session_start();
 
-// Read the data table
-$reader = new JsonReader($config);
-$dataTable = $reader->getTable();
+// Create checker and vote counter objects
+$checker = new JsonChecker($config['json']);
+$voteCounter = new VoteCounter($config['json'], $config['defaultKeys']);
 
-// Add vote and write the data table
-$vote = (isset($_POST['activity'])) ? htmlspecialchars($_POST['activity']) : null;
-$writer = new JsonWriter($vote, $dataTable, $config);
-
+/*
+ * Validation file and directory,
+ * add vote to data table and write table to json file.
+ */
 try {
-    $writer->writeTable();
+    if ($checker->isJsonValid()) {
+        $dataTable = $voteCounter->getTable();
+    } elseif (!$checker->isJsonExists() && $checker->isDirValid()) {
+        $dataTable = $voteCounter->getDefaultTable();
+    } else {
+        throw new Exception('Access file error');
+    }
+
+    $vote = (isset($_POST['activity'])) ? htmlspecialchars($_POST['activity']) : null;
+    $voteCounter->putTable($vote, $dataTable);
+
     header('Location: chart.php');
 } catch (Exception $ex) {
     $_SESSION['error'] = $ex->getMessage();
