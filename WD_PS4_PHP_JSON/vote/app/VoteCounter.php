@@ -61,29 +61,26 @@ class VoteCounter
     }
 
     /**
-     * Put table to the json.
-     * @param string $vote Vote
-     * @param array $dataTable Data table with vote result
-     * @throws Exception Selected candidate isn't found in data table
-     */
-    public function putTable($vote, $dataTable)
-    {
-        $this->addVote($vote, $dataTable);
-        file_put_contents($this->tablePath, json_encode($dataTable, JSON_PRETTY_PRINT));
-    }
-
-    /**
      * Add vote to the data table.
      * @param string $vote Vote
      * @param array $dataTable Data table with vote result
      * @throws Exception Selected candidate isn't found in data table
      */
-    private function addVote($vote, &$dataTable)
+    public function addVote($vote, &$dataTable)
     {
         if (array_key_exists($vote, $dataTable)) {
             $dataTable[$vote]++;
         } else {
             throw new Exception('Selected item is not found in data table');
         }
+    }
+
+    /**
+     * Put table to the json.
+     * @param array $dataTable Data table with vote result
+     */
+    public function putTable($dataTable)
+    {
+        file_put_contents($this->tablePath, json_encode($dataTable, JSON_PRETTY_PRINT));
     }
 }

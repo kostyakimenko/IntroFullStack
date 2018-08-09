@@ -28,7 +28,8 @@ try {
     }
 
     $vote = (isset($_POST['activity'])) ? htmlspecialchars($_POST['activity']) : null;
-    $voteCounter->putTable($vote, $dataTable);
+    $voteCounter->addVote($vote, $dataTable);
+    $voteCounter->putTable($dataTable);
 
     header('Location: chart.php');
 } catch (Exception $ex) {
