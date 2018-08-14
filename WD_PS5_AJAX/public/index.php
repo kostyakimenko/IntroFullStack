@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link href="./css/style.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-    <link href="css/fontawesome-free-5.1.0-web/css/all.css" rel="stylesheet">
+    <link href="/css/fontawesome-free-5.1.0-web/css/all.css" rel="stylesheet">
     <title>Easy Chat</title>
 </head>
 <body>
@@ -56,7 +56,8 @@
 
     </section>
 
-    <script src="./js/jquery-3.3.1.js"></script>
-    <script src="./js/ajax-requests.js"></script>
+    <script src="/js/jquery-3.3.1.js"></script>
+    <script src="/js/ajax-requests.js"></script>
+
 </body>
 </html>
