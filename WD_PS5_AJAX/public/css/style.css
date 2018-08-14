@@ -128,7 +128,7 @@ header > div {
 .chat__out {
     background-color: #fffecd;
     width: 500px;
-    height: 250px;
+    height: 240px;
     overflow-y: scroll;
     padding: 0 0 0 10px;
     text-align: left;
