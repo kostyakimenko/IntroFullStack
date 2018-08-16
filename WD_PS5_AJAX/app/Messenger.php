@@ -16,18 +16,18 @@ class Messenger
         return json_decode(file_get_contents($this->filePath), true);
     }
 
-    public function getLastHoursMsg()
+    public function getLastHourMsg()
     {
         $hourAgo = strtotime('-1 hour');
-        $lastHoursMsg = [];
+        $lastHourMsg = [];
 
         foreach ($this->msgTable as $msg) {
             if ($msg['time'] > $hourAgo) {
-                array_push($lastHoursMsg, $msg);
+                array_push($lastHourMsg, $msg);
             }
         }
 
-        return $lastHoursMsg;
+        return $lastHourMsg;
     }
 
     public function addMsg($user, $msg)

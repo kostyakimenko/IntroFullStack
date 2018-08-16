@@ -24,6 +24,16 @@ class DBConnector
         return is_readable(dirname($this->filePath)) && is_writable(dirname($this->filePath));
     }
 
+    public function isContentValid()
+    {
+        $content = file_get_contents($this->filePath);
+        $firstChar = $content[0];
+        $lastChar = $content[strlen($content) - 1];
+
+        return ($firstChar === '{' && $lastChar === '}')
+               || ($firstChar === '[' && $lastChar === ']');
+    }
+
     public function createEmptyFile()
     {
         file_put_contents($this->filePath, '[]');
