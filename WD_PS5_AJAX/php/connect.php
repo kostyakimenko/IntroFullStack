@@ -20,7 +20,8 @@ function connectFile($filePath)
 {
     $connector = new DBConnector($filePath);
 
-    if (!$connector->isFileExists() && $connector->isDirValid()) {
+    if ((!$connector->isFileExists() && $connector->isDirValid())
+        || ($connector->isFileValid() && !$connector->isContentValid())) {
         $connector->createEmptyFile();
     } elseif (!$connector->isFileValid()) {
         throw new Exception();

@@ -16,7 +16,7 @@ switch ($requestType) {
     case 'getMsg':
         $messenger = new Messenger($config['messages']);
         $response = [];
-        $response['msgTable'] = $messenger->getLastHoursMsg();
+        $response['msgTable'] = $messenger->getLastHourMsg();
         $response['updateTime'] = filemtime($config['messages']);
         echo json_encode($response);
         break;
