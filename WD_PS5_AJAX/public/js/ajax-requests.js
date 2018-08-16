@@ -116,8 +116,8 @@ function updMsgArea() {
 //Create message area
 function createMsgArea(msgTable) {
     let html = '';
-    const smile = '<i class="fas fa-smile"></i>';
-    const frown = '<i class="fas fa-frown"></i>';
+    const smile = '<img class="emoji" src="/img/smile.png">';
+    const frown = '<img class="emoji" src="/img/frown.png">';
 
     msgTable.forEach(function(msg, i) {
         if (i === 0) {
@@ -127,7 +127,7 @@ function createMsgArea(msgTable) {
         msg.text = msg.text.replace(/:\)/g, smile);
         msg.text = msg.text.replace(/:\(/g, frown);
 
-        html += `<p>[${getTime(msg.time)}] <b>${msg.user}:</b> ${msg.text}</p>`;
+        html += `<div>[${getTime(msg.time)}] <b>${msg.user}:</b> ${msg.text}</div>`;
     });
 
     $('#msg-area').html(html);

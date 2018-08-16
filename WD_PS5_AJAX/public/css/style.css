@@ -134,6 +134,17 @@ header > div {
     text-align: left;
 }
 
+.chat__out > div {
+    display: flex;
+    flex-direction: row;
+    height: 40px;
+    align-items: center;
+}
+
+.chat__out > div > b {
+    margin: 0 5px 0 5px;
+}
+
 .chat__form {
     display: flex;
     justify-content: space-between;
@@ -166,7 +177,16 @@ header > div {
     font-family: 'Montserrat', sans-serif;
 }
 
+.emoji {
+    width: 20px;
+    height: 20px;
+    margin: -5px 0 0 5px;
+}
+
 .fa-smile, .fa-frown {
+    background-color: black;
+    border-radius: 10px;
+    padding: 1px;
     color: #f0932b;
     font-size: 18px;
 }

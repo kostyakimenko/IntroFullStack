@@ -5,7 +5,6 @@
     <link href="/css/style.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-    <link href="/css/fontawesome-free-5.1.0-web/css/all.css" rel="stylesheet">
     <title>Easy Chat</title>
 </head>
 <body>
