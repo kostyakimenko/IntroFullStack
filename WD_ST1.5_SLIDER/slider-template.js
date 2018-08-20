@@ -1,7 +1,7 @@
 const API_URL = 'https://picsum.photos/';
 const BIG_SIZE = '600/400/';
 const SMALL_SIZE = '60/';
-const ANIMATION_SPEED = 300;
+const ANIMATION_SPEED = 250;
 const LEFT_KEY_CODE = 37;
 const RIGHT_KEY_CODE = 39;
 
@@ -15,6 +15,7 @@ const IMAGES = [
 ];
 
 const animation = true;
+const slider_previews = $('.slider .slider-previews');
 let keyDownRepeat = 0;
 
 // Initialization preview images,
@@ -33,18 +34,19 @@ $('body').keyup(function() {
 
 // Initialization preview images
 function initPreviews() {
-    IMAGES.forEach(function(img) {
-        $('.slider-previews').append(`<li><img src=${API_URL}${SMALL_SIZE}${img}></li>`);
-    });
+    const previewsHtml = IMAGES.reduce(function(html, img) {
+        return html + `<li><img src=${API_URL}${SMALL_SIZE}${img}></li>`
+    }, '');
+    slider_previews.html(previewsHtml);
 
     const imgIndex = curImgIndex();
-    $(`.slider .slider-previews li:nth-child(${imgIndex + 1})`).addClass('current');
+    slider_previews.find(`li:nth-child(${imgIndex + 1})`).addClass('current');
 }
 
 // Mouse click event for preview images
 function clickPreviewEvent() {
-    $('.slider .slider-previews li img').click(function() {
-        $('.slider .slider-previews li').removeClass('current');
+    slider_previews.find('li img').click(function() {
+        slider_previews.find('li').removeClass('current');
 
         const smallImgSrc = $(this).attr('src');
         const bigImgSrc = smallImgSrc.replace(SMALL_SIZE, BIG_SIZE);
@@ -61,13 +63,13 @@ function keyLeftRightEvent() {
 
         if (keyCode === LEFT_KEY_CODE || keyCode === RIGHT_KEY_CODE) {
             keyDownRepeat++;
-            $('.slider .slider-previews li').removeClass('current');
+            slider_previews.find('li').removeClass('current');
 
             const curIndex = curImgIndex();
             const index = (keyCode === LEFT_KEY_CODE) ? prevImgIndex(curIndex) : nextImgIndex(curIndex);
             const imgSrc = `${API_URL}${BIG_SIZE}${IMAGES[index]}`;
 
-            $(`.slider .slider-previews li:nth-child(${index + 1})`).addClass('current');
+            slider_previews.find(`li:nth-child(${index + 1})`).addClass('current');
 
             (keyDownRepeat > 1) ? changeImg(imgSrc) : changeImg(imgSrc, animation);
         }
@@ -77,13 +79,13 @@ function keyLeftRightEvent() {
 // Change current images
 function changeImg(imgSrc, animation = false) {
     const curImg = $('.slider-current img');
+    curImg.stop(true, true);
 
     if (animation) {
-        curImg.stop(true);
-        curImg.fadeOut(ANIMATION_SPEED, function () {
+        curImg.fadeTo(ANIMATION_SPEED, 0.3, function () {
             curImg.attr('src', imgSrc);
         });
-        curImg.fadeIn(ANIMATION_SPEED);
+        curImg.fadeTo(ANIMATION_SPEED, 1);
     } else {
         curImg.attr('src', imgSrc);
     }

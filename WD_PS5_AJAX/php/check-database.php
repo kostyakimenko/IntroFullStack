@@ -3,6 +3,8 @@
 $config = require __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'config.php';
 
 require $config['connector'];
+require $config['databaseIO'];
+require $config['databaseChecker'];
 
 try {
     connectFile($config['users']);
@@ -18,12 +20,10 @@ try {
  */
 function connectFile($filePath)
 {
-    $connector = new DBConnector($filePath);
+    $dbIO = new DatabaseIO($filePath);
+    $dbChecker = new DatabaseChecker($filePath, $dbIO);
 
-    if ((!$connector->isFileExists() && $connector->isDirValid())
-        || ($connector->isFileValid() && !$connector->isContentValid())) {
-        $connector->createEmptyFile();
-    } elseif (!$connector->isFileValid()) {
+    if (!$dbChecker->isFileValid() || !$dbChecker->isContentValid()) {
         throw new Exception();
     }
 }
