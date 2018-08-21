@@ -2,32 +2,28 @@
 
 class Messenger
 {
-    private $filePath;
+    private $dbIO;
     private $msgTable;
+    private $msgUpdateTime;
 
-    public function __construct($filePath)
+    /**
+     * Messenger constructor.
+     * @param DatabaseIO $dbIO
+     */
+    public function __construct($dbIO)
     {
-        $this->filePath = $filePath;
-        $this->msgTable = $this->readTable();
+        $this->dbIO = $dbIO;
+        $this->msgTable = $dbIO->readData();
+        $this->msgUpdateTime = $dbIO->updateTime();
     }
 
-    private function readTable()
-    {
-        return json_decode(file_get_contents($this->filePath), true);
-    }
-
-    public function getLastHourMsg()
+    public function getMsg($lastUpdateTime = 0)
     {
         $hourAgo = strtotime('-1 hour');
-        $lastHourMsg = [];
 
-        foreach ($this->msgTable as $msg) {
-            if ($msg['time'] > $hourAgo) {
-                array_push($lastHourMsg, $msg);
-            }
-        }
-
-        return $lastHourMsg;
+        return array_filter($this->msgTable, function($msg) use ($lastUpdateTime, $hourAgo) {
+            return $msg['time'] > $lastUpdateTime && $msg['time'] > $hourAgo;
+        });
     }
 
     public function addMsg($user, $msg)
@@ -38,6 +34,12 @@ class Messenger
         $message['text'] = $msg;
 
         array_push($this->msgTable, $message);
-        file_put_contents($this->filePath, json_encode($this->msgTable, JSON_PRETTY_PRINT ));
+        $this->dbIO->writeData($this->msgTable);
+        $this->msgUpdateTime = $this->dbIO->updateTime();
+    }
+
+    public function msgUpdateTime()
+    {
+        return $this->msgUpdateTime;
     }
 }

@@ -1,26 +1,34 @@
 <?php
 
+spl_autoload_register(function($class) {
+    include __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . $class . '.php';
+});
 $config = require __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'config.php';
 
-require $config['messenger'];
+session_start();
 
-$username = (isset($_POST['user'])) ? htmlspecialchars($_POST['user']) : null;
+$username = (isset($_SESSION['user'])) ? htmlspecialchars($_SESSION['user']) : null;
+$lastUpdateTime = (isset($_SESSION['updTime'])) ? htmlspecialchars($_SESSION['updTime']) : 0;
 $message = (isset($_POST['msg'])) ? htmlspecialchars($_POST['msg']) : null;
-$requestType = (isset($_POST['type'])) ? htmlspecialchars($_POST['type']) : null;
+$action = (isset($_POST['action'])) ? htmlspecialchars($_POST['action']) : null;
 
-switch ($requestType) {
+$dbIO = new DatabaseIO($config['messages']);
+$messenger = new Messenger($dbIO);
+
+switch ($action) {
     case 'addMsg':
-        $messenger = new Messenger($config['messages']);
         $messenger->addMsg($username, $message);
+        echo json_encode($messenger->getMsg($lastUpdateTime));
         break;
-    case 'getMsg':
-        $messenger = new Messenger($config['messages']);
-        $response = [];
-        $response['msgTable'] = $messenger->getLastHourMsg();
-        $response['updateTime'] = filemtime($config['messages']);
-        echo json_encode($response);
+    case 'getAllMsg':
+        echo json_encode($messenger->getMsg());
         break;
-    case 'updTime':
-        echo filemtime($config['messages']);
+    case 'update':
+        $updateTime = $messenger->msgUpdateTime();
+        if ($updateTime !== $lastUpdateTime){
+            echo json_encode($messenger->getMsg($lastUpdateTime));
+        }
         break;
 }
+
+$_SESSION['updTime'] = $messenger->msgUpdateTime();

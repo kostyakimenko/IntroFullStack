@@ -41,13 +41,6 @@ header > div {
     background-color: #7bc3ab;
 }
 
-.main-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
 .title {
     color: #fffecd;
     font-family: 'Pacifico', cursive;
@@ -113,7 +106,6 @@ header > div {
 }
 
 .auth__error {
-    display: none;
     color: #d63031;
     font-size: 12px;
     text-align: left;
@@ -122,23 +114,28 @@ header > div {
 }
 
 .chat {
-    display: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .chat__out {
     background-color: #fffecd;
     width: 500px;
-    height: 240px;
+    height: 233px;
     overflow-y: scroll;
-    padding: 0 0 0 10px;
     text-align: left;
+    padding: 15px 0 15px 0;
 }
 
 .chat__out > div {
     display: flex;
     flex-direction: row;
-    height: 40px;
+    height: 30px;
     align-items: center;
+    font-size: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-left: 20px;
 }
 
 .chat__out > div > b {
@@ -149,6 +146,7 @@ header > div {
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
+    width: 500px;
 }
 
 .chat__in {
@@ -158,6 +156,7 @@ header > div {
     height: 35px;
     padding: 0 0 0 10px;
     font-size: 15px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .chat__btn {
@@ -172,8 +171,8 @@ header > div {
 }
 
 .db-error {
-    display: none;
     color: #d63031;
+    font-size: 18px;
     font-family: 'Montserrat', sans-serif;
 }
 

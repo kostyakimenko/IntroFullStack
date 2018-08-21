@@ -5,8 +5,8 @@ $config = require __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '
 $route = (isset($_POST['route'])) ? htmlspecialchars($_POST['route']) : null;
 
 switch ($route) {
-    case 'connect':
-        require $config['connect'];
+    case 'check_database':
+        require $config['validation'];
         break;
     case 'authorization':
         require $config['authorization'];
