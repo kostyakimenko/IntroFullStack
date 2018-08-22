@@ -1,3 +1,5 @@
+// Check connecting with database
+// and correct database files
 $(function() {
     $.ajax({
         method: 'POST',

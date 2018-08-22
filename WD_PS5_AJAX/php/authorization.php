@@ -5,12 +5,14 @@ spl_autoload_register(function($class) {
 });
 $config = require __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'config.php';
 
+// Create object for database input/output,
+// get users table and current username and password
 $dbIO = new DatabaseIO($config['users']);
-
 $users = $dbIO->readData();
 $username = (isset($_POST['user'])) ? htmlspecialchars($_POST['user']) : null;
 $password = (isset($_POST['pass'])) ? htmlspecialchars($_POST['pass']) : null;
 
+// User data handling and check authorization
 try {
     $userHandler = new UserHandler($users, $username, $password);
     if ($userHandler->isNewUser()) {

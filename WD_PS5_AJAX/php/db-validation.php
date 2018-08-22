@@ -5,6 +5,7 @@ spl_autoload_register(function($class) {
 });
 $config = require __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'config.php';
 
+// Database files validation
 try {
     checkDB($config['users']);
     checkDB($config['messages']);
@@ -14,8 +15,9 @@ try {
 }
 
 /**
- * @param $dbPath
- * @throws Exception
+ * Check file.
+ * @param string $dbPath Path to the database file
+ * @throws Exception Invalid file
  */
 function checkDB($dbPath)
 {

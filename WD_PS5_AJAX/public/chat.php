@@ -15,6 +15,9 @@ if (!isset($_SESSION['user'])) {
     </form>
 </div>
 
+<button class="logout__btn chat__btn" onclick="logout()">Log out</button>
+
 <script src="/js/chat.js"></script>
+<script src="/js/logout.js"></script>
 
 <?php include __DIR__ . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'footer.php' ?>

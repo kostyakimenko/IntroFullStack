@@ -1,3 +1,6 @@
+// User authorization.
+// If authorization ok - redirect on chat page,
+// else - output error in main page.
 $('#auth-form').submit(function(event) {
     const username = $('#user').val();
     const password = $('#pass').val();

@@ -78,7 +78,6 @@ header > div {
     margin-bottom: 5px;
     font-size: 14px;
     font-weight: bold;
-
 }
 
 .auth__btn {
@@ -122,20 +121,20 @@ header > div {
 .chat__out {
     background-color: #fffecd;
     width: 500px;
-    height: 233px;
+    height: 245px;
     overflow-y: scroll;
     text-align: left;
-    padding: 15px 0 15px 0;
+    padding: 10px 0 10px 0;
 }
 
 .chat__out > div {
     display: flex;
     flex-direction: row;
-    height: 30px;
-    align-items: center;
     font-size: 15px;
     font-family: Arial, Helvetica, sans-serif;
-    margin-left: 20px;
+    margin: 0 20px 0 20px;
+    white-space: pre-line;
+    line-height: 1.7;
 }
 
 .chat__out > div > b {
@@ -152,9 +151,9 @@ header > div {
 .chat__in {
     background-color: #fffecd;
     border: 0;
-    width: 370px;
+    width: 360px;
     height: 35px;
-    padding: 0 0 0 10px;
+    padding: 0 10px 0 10px;
     font-size: 15px;
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -179,15 +178,6 @@ header > div {
 .emoji {
     width: 20px;
     height: 20px;
-    margin: -5px 0 0 5px;
-}
-
-.fa-smile, .fa-frown {
-    background-color: black;
-    border-radius: 10px;
-    padding: 1px;
-    color: #f0932b;
-    font-size: 18px;
 }
 
 .border_red {
@@ -200,4 +190,17 @@ header > div {
 
 [type=submit]:focus {
     outline: none;
+}
+
+.logout__btn {
+    position: fixed;
+    top: 30px;
+    right: 20px;
+    width: 70px;
+    height: 30px;
+    font-size: 12px;
+}
+
+.logout__btn:hover {
+    cursor: pointer;
 }

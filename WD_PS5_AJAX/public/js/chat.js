@@ -1,6 +1,7 @@
 const MS_IN_SEC = 1000;
 const REQUEST_INTERVAL = 1000;
 
+// Get all message in the last hour
 $(function() {
    $.ajax({
        method: 'POST',
@@ -14,6 +15,7 @@ $(function() {
    });
 });
 
+// Add new message to the message area
 $('#chat-form').submit(function(event) {
     const message = $('#msg').val();
     event.preventDefault();
@@ -30,6 +32,7 @@ $('#chat-form').submit(function(event) {
     })
 });
 
+// Listener for checking updates of the database.
 function databaseListener() {
     $.ajax({
         method: 'POST',
@@ -44,21 +47,22 @@ function databaseListener() {
     });
 }
 
+// Add new messages to the message area
 function updMsgArea(msgTable) {
-    const smile = '<img class="emoji" src="/img/smile.png">';
-    const frown = '<img class="emoji" src="/img/frown.png">';
+    const smile = '<img class="emoji" align="top" src="/img/smile.png">';
+    const frown = '<img class="emoji" align="top" src="/img/frown.png">';
 
     $.each(msgTable, function(i, msg) {
         msg.text = msg.text.replace(/:\)/g, smile);
         msg.text = msg.text.replace(/:\(/g, frown);
 
-        $('#msg-area').append(`<div>[${getTime(msg.time)}] <b>${msg.user}:</b> ${msg.text}</div>`);
+        $('#msg-area').append(`<div>[${getTime(msg.time)}] <b>${msg.user}:</b> <div>${msg.text}</div></div>`);
     });
 
     scrollDown();
 }
 
-//Time format hh:mm:ss
+// Convert seconds to time format hh:mm:ss
 function getTime(sec) {
     const date = new Date(sec * MS_IN_SEC);
     const hours = date.getHours().toString().padStart(2, '0');
