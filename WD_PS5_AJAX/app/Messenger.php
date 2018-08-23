@@ -8,7 +8,7 @@ class Messenger
 {
     private $dbIO;
     private $msgTable;
-    private $msgUpdateTime;
+    private $lastMsgTime;
 
     /**
      * Messenger constructor.
@@ -18,21 +18,29 @@ class Messenger
     {
         $this->dbIO = $dbIO;
         $this->msgTable = $dbIO->readData();
-        $this->msgUpdateTime = $dbIO->updateTime();
+        $this->lastMsgTime = null;
     }
 
     /**
      * Get new messages on last hour.
-     * @param int $updateTime Time of the last message added
+     * @param int $updateTime Time of the last update
      * @return array New messages
      */
-    public function getMsg($updateTime = 0)
+    public function getNewMsg($updateTime = 0)
     {
-        $hourAgo = strtotime('-1 hour');
+        $hourAgo = strtotime('-1 hour') * 1000;
+        $newMessages = [];
 
-        return array_filter($this->msgTable, function($msg) use ($updateTime, $hourAgo) {
-            return $msg['time'] > $updateTime && $msg['time'] > $hourAgo;
-        });
+        for ($i = count($this->msgTable); $i--;) {
+            $msgTime = $this->msgTable[$i]['time'];
+            if ($msgTime > $updateTime && $msgTime > $hourAgo) {
+                array_unshift($newMessages, $this->msgTable[$i]);
+            }
+        }
+
+        $this->lastMsgTime = end($this->msgTable)['time'];
+
+        return $newMessages;
     }
 
     /**
@@ -43,20 +51,20 @@ class Messenger
     public function addMsg($user, $msg)
     {
         $message = [];
-        $message['time'] = time();
+        $message['time'] = round(microtime(true) * 1000);
         $message['user'] = $user;
         $message['text'] = $msg;
 
         array_push($this->msgTable, $message);
         $this->dbIO->writeData($this->msgTable);
-        $this->msgUpdateTime = $this->dbIO->updateTime();
+        $this->lastMsgTime = $message['time'];
     }
 
     /**
-     * Get last update time.
+     * Get last message time.
      */
-    public function msgUpdateTime()
+    public function lastMsgTime()
     {
-        return $this->msgUpdateTime;
+        return $this->lastMsgTime;
     }
 }

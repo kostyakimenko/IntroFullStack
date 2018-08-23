@@ -9,6 +9,7 @@ session_start();
 
 // Session data
 $username = (isset($_SESSION['user'])) ? htmlspecialchars($_SESSION['user']) : null;
+$databaseSize = (isset($_SESSION['dbSize'])) ? htmlspecialchars($_SESSION['dbSize']) : null;
 $updateTime = (isset($_SESSION['updTime'])) ? htmlspecialchars($_SESSION['updTime']) : 0;
 
 // Request data
@@ -23,17 +24,20 @@ $messenger = new Messenger($dbIO);
 switch ($action) {
     case 'addMsg':
         $messenger->addMsg($username, $message);
-        echo json_encode($messenger->getMsg($updateTime));
+        echo json_encode($messenger->getNewMsg($updateTime));
+        $_SESSION['updTime'] = $messenger->lastMsgTime();
         break;
     case 'getAllMsg':
-        echo json_encode($messenger->getMsg());
+        echo json_encode($messenger->getNewMsg());
+        $_SESSION['updTime'] = $messenger->lastMsgTime();
         break;
     case 'update':
-        $lastUpdateTime = $messenger->msgUpdateTime();
-        if ($updateTime !== $lastUpdateTime){
-            echo json_encode($messenger->getMsg($updateTime));
+        $newSize = $dbIO->databaseSize();
+        if ($newSize != $databaseSize){
+            echo json_encode($messenger->getNewMsg($updateTime));
+            $_SESSION['updTime'] = $messenger->lastMsgTime();
         }
         break;
 }
 
-$_SESSION['updTime'] = $messenger->msgUpdateTime();
+$_SESSION['dbSize'] = $dbIO->databaseSize();

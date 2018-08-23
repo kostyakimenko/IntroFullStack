@@ -36,12 +36,12 @@ class DatabaseIO
     }
 
     /**
-     * Get last update time.
-     * @return int Database update time
+     * Get database size.
+     * @return int Database size
      */
-    public function updateTime()
+    public function databaseSize()
     {
         clearstatcache();
-        return filemtime($this->dbPath);
+        return filesize($this->dbPath);
     }
 }

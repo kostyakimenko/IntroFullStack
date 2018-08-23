@@ -1,1 +1,12 @@
-{}
+[
+    {
+        "time": 1535034811936,
+        "user": "kos",
+        "text": "hello, ben :)"
+    },
+    {
+        "time": 1535034829321,
+        "user": "ben",
+        "text": "hi, kos"
+    }
+]
