@@ -41,9 +41,9 @@ class VoteCounter
 
         if ($this->isValidTable($currentTable)) {
             return $currentTable;
-        } else {
-            return $this->getDefaultTable();
         }
+
+        return $this->getDefaultTable();
     }
 
     /**
@@ -55,9 +55,9 @@ class VoteCounter
     {
         if (empty($table)) {
             return false;
-        } else {
-            return $this->defaultKeys === array_keys($table);
         }
+
+        return $this->defaultKeys === array_keys($table);
     }
 
     /**
