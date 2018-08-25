@@ -35,6 +35,8 @@ class Messenger
             $msgTime = $this->msgTable[$i]['time'];
             if ($msgTime > $updateTime && $msgTime > $hourAgo) {
                 array_unshift($newMessages, $this->msgTable[$i]);
+            } else {
+                break;
             }
         }
 
