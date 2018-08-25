@@ -12,22 +12,20 @@ $users = $dbIO->readData();
 $username = (isset($_POST['user'])) ? htmlspecialchars($_POST['user']) : null;
 $password = (isset($_POST['pass'])) ? htmlspecialchars($_POST['pass']) : null;
 
-// User data handling and check authorization
-try {
-    $userHandler = new UserHandler($users, $username, $password);
-    if ($userHandler->isNewUser()) {
-        $userHandler->addUser();
-        $dbIO->writeData($userHandler->getUsers());
-    }
+// User data handling
+$userHandler = new UserHandler($users, $username, $password);
+if ($userHandler->isNewUser()) {
+    $userHandler->addUser();
+    $users = $userHandler->getUsers();
+    $dbIO->writeData($users);
+}
 
-    $auth = new Authorizer($users, $username, $password);
-    if ($auth->isAuthOk()) {
-        session_start();
-        $_SESSION['user'] = $username;
-        echo 'auth_ok';
-    } else {
-        echo 'pass_err';
-    }
-} catch (Exception $ex) {
-    echo $ex->getMessage();
+// Check authorization
+$auth = new Authorizer($users, $username, $password);
+if ($auth->isAuthOk()) {
+    session_start();
+    $_SESSION['user'] = $username;
+    echo 'auth_ok';
+} else {
+    echo 'auth_err';
 }
