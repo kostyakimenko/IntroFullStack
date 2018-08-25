@@ -1,4 +1,5 @@
 const REQUEST_INTERVAL = 1000;
+const MAX_MSG_LENGTH = 200;
 
 // Get all message in the last hour
 $(function() {
@@ -16,19 +17,26 @@ $(function() {
 
 // Add new message to the message area
 $('#chat-form').submit(function(event) {
-    const message = $('#msg').val();
-    event.preventDefault();
+    const msgField = $('#msg');
+    const message = msgField.val().trim();
 
-    $.ajax({
-        method: 'POST',
-        url: 'router.php',
-        data: {route: 'messaging', action: 'addMsg', msg: message},
-        dataType: 'json'
-    })
-    .done(function(msgTable) {
-        updMsgArea(msgTable);
-        $('#msg').val('');
-    })
+    event.preventDefault();
+    hideChatError();
+
+    if (message.length > MAX_MSG_LENGTH) {
+        showChatError(`Message to large (max ${MAX_MSG_LENGTH} symbols)`);
+    } else if (message) {
+        $.ajax({
+            method: 'POST',
+            url: 'router.php',
+            data: {route: 'messaging', action: 'addMsg', msg: message},
+            dataType: 'json'
+        })
+        .done(function(msgTable) {
+            updMsgArea(msgTable);
+            msgField.val('');
+        })
+    }
 });
 
 // Listener for checking updates of the database.
@@ -55,7 +63,7 @@ function updMsgArea(msgTable) {
         msg.text = msg.text.replace(/:\)/g, smile);
         msg.text = msg.text.replace(/:\(/g, frown);
 
-        $('#msg-area').append(`<div>[${getTime(msg.time)}] <b>${msg.user}:</b> <div>${msg.text}</div></div>`);
+        $('#msg-area').append(`<div>[${getTime(msg.time)}] <b>${msg.user}:</b> ${msg.text}</div>`);
     });
 
     scrollDown();
@@ -75,4 +83,17 @@ function getTime(msec) {
 function scrollDown() {
     const msgArea = document.getElementById('msg-area');
     msgArea.scrollTop = msgArea.scrollHeight;
+}
+
+// Show error
+function showChatError(message) {
+    $('.chat__in').addClass('border_red');
+    $('.chat__form').after(`<div class="chat__error">${message}</div>`);
+    $('.chat__error').fadeIn();
+}
+
+// Hide error
+function hideChatError() {
+    $('.chat__in').removeClass('border_red');
+    $('.chat__error').remove();
 }
