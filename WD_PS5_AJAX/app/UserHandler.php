@@ -15,23 +15,12 @@ class UserHandler
      * @param array $users Users table
      * @param string $username User name
      * @param string $password User password
-     * @throws Exception Username or password is empty
      */
     public function __construct($users, $username, $password)
     {
         $this->users = $users;
-
-        if (empty($username)) {
-            throw new Exception('empty_login');
-        } else {
-            $this->username = $username;
-        }
-
-        if (empty($password)) {
-            throw new Exception('empty_pass');
-        } else {
-            $this->password = $password;
-        }
+        $this->username = $username;
+        $this->password = $password;
     }
 
     /**
