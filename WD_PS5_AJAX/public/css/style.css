@@ -3,10 +3,12 @@ html {
 }
 
 body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     min-height: 100%;
     background-color: #b9c783;
     margin: 0;
-    text-align: center;
     overflow: hidden;
 }
 
@@ -60,16 +62,20 @@ header > div {
     font-family: 'Montserrat', sans-serif;
 }
 
+.auth__form > div {
+    position: relative;
+}
+
 .auth__input {
     background-color: #fffecd;
+    border: 1px solid #fffecd;
     color: #635960;
     font-weight: bold;
     font-size: 16px;
     padding: 0 0 0 10px;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
     width: 250px;
     height: 35px;
-    border: 0;
 }
 
 .auth__label {
@@ -86,36 +92,41 @@ header > div {
     cursor: pointer;
     font-size: 18px;
     font-weight: bold;
-    width: 260px;
-    height: 35px;
+    width: 262px;
+    height: 37px;
     border: 0;
     padding: 0;
-    margin-top: 5px;
+    margin-top: 10px;
     font-family: 'Montserrat', sans-serif;
 }
 
 .auth__shadow {
     position: relative;
-    width: 260px;
+    width: 262px;
     height: 150px;
     background: linear-gradient(to bottom, rgba(0,0,0,0.06), rgba(0,0,0,0));
-    transform: skew(20deg,-7deg);
+    transform: skew(20deg,-8deg);
     transform-origin: 0 0;
     z-index: -1;
 }
 
 .auth__error {
-    color: #d63031;
+    display: none;
+    position: absolute;
+    color: #c0392b;
     font-size: 12px;
     text-align: left;
-    margin: -30px 0 30px 0;
+    top: 62px;
+    left: 1px;
     width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .chat {
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 500px;
 }
 
 .chat__out {
@@ -128,17 +139,11 @@ header > div {
 }
 
 .chat__out > div {
-    display: flex;
-    flex-direction: row;
     font-size: 15px;
     font-family: Arial, Helvetica, sans-serif;
-    margin: 0 20px 0 20px;
-    white-space: pre-line;
+    margin: 0 10px 0 20px;
     line-height: 1.7;
-}
-
-.chat__out > div > b {
-    margin: 0 5px 0 5px;
+    word-break: break-word;
 }
 
 .chat__form {
@@ -169,10 +174,20 @@ header > div {
     font-family: 'Montserrat', sans-serif;
 }
 
+.chat__error {
+    display: none;
+    color: #c0392b;
+    font-size: 12px;
+    text-align: left;
+    width: 100%;
+    margin-top: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 .db-error {
     color: #d63031;
     font-size: 18px;
-    font-family: 'Montserrat', sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .emoji {
