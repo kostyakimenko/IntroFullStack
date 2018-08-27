@@ -1,12 +1,22 @@
 [
     {
-        "time": 1535034811936,
+        "time": 1535379873327,
         "user": "kos",
-        "text": "hello, ben :)"
+        "text": "hello :)"
     },
     {
-        "time": 1535034829321,
+        "time": 1535379883103,
         "user": "ben",
-        "text": "hi, kos"
+        "text": "hi!"
+    },
+    {
+        "time": 1535380049018,
+        "user": "ben",
+        "text": ":)"
+    },
+    {
+        "time": 1535380049230,
+        "user": "kos",
+        "text": "how are you?"
     }
 ]

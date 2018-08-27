@@ -12,9 +12,9 @@ class Messenger
 
     /**
      * Messenger constructor.
-     * @param DatabaseIO $dbIO Object for input/output database
+     * @param DataIO $dbIO Object for input/output database
      */
-    public function __construct($dbIO)
+    public function __construct(DataIO $dbIO)
     {
         $this->dbIO = $dbIO;
         $this->msgTable = $dbIO->readData();

@@ -1,5 +1,5 @@
-const MAX_NAME_LENGTH = 20;
-const MIN_NAME_LENGTH = 1;
+const MIN_NAME_LEN = 1;
+const MAX_NAME_LEN = 30;
 
 const user = $('#user');
 const pass = $('#pass');
@@ -10,31 +10,61 @@ const pass = $('#pass');
 $('#auth-form').submit(function(event) {
     const username = user.val().trim();
     const password = pass.val();
+
     event.preventDefault();
     hideAuthError();
 
-    if (username.length < MIN_NAME_LENGTH || username.length > MAX_NAME_LENGTH) {
-        showAuthError(user, `Invalid login length (valid range ${MIN_NAME_LENGTH}-${MAX_NAME_LENGTH})`);
-    } else if (password.length < 1) {
-        showAuthError(pass, 'Password can not be empty');
-    } else {
+    if (!isNameLenValid(username)) {
+        showAuthError(user, `Invalid login length (valid range ${MIN_NAME_LEN}-${MAX_NAME_LEN})`);
+    }
+
+    if (!isPassLenValid(password)) {
+        showAuthError(pass, 'Invalid password');
+    }
+
+    if (isNameLenValid(username) && isPassLenValid(password)) {
         $.ajax({
             method: 'POST',
             url: 'router.php',
-            data: {route: 'authorization', user: username, pass: password}
+            data: {route: 'auth', auth_action: 'login', user: username, pass: password}
         })
-        .done(function(response) {
-            switch (response) {
-                case 'auth_ok':
+        .done(function(msg) {
+            switch (msg) {
+                case 'success':
                     $(location).attr('href', 'chat.php');
                     break;
-                case 'auth_err':
+                case 'error':
                     showAuthError(pass, 'Invalid password');
                     break;
             }
         });
     }
 });
+
+// User log out
+$('#logout').submit(function(event) {
+    event.preventDefault();
+
+    $.ajax({
+        method: 'POST',
+        url: 'router.php',
+        data: {route: 'auth', auth_action: 'logout'}
+    })
+    .done(function() {
+        $(location).attr('href', 'index.php');
+    });
+});
+
+// Username length checking
+function isNameLenValid(username) {
+    const nameLength = username.length;
+    return nameLength >= MIN_NAME_LEN && nameLength <= MAX_NAME_LEN;
+}
+
+// Password length checking
+function isPassLenValid(password) {
+    return password.length > 0;
+}
 
 // Show error
 function showAuthError(element, message) {

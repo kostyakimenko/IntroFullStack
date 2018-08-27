@@ -1,4 +1,13 @@
-<?php include __DIR__ . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'header.php'; ?>
+<?php
+include dirname(__DIR__) . DIRECTORY_SEPARATOR . 'app'
+    . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'header.php';
+
+session_start();
+
+if (isset($_SESSION['user'])) {
+    header('location: chat.php');
+}
+?>
 
 <div class="auth" id="auth">
     <form class="auth__form" id="auth-form">
@@ -16,6 +25,6 @@
 </div>
 
 <script src="/js/check-database.js"></script>
-<script src="/js/auth.js"></script>
 
-<?php include __DIR__ . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'footer.php' ?>
+<?php include dirname(__DIR__) . DIRECTORY_SEPARATOR . 'app'
+    . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'footer.php' ?>

@@ -8,7 +8,7 @@ $(function() {
     })
     .done(function(response) {
         switch (response) {
-            case 'valid':
+            case 'success':
                 $('#auth').show();
                 break;
             case 'error':

@@ -24,7 +24,7 @@ $('#chat-form').submit(function(event) {
     hideChatError();
 
     if (message.length > MAX_MSG_LENGTH) {
-        showChatError(`Message to large (max ${MAX_MSG_LENGTH} symbols)`);
+        showChatError(`Message too large (max ${MAX_MSG_LENGTH} symbols)`);
     } else if (message) {
         $.ajax({
             method: 'POST',
@@ -35,7 +35,7 @@ $('#chat-form').submit(function(event) {
         .done(function(msgTable) {
             updMsgArea(msgTable);
             msgField.val('');
-        })
+        });
     }
 });
 

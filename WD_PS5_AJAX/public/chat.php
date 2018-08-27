@@ -1,5 +1,7 @@
 <?php
-include __DIR__ . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'header.php';
+include dirname(__DIR__) . DIRECTORY_SEPARATOR . 'app'
+    . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'header.php';
+
 session_start();
 
 if (!isset($_SESSION['user'])) {
@@ -15,9 +17,11 @@ if (!isset($_SESSION['user'])) {
     </form>
 </div>
 
-<button class="logout__btn chat__btn" onclick="logout()">Log out</button>
+<form id="logout">
+    <input class="logout__btn chat__btn" type="submit" value="Log Out">
+</form>
 
 <script src="/js/chat.js"></script>
-<script src="/js/logout.js"></script>
 
-<?php include __DIR__ . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'footer.php' ?>
+<?php include dirname(__DIR__) . DIRECTORY_SEPARATOR . 'app'
+    . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'footer.php' ?>

@@ -72,9 +72,9 @@ header > div {
     color: #635960;
     font-weight: bold;
     font-size: 16px;
-    padding: 0 0 0 10px;
+    padding: 0 10px 0 10px;
     margin-bottom: 25px;
-    width: 250px;
+    width: 240px;
     height: 35px;
 }
 
