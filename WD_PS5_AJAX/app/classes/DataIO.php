@@ -8,5 +8,4 @@ interface DataIO
 {
     public function readData();
     public function writeData($data);
-    public function databaseSize();
 }
