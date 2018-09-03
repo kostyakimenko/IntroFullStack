@@ -13,11 +13,6 @@ if (is_null($username)) {
     exit;
 }
 
-// Request data
-$message = (isset($_POST['msg'])) ? htmlspecialchars($_POST['msg']) : null;
-$action = (isset($_POST['action'])) ? htmlspecialchars($_POST['action']) : null;
-$updateTime = (isset($_POST['updTime'])) ? htmlspecialchars($_POST['updTime']) : 0;
-
 // Create object for messaging
 $fileIO = new FileIO($config['messages']);
 try {
@@ -26,6 +21,11 @@ try {
     http_response_code(500);
     exit;
 }
+
+// Request data
+$message = (isset($_POST['msg'])) ? htmlspecialchars($_POST['msg']) : null;
+$action = (isset($_POST['action'])) ? htmlspecialchars($_POST['action']) : null;
+$updateTime = (isset($_POST['updTime'])) ? htmlspecialchars($_POST['updTime']) : 0;
 
 // Select action for messaging
 switch ($action) {
