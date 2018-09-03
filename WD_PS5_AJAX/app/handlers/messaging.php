@@ -1,7 +1,5 @@
 <?php
 
-$config = require dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'config.php';
-
 // Сonnect the class autoloader
 require $config['classLoader'];
 $classLoader = new ClassLoader();
@@ -9,45 +7,43 @@ $classLoader = new ClassLoader();
 // Session data
 session_start();
 $username = $_SESSION['user'] ?? null;
-$databaseSize = $_SESSION['dbSize'] ?? null;
-$updateTime = $_SESSION['updTime'] ?? 0;
+
+if (is_null($username)) {
+    http_response_code(401);
+    exit;
+}
 
 // Request data
 $message = (isset($_POST['msg'])) ? htmlspecialchars($_POST['msg']) : null;
 $action = (isset($_POST['action'])) ? htmlspecialchars($_POST['action']) : null;
+$updateTime = (isset($_POST['updTime'])) ? htmlspecialchars($_POST['updTime']) : 0;
 
 // Create object for messaging
-$dbIO = new JsonIO($config['messages']);
-$messenger = new Messenger($dbIO);
+$fileIO = new FileIO($config['messages']);
+try {
+    $messenger = new Messenger($fileIO);
+} catch (Exception $e) {
+    http_response_code(500);
+    exit;
+}
 
 // Select action for messaging
 switch ($action) {
     case 'addMsg':
         $messenger->addMsg($username, $message);
-        echo json_encode($messenger->getNewMsg($updateTime));
-        setUpdateData($messenger->lastMsgTime(), $dbIO->databaseSize());
+        header('Content-type: application/json');
+        echo json_encode($messenger->getMsg($updateTime));
         break;
     case 'getAllMsg':
-        echo json_encode($messenger->getNewMsg());
-        setUpdateData($messenger->lastMsgTime(), $dbIO->databaseSize());
+        header('Content-type: application/json');
+        echo json_encode($messenger->getMsg());
         break;
     case 'update':
         $msgTable = [];
-        $newSize = $dbIO->databaseSize();
-        if ($newSize != $databaseSize){
-            $msgTable = $messenger->getNewMsg($updateTime);
-            setUpdateData($messenger->lastMsgTime(), $newSize);
+        if ($updateTime != $messenger->lastMsgTime()){
+            $msgTable = $messenger->getMsg($updateTime);
         }
+        header('Content-type: application/json');
         echo json_encode($msgTable);
         break;
-}
-
-/**
- * Set data of last update
- * @param int $updTime Last message time
- * @param int $dbSize Database size
- */
-function setUpdateData($updTime, $dbSize) {
-    $_SESSION['updTime'] = $updTime;
-    $_SESSION['dbSize'] = $dbSize;
 }

@@ -1,30 +1,27 @@
 <?php
-include dirname(__DIR__) . DIRECTORY_SEPARATOR . 'app'
-    . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'header.php';
-
 session_start();
 
-if (isset($_SESSION['user'])) {
-    header('location: chat.php');
+$config = require dirname(__DIR__) . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'config.php';
+
+// Сonnect the class autoloader
+require $config['classLoader'];
+$classLoader = new ClassLoader();
+
+// Files validation
+$usersValidator = new FileValidator(new FileIO($config['users']));
+$messagesValidator = new FileValidator(new FileIO($config['messages']));
+$_SESSION['db_valid'] = $usersValidator->isFileValid() && $messagesValidator->isFileValid();
+
+// Including html blocks
+require $config['header'];
+
+if (!$_SESSION['db_valid']) {
+    require $config['db-error'];
+} elseif (isset($_SESSION['user'])) {
+    require $config['chat-block'];
+    $_SESSION['hello_msg'] = true;
+} else {
+    require $config['auth-block'];
 }
-?>
 
-<div class="auth" id="auth">
-    <form class="auth__form" id="auth-form">
-        <div>
-            <label class="auth__label" for="user">Enter your name</label><br>
-            <input class="auth__input" type="text" name="username" id="user">
-        </div>
-        <div>
-            <label class="auth__label" for="pass">Enter your password</label><br>
-            <input class="auth__input" type="password" name="password" id="pass">
-        </div>
-        <input class="auth__btn" type="submit" value="Submit">
-        <div class="auth__shadow"></div>
-    </form>
-</div>
-
-<script src="/js/check-database.js"></script>
-
-<?php include dirname(__DIR__) . DIRECTORY_SEPARATOR . 'app'
-    . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'footer.php' ?>
+require $config['footer'];

@@ -1,10 +1,19 @@
 <?php
 
+define ('DB_PATH', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'database');
+define ('HANDLERS_PATH', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'handlers');
+define ('CLASSES_PATH', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'classes');
+define ('TEMPLATES_PATH', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'templates');
+
 return [
-    'users' => dirname(__DIR__) . DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR . 'users.json',
-    'messages' => dirname(__DIR__) . DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR . 'messages.json',
-    'validation' => dirname(__DIR__) . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'handlers' . DIRECTORY_SEPARATOR . 'db-validation.php',
-    'authorization' => dirname(__DIR__) . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'handlers' . DIRECTORY_SEPARATOR . 'authorization.php',
-    'messaging' => dirname(__DIR__) . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'handlers' . DIRECTORY_SEPARATOR . 'messaging.php',
-    'classLoader' => dirname(__DIR__) . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'classes' . DIRECTORY_SEPARATOR . 'ClassLoader.php'
+    'users' => DB_PATH . DIRECTORY_SEPARATOR . 'users.json',
+    'messages' => DB_PATH . DIRECTORY_SEPARATOR . 'messages.json',
+    'authorization' => HANDLERS_PATH . DIRECTORY_SEPARATOR . 'authorization.php',
+    'messaging' => HANDLERS_PATH . DIRECTORY_SEPARATOR . 'messaging.php',
+    'classLoader' => CLASSES_PATH . DIRECTORY_SEPARATOR . 'ClassLoader.php',
+    'header' => TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'header.php',
+    'footer' => TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'footer.php',
+    'auth-block' => TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'auth-block.php',
+    'chat-block' => TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'chat-block.php',
+    'db-error' => TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'db-error.php'
 ];

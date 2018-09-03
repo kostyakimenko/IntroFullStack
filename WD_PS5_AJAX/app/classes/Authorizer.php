@@ -19,17 +19,16 @@ class Authorizer
 
     /**
      * User log in.
-     * @param string $username User name
-     * @param string $password User password
+     * @param User $user User object
      * @return bool Auth result
      */
-    public function login($username, $password)
+    public function login(User $user)
     {
         $users = $this->dataIO->readData();
 
-        if ($users[$username] === $password) {
+        if (in_array($user->userData(), $users)) {
             session_start();
-            $_SESSION['user'] = $username;
+            $_SESSION['user'] = $user->getName();
             return true;
         }
 

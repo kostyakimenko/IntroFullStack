@@ -8,17 +8,20 @@ class Messenger
 {
     private $dbIO;
     private $msgTable;
-    private $lastMsgTime;
 
     /**
      * Messenger constructor.
      * @param DataIO $dbIO Object for input/output database
+     * @throws Exception Table is null
      */
     public function __construct(DataIO $dbIO)
     {
         $this->dbIO = $dbIO;
         $this->msgTable = $dbIO->readData();
-        $this->lastMsgTime = null;
+
+        if (!isset($this->msgTable)) {
+            throw new Exception();
+        }
     }
 
     /**
@@ -26,7 +29,7 @@ class Messenger
      * @param int $updateTime Time of the last update
      * @return array New messages
      */
-    public function getNewMsg($updateTime = 0)
+    public function getMsg($updateTime = 0)
     {
         $hourAgo = strtotime('-1 hour') * 1000;
         $newMessages = [];
@@ -39,8 +42,6 @@ class Messenger
                 break;
             }
         }
-
-        $this->lastMsgTime = end($this->msgTable)['time'];
 
         return $newMessages;
     }
@@ -59,7 +60,6 @@ class Messenger
 
         array_push($this->msgTable, $message);
         $this->dbIO->writeData($this->msgTable);
-        $this->lastMsgTime = $message['time'];
     }
 
     /**
@@ -67,6 +67,6 @@ class Messenger
      */
     public function lastMsgTime()
     {
-        return $this->lastMsgTime;
+        return end($this->msgTable)['time'];
     }
 }

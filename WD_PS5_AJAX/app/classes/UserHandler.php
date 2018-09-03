@@ -21,22 +21,22 @@ class UserHandler
 
     /**
      * Check is new user.
-     * @param string $username User name
+     * @param User $user User data
      * @return bool Checking result
      */
-    public function isNewUser($username)
+    public function isNewUser(User $user)
     {
-        return !array_key_exists($username, $this->users);
+        $names = array_column($this->users, 'username');
+        return !in_array($user->getName(), $names);
     }
 
     /**
      * Add user to table.
-     * @param string $username User name
-     * @param string $password User password
+     * @param User $user User data
      */
-    public function addUser($username, $password)
+    public function addUser(User $user)
     {
-        $this->users[$username] = $password;
+        array_push($this->users, $user->userData());
         $this->dataIO->writeData($this->users);
     }
 }

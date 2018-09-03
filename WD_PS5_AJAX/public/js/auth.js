@@ -5,9 +5,9 @@ const user = $('#user');
 const pass = $('#pass');
 
 // User authorization.
-// If authorization ok - redirect on chat page,
-// else - output error in main page.
-$('#auth-form').submit(function(event) {
+// If authorization ok - load chat block,
+// else - output error.
+$('#auth-form').on('submit', function(event) {
     const username = user.val().trim();
     const password = pass.val();
 
@@ -26,12 +26,12 @@ $('#auth-form').submit(function(event) {
         $.ajax({
             method: 'POST',
             url: 'router.php',
-            data: {route: 'auth', auth_action: 'login', user: username, pass: password}
+            data: {route: 'auth', action: 'login', user: username, pass: password}
         })
         .done(function(msg) {
             switch (msg) {
                 case 'success':
-                    $(location).attr('href', 'chat.php');
+                    location.reload();
                     break;
                 case 'error':
                     showAuthError(pass, 'Invalid password');
@@ -42,16 +42,16 @@ $('#auth-form').submit(function(event) {
 });
 
 // User log out
-$('#logout').submit(function(event) {
+$('#logout').on('submit', function(event) {
     event.preventDefault();
 
     $.ajax({
         method: 'POST',
         url: 'router.php',
-        data: {route: 'auth', auth_action: 'logout'}
+        data: {route: 'auth', action: 'logout'}
     })
     .done(function() {
-        $(location).attr('href', 'index.php');
+        location.reload();
     });
 });
 

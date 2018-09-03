@@ -1,27 +1,38 @@
 const REQUEST_INTERVAL = 1000;
+const MSG_HIDE_TIMEOUT = 1500;
+const MSG_HIDE_ANIMATION_TIME = 1000;
 const MAX_MSG_LENGTH = 200;
+
+let updateTime;
+let timerId;
 
 // Get all message in the last hour
 $(function() {
    $.ajax({
        method: 'POST',
        url: 'router.php',
-       data: {route: 'messaging', action: 'getAllMsg'},
-       dataType: 'json'
+       data: {route: 'messaging', action: 'getAllMsg'}
    })
    .done(function(msgTable) {
-       updMsgArea(msgTable);
-       setInterval(databaseListener, REQUEST_INTERVAL);
+       if (!$.isEmptyObject(msgTable)) {
+           updMsgArea(msgTable);
+       }
+       timerId = setInterval(databaseListener, REQUEST_INTERVAL);
    });
+
+   setTimeout(function() {
+       $('.chat_hello').fadeOut(MSG_HIDE_ANIMATION_TIME);
+   }, MSG_HIDE_TIMEOUT);
 });
 
 // Add new message to the message area
-$('#chat-form').submit(function(event) {
+$('#chat-form').on('submit', function(event) {
     const msgField = $('#msg');
     const message = msgField.val().trim();
 
-    event.preventDefault();
+    clearInterval(timerId);
     hideChatError();
+    event.preventDefault();
 
     if (message.length > MAX_MSG_LENGTH) {
         showChatError(`Message too large (max ${MAX_MSG_LENGTH} symbols)`);
@@ -29,12 +40,12 @@ $('#chat-form').submit(function(event) {
         $.ajax({
             method: 'POST',
             url: 'router.php',
-            data: {route: 'messaging', action: 'addMsg', msg: message},
-            dataType: 'json'
+            data: {route: 'messaging', action: 'addMsg', msg: message, updTime: updateTime}
         })
         .done(function(msgTable) {
-            updMsgArea(msgTable);
             msgField.val('');
+            updMsgArea(msgTable);
+            timerId = setInterval(databaseListener, REQUEST_INTERVAL);
         });
     }
 });
@@ -44,13 +55,15 @@ function databaseListener() {
     $.ajax({
         method: 'POST',
         url: 'router.php',
-        data: {route: 'messaging', action: 'update'},
-        dataType: 'json',
+        data: {route: 'messaging', action: 'update', updTime: updateTime}
     })
     .done(function(msgTable) {
         if (!$.isEmptyObject(msgTable)) {
             updMsgArea(msgTable);
         }
+    })
+    .fail(function() {
+        location.reload();
     });
 }
 
@@ -66,6 +79,8 @@ function updMsgArea(msgTable) {
         $('#msg-area').append(`<div>[${getTime(msg.time)}] <b>${msg.user}:</b> ${msg.text}</div>`);
     });
 
+    updateTime = msgTable[msgTable.length - 1].time;
+
     scrollDown();
 }
 
@@ -79,7 +94,7 @@ function getTime(msec) {
     return `${hours}:${minutes}:${seconds}`;
 }
 
-//Window scroll down
+// Window scroll down
 function scrollDown() {
     const msgArea = document.getElementById('msg-area');
     msgArea.scrollTop = msgArea.scrollHeight;
