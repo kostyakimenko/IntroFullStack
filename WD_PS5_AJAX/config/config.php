@@ -2,7 +2,7 @@
 
 define ('DB_PATH', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'database');
 define ('HANDLERS_PATH', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'handlers');
-define ('CLASSES_PATH', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'classes');
+define ('SERVICES_PATH', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'services' );
 define ('TEMPLATES_PATH', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'templates');
 
 return [
@@ -10,7 +10,7 @@ return [
     'messages' => DB_PATH . DIRECTORY_SEPARATOR . 'messages.json',
     'authorization' => HANDLERS_PATH . DIRECTORY_SEPARATOR . 'authorization.php',
     'messaging' => HANDLERS_PATH . DIRECTORY_SEPARATOR . 'messaging.php',
-    'classLoader' => CLASSES_PATH . DIRECTORY_SEPARATOR . 'ClassLoader.php',
+    'classLoader' => SERVICES_PATH . DIRECTORY_SEPARATOR . 'ClassLoader.php',
     'header' => TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'header.php',
     'footer' => TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'footer.php',
     'auth-block' => TEMPLATES_PATH . DIRECTORY_SEPARATOR . 'auth-block.php',
