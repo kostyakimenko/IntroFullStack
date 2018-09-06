@@ -1,39 +1,71 @@
 ### Application requirements
 
-* PHP version 7.0 or higher
+* PHP version 7.0
+* MySQL version 5.7
 
 ### Database creating
 
 Before using the application, you need to create a database and necessary tables - users and messages.
 
-##### Install mysql-server and create database
+#### 1. Install mysql-server and create database
 https://support.rackspace.com/how-to/installing-mysql-server-on-ubuntu/
 
-##### Create users table
+#### 2. Create tables (users, messages)
+Import file with sql script `chat_tables.sql` 
 
-```
-CREATE TABLE users
-(
-    id int unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT, 
-    username VARCHAR(30) NOT NULL,
-    password VARCHAR(255) NOT NULL
-);
-CREATE UNIQUE INDEX users_username_uindex ON users (username);
-```
+or 
 
-##### Create messages table
+create tables
 
-```
-CREATE TABLE messages
-(
-    id int unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    message VARCHAR(255) NOT NULL,
-    user VARCHAR(30) NOT NULL,
-    time TIMESTAMP
-);
-```
+##### Users table parameters
 
-### Change configuration data
+* table name: users
+* column 1
+  * name: id
+  * type: int
+  * attributes: unsigned
+  * index: primary
+  * auto_increment
+  * not null
+* column 2
+  * name: username
+  * type: varchar
+  * length: 30
+  * index: unique
+  * not null
+* column 3
+  * name: password
+  * type: varchar
+  * length: 255
+  * not null
+
+##### Messages table parameters
+
+* table name: messages
+* column 1
+  * name: id
+  * type: int
+  * attributes: unsigned
+  * index: primary
+  * auto_increment
+  * not null
+* column 2
+  * name: message
+  * type: varchar
+  * length: 255
+  * not null
+* column 3
+  * name: user
+  * type: varchar
+  * length: 30
+  * not null
+* column 4
+  * name: time
+  * type: timestamp
+  * default: current_timestamp
+  * not null
+
+#### 3. Change configuration data
 
 After database and tables creating you must make changes to the configuration file `config.php`
 
