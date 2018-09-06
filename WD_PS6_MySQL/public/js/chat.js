@@ -3,7 +3,7 @@ const MSG_HIDE_TIMEOUT = 1500;
 const MSG_HIDE_ANIMATION_TIME = 1000;
 const MAX_MSG_LENGTH = 200;
 
-let messageId;
+let lastMsgId;
 let timerId;
 
 // Get all message in the last hour
@@ -40,7 +40,7 @@ $('#chat-form').on('submit', function(event) {
         $.ajax({
             method: 'POST',
             url: 'router.php',
-            data: {route: 'messaging', action: 'addMsg', msg: message, msgId: messageId}
+            data: {route: 'messaging', action: 'addMsg', msg: message, last_id: lastMsgId}
         })
         .done(function(msgTable) {
             msgField.val('');
@@ -55,7 +55,7 @@ function databaseListener() {
     $.ajax({
         method: 'POST',
         url: 'router.php',
-        data: {route: 'messaging', action: 'update', msgId: messageId}
+        data: {route: 'messaging', action: 'update', last_id: lastMsgId}
     })
     .done(function(msgTable) {
         if (!$.isEmptyObject(msgTable)) {
@@ -81,7 +81,7 @@ function updMsgArea(msgTable) {
         $('#msg-area').append(`<div>[${getTime(msg.time)}] <b>${msg.user}:</b> ${msg.text}</div>`);
     });
 
-    messageId = msgTable[msgTable.length - 1].id;
+    lastMsgId = msgTable[msgTable.length - 1].id;
 
     scrollDown();
 }
