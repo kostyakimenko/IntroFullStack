@@ -6,9 +6,9 @@ $classLoader = new ClassLoader();
 
 // Session data
 session_start();
-$username = $_SESSION['user'] ?? null;
+$user = $_SESSION['user'] ?? null;
 
-if (is_null($username)) {
+if (!$user) {
     http_response_code(401);
     exit;
 }
@@ -30,18 +30,18 @@ $updateTime = (isset($_POST['updTime'])) ? htmlspecialchars($_POST['updTime']) :
 // Select action for messaging
 switch ($action) {
     case 'addMsg':
-        $messenger->addMsg($username, $message);
+        $messenger->addMessage($user, $message);
         header('Content-type: application/json');
-        echo json_encode($messenger->getMsg($updateTime));
+        echo json_encode($messenger->getMessages($updateTime));
         break;
     case 'getAllMsg':
         header('Content-type: application/json');
-        echo json_encode($messenger->getMsg());
+        echo json_encode($messenger->getMessages());
         break;
     case 'update':
         $msgTable = [];
         if ($updateTime != $messenger->lastMsgTime()){
-            $msgTable = $messenger->getMsg($updateTime);
+            $msgTable = $messenger->getMessages($updateTime);
         }
         header('Content-type: application/json');
         echo json_encode($msgTable);
