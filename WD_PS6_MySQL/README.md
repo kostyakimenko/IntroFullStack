@@ -38,7 +38,7 @@ CREATE TABLE messages
 After database and tables creating you must make changes to the configuration file `config.php`
 
 ```
-'connect' => [
+'database' => [
         'hostname' => 'localhost', 
         'username' => 'user', 
         'password' => '0000', 
