@@ -14,11 +14,10 @@ https://support.rackspace.com/how-to/installing-mysql-server-on-ubuntu/
 ```
 CREATE TABLE users
 (
-    user_id int unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT, 
+    id int unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT, 
     username VARCHAR(30) NOT NULL,
     password VARCHAR(255) NOT NULL
 );
-CREATE UNIQUE INDEX users_user_id_uindex ON users (user_id);
 CREATE UNIQUE INDEX users_username_uindex ON users (username);
 ```
 
@@ -27,12 +26,11 @@ CREATE UNIQUE INDEX users_username_uindex ON users (username);
 ```
 CREATE TABLE messages
 (
-    message_id int unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    id int unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
     message VARCHAR(255) NOT NULL,
     user VARCHAR(30) NOT NULL,
     time TIMESTAMP
 );
-CREATE UNIQUE INDEX messages_message_id_uindex ON messages (message_id); 
 ```
 
 ### Change configuration data
@@ -48,4 +46,4 @@ After database and tables creating you must make changes to the configuration fi
     ]
 ```
 
-Change 'localhost', 'user', '0000', 'chat' to your data
+Change 'localhost', 'user', '0000', 'chat' to your data.
