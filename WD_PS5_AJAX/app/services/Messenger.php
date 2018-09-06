@@ -29,7 +29,7 @@ class Messenger
      * @param int $updateTime Time of the last update
      * @return array New messages
      */
-    public function getMsg($updateTime = 0)
+    public function getMessages($updateTime = 0)
     {
         $hourAgo = strtotime('-1 hour') * 1000;
         $newMessages = [];
@@ -51,7 +51,7 @@ class Messenger
      * @param string $user User name
      * @param string $msg message
      */
-    public function addMsg($user, $msg)
+    public function addMessage($user, $msg)
     {
         $message = [];
         $message['time'] = round(microtime(true) * 1000);
