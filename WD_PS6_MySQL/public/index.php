@@ -3,15 +3,14 @@ session_start();
 
 $config = require dirname(__DIR__) . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'config.php';
 
-// Сonnect the class autoloader
+// Including class autoloader
 require $config['classLoader'];
-$classLoader = new ClassLoader();
 
-use io\DBConnector;
+use app\services\io\DBConnector;
 
 // Check connecting of the database
 try {
-    $connect = new DBConnector($config['connect']);
+    $connect = new DBConnector($config['database']);
     $_SESSION['db_valid'] = true;
 } catch (PDOException $e) {
     $_SESSION['db_valid'] = false;
