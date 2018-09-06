@@ -1,18 +1,14 @@
 <?php
 
-// Сonnect the class autoloader
+// Including class autoloader
 require $config['classLoader'];
-$classLoader = new ClassLoader();
 
-use io\DBConnector;
-use user\UserDataIO;
-use user\Authorizer;
-use user\User;
-use user\UserHandler;
+use app\services\io\DBConnector;
+use app\services\user\{Authorizer, User, UserDataIO, UserHandler};
 
 // Connect to the database
 try {
-    $connect = new DBConnector($config['connect']);
+    $connect = new DBConnector($config['database']);
 } catch (PDOException $e) {
     session_start();
     $_SESSION['db_err_msg'] = $e->getMessage();

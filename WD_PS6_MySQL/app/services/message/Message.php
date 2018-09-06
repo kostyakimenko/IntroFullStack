@@ -1,6 +1,6 @@
 <?php
 
-namespace message;
+namespace app\services\message;
 
 /**
  * Class Message.

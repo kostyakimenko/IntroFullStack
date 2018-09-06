@@ -1,9 +1,9 @@
 <?php
 
-namespace message;
+namespace app\services\message;
 
-use io\DataIO;
-use io\DBConnector;
+use app\services\io\DataIO;
+use app\services\io\DBConnector;
 
 /**
  * Class MessageDataIO.
@@ -25,18 +25,18 @@ class MessageDataIO implements DataIO
 
     /**
      * Select data.
-     * @param int $msgId Message id
+     * @param int $lastMsgId Last message id
      * @return array Message data
      */
-    public function selectData($msgId)
+    public function selectData($lastMsgId)
     {
-        $sql = "SELECT * FROM messages WHERE message_id > $msgId AND time > now() - INTERVAL 1 HOUR";
+        $sql = "SELECT * FROM messages WHERE id > $lastMsgId AND time > now() - INTERVAL 1 HOUR";
 
         $messages = [];
 
         foreach ($this->conn->query($sql) as $row) {
             $message = [];
-            $message['id'] = $row['message_id'];
+            $message['id'] = $row['id'];
             $message['time'] = $row['time'];
             $message['user'] = $row['user'];
             $message['text'] = $row['message'];

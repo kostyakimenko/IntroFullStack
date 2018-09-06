@@ -1,8 +1,8 @@
 <?php
 
-namespace message;
+namespace app\services\message;
 
-use io\DataIO;
+use app\services\io\DataIO;
 
 /**
  * Class Messenger.
@@ -24,19 +24,19 @@ class Messenger
 
     /**
      * Get new messages on last hour.
-     * @param int $msgId Last updated message id
+     * @param int $lastMsgId Last updated message id
      * @return array New messages
      */
-    public function getMsg($msgId = 0)
+    public function getMessages($lastMsgId = 0)
     {
-        return $this->dbIO->selectData($msgId);
+        return $this->dbIO->selectData($lastMsgId);
     }
 
     /**
      * Add message to database.
      * @param Message $message Message object
      */
-    public function addMsg(Message $message)
+    public function addMessage(Message $message)
     {
         $this->dbIO->insertData($message);
     }

@@ -1,9 +1,9 @@
 <?php
 
-namespace user;
+namespace app\services\user;
 
-use io\DataIO;
-use io\DBConnector;
+use app\services\io\DataIO;
+use app\services\io\DBConnector;
 use PDO;
 
 /**

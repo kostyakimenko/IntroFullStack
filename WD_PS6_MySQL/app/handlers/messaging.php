@@ -1,26 +1,23 @@
 <?php
 
-// Сonnect the class autoloader
+// Including class autoloader
 require $config['classLoader'];
-$classLoader = new ClassLoader();
 
-use io\DBConnector;
-use message\Message;
-use message\MessageDataIO;
-use message\Messenger;
+use app\services\io\DBConnector;
+use app\services\message\{Message, MessageDataIO, Messenger};
 
 // Check authorization of the user
 session_start();
 $user = $_SESSION['user'] ?? null;
 
-if ($user === null) {
+if (!$user) {
     http_response_code(401);
     exit;
 }
 
 // Connect to the database
 try {
-    $connect = new DBConnector($config['connect']);
+    $connect = new DBConnector($config['database']);
 } catch (PDOException $e) {
     session_start();
     $_SESSION['db_err_msg'] = $e->getMessage();
@@ -35,24 +32,24 @@ $messenger = new Messenger($dbIO);
 // Request data
 $msg = (isset($_POST['msg'])) ? htmlspecialchars($_POST['msg']) : null;
 $action = (isset($_POST['action'])) ? htmlspecialchars($_POST['action']) : null;
-$msgId = (isset($_POST['msgId'])) ? htmlspecialchars($_POST['msgId']) : 0;
+$lastMsgId = (isset($_POST['last_id'])) ? htmlspecialchars($_POST['last_id']) : 0;
 
 // Select action for messaging
 switch ($action) {
     case 'addMsg':
         $message = new Message($user, $msg);
-        $messenger->addMsg($message);
+        $messenger->addMessage($message);
         header('Content-type: application/json');
-        echo json_encode($messenger->getMsg($msgId));
+        echo json_encode($messenger->getMessages($lastMsgId));
         break;
     case 'getAllMsg':
         header('Content-type: application/json');
-        echo json_encode($messenger->getMsg());
+        echo json_encode($messenger->getMessages());
         break;
     case 'update':
         $msgTable = [];
-        if ($dbIO->isUpdatedTable($msgId)){
-            $msgTable = $messenger->getMsg($msgId);
+        if ($dbIO->isUpdatedTable($lastMsgId)){
+            $msgTable = $messenger->getMessages($lastMsgId);
         }
         header('Content-type: application/json');
         echo json_encode($msgTable);

@@ -1,8 +1,8 @@
 <?php
 
-namespace user;
+namespace app\services\user;
 
-use io\DataIO;
+use app\services\io\DataIO;
 
 /**
  * Class UserHandler.

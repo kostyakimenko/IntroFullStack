@@ -1,6 +1,6 @@
 <?php
 
-namespace user;
+namespace app\services\user;
 
 /**
  * Class User.
