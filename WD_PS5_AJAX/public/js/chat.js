@@ -71,8 +71,8 @@ function databaseListener() {
 
 // Add new messages to the message area
 function updMsgArea(msgTable) {
-    const smile = '<img class="emoji" align="top" src="/img/smile.png">';
-    const frown = '<img class="emoji" align="top" src="/img/frown.png">';
+    const smile = '<img class="emoji" align="top" src="img/smile.png">';
+    const frown = '<img class="emoji" align="top" src="img/frown.png">';
 
     $.each(msgTable, function(i, msg) {
         msg.text = msg.text.replace(/:\)/g, smile);
