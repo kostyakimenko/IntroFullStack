@@ -62,8 +62,10 @@ function databaseListener() {
             updMsgArea(msgTable);
         }
     })
-    .fail(function() {
-        location.reload();
+    .fail(function(xhr) {
+        if (xhr.status === 401 || xhr.status === 500) {
+            location.reload();
+        }
     });
 }
 
