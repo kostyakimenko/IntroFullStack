@@ -2,8 +2,7 @@
 
 namespace app\services\user;
 
-use app\services\io\DataIO;
-use app\services\io\DBConnector;
+use app\services\io\{DataIO, DBConnector};
 use PDO;
 
 /**
