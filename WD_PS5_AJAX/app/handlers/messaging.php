@@ -4,11 +4,10 @@
 require $config['classLoader'];
 $classLoader = new ClassLoader();
 
-// Session data
 session_start();
-$user = $_SESSION['user'] ?? null;
 
-if (!$user) {
+// Check user authorization
+if (!isset($_SESSION['user'])) {
     http_response_code(401);
     exit;
 }
@@ -30,7 +29,7 @@ $updateTime = (isset($_POST['updTime'])) ? htmlspecialchars($_POST['updTime']) :
 // Select action for messaging
 switch ($action) {
     case 'addMsg':
-        $messenger->addMessage($user, $message);
+        $messenger->addMessage($_SESSION['user'], $message);
         header('Content-type: application/json');
         echo json_encode($messenger->getMessages($updateTime));
         break;
