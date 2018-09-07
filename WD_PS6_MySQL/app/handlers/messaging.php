@@ -6,11 +6,10 @@ require $config['classLoader'];
 use app\services\io\DBConnector;
 use app\services\message\{Message, MessageDataIO, Messenger};
 
-// Check authorization of the user
 session_start();
-$user = $_SESSION['user'] ?? null;
 
-if (!$user) {
+// Check authorization of the user
+if (!isset($_SESSION['user'])) {
     http_response_code(401);
     exit;
 }
@@ -37,7 +36,7 @@ $lastMsgId = (isset($_POST['last_id'])) ? htmlspecialchars($_POST['last_id']) : 
 // Select action for messaging
 switch ($action) {
     case 'addMsg':
-        $message = new Message($user, $msg);
+        $message = new Message($_SESSION['user'], $msg);
         $messenger->addMessage($message);
         header('Content-type: application/json');
         echo json_encode($messenger->getMessages($lastMsgId));
