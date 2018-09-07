@@ -2,8 +2,7 @@
 
 namespace app\services\message;
 
-use app\services\io\DataIO;
-use app\services\io\DBConnector;
+use app\services\io\{DataIO, DBConnector};
 
 /**
  * Class MessageDataIO.
@@ -61,12 +60,12 @@ class MessageDataIO implements DataIO
 
     /**
      * Check updating of the message table.
-     * @param int $msgId Message id
+     * @param int $lastMsgId Last message id
      * @return bool Checking result
      */
-    public function isUpdatedTable($msgId)
+    public function isUpdatedTable($lastMsgId)
     {
-        $sql = "SELECT COUNT(*) FROM messages WHERE message_id > $msgId";
+        $sql = "SELECT COUNT(*) FROM messages WHERE id > $lastMsgId";
         $statement = $this->conn->query($sql);
 
         return $statement->fetchColumn() > 0;
