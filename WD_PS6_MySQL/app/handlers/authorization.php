@@ -6,32 +6,35 @@ use app\services\user\{Authorizer, User, UserDataIO, UserHandler};
 $dbIO = new UserDataIO($pdo);
 $auth = new Authorizer($dbIO);
 
-$authAction = (isset($_POST['action'])) ? htmlspecialchars($_POST['action']) : null;
+// Request data
+$authAction = $_POST['action'] ?? null;
+$username = $_POST['user'] ?? null;
+$password = $_POST['pass'] ?? null;
 
 switch ($authAction) {
     case 'login':
         // Validation user name
-        if (preg_match('/\W/', $_POST['user']) !== 0) {
+        if (preg_match('/\W/', $username) !== 0) {
             $response->responseData('user_error', 'Invalid char (allowed "a-z", "A-Z", "0-9", "_")');
             $response->sendResponse();
             exit;
         }
 
         // Check user name length
-        if (!in_array(strlen(trim($_POST['user'])), range(1, 30))) {
+        if (!in_array(strlen(trim($username)), range(1, 30))) {
             $response->responseData('user_error', 'Invalid name length (range 1-30)');
             $response->sendResponse();
             exit;
         }
 
-        // Check empty password
-        if (empty($_POST['pass'])) {
-            $response->responseData('pass_error', 'Empty password');
+        // Check password length
+        if (!in_array(strlen($password), range(4, 72))) {
+            $response->responseData('pass_error', 'Invalid pass length (range 4-72)');
             $response->sendResponse();
             exit;
         }
 
-        $user = new User(trim($_POST['user']), htmlspecialchars($_POST['pass']));
+        $user = new User(trim($username), $password);
 
         // User handling
         $userHandler = new UserHandler($dbIO);
