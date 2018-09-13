@@ -30,7 +30,7 @@ try {
 }
 
 // Select of the handler depending on the request
-$route = (isset($_POST['route'])) ? htmlspecialchars($_POST['route']) : null;
+$route = $_POST['route'] ?? null;
 
 switch ($route) {
     case 'auth':
