@@ -12,15 +12,15 @@ if (!isset($_SESSION['user'])) {
 }
 
 // Check message
-$message = (isset($_POST['msg'])) ? htmlspecialchars($_POST['msg']) : null;
+$msg = (isset($_POST['msg'])) ? htmlspecialchars($_POST['msg']) : null;
 
-if ($message !== null && empty(trim($message))) {
+if ($msg !== null && empty(trim($msg))) {
     $response->responseData('msg_error', 'Empty message');
     $response->sendResponse();
     exit;
 }
 
-if (strlen($message) > 255) {
+if (strlen($msg) > 255) {
     $response->responseData('msg_error', 'Too large message (max length 255)');
     $response->sendResponse();
     exit;
@@ -37,7 +37,7 @@ $lastMsgId = (isset($_POST['last_id'])) ? htmlspecialchars($_POST['last_id']) : 
 // Select action for messaging
 switch ($action) {
     case 'addMsg':
-        $message = new Message($_SESSION['user'], $message);
+        $message = new Message($_SESSION['user'], $msg);
         $messenger->addMessage($message);
         $response->responseData('success', '', $messenger->getMessages($lastMsgId));
         $response->sendResponse();
