@@ -87,13 +87,14 @@ chatForm.on('submit', function(event) {
             case 'success':
                 msgField.val('');
                 updMsgArea(response.data);
-                timerId = setInterval(databaseListener, REQUEST_INTERVAL);
                 break;
             case 'msg_error':
             case 'db_error':
                 showError(chatForm, response.error);
                 break;
         }
+
+        timerId = setInterval(databaseListener, REQUEST_INTERVAL);
     });
 });
 
