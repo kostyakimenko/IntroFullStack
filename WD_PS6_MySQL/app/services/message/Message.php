@@ -16,7 +16,7 @@ class Message
      * @param string $user User name
      * @param string $message Message
      */
-    public function __construct($user, $message)
+    public function __construct(string $user, string $message)
     {
         $this->user = $user;
         $this->message = $message;
@@ -39,5 +39,4 @@ class Message
     {
         return $this->message;
     }
-
 }

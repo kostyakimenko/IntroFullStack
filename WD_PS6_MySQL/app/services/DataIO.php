@@ -1,6 +1,6 @@
 <?php
 
-namespace app\services\io;
+namespace app\services;
 
 /**
  * Interface DataIO.

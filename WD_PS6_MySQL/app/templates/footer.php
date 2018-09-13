@@ -1,4 +1,4 @@
-<script src="js/auth.js"></script>
+<script src="js/ajax-requests.js"></script>
 
 </body>
 </html>

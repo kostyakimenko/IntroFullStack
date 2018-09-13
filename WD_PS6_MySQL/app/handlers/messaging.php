@@ -1,56 +1,57 @@
 <?php
 
-// Including class autoloader
-require $config['classLoader'];
-
-use app\services\io\DBConnector;
-use app\services\message\{Message, MessageDataIO, Messenger};
-
 session_start();
 
-// Check authorization of the user
+use app\services\message\{Message, MessageDataIO, Messenger};
+
+// Check user authorization
 if (!isset($_SESSION['user'])) {
-    http_response_code(401);
+    $response->responseData('user_error', 'Unauthorized');
+    $response->sendResponse();
     exit;
 }
 
-// Connect to the database
-try {
-    $connect = new DBConnector($config['database']);
-} catch (PDOException $e) {
-    session_start();
-    $_SESSION['db_err_msg'] = $e->getMessage();
-    http_response_code(500);
+// Check message
+$message = (isset($_POST['msg'])) ? htmlspecialchars($_POST['msg']) : null;
+
+if ($message !== null && empty(trim($message))) {
+    $response->responseData('msg_error', 'Empty message');
+    $response->sendResponse();
+    exit;
+}
+
+if (strlen($message) > 255) {
+    $response->responseData('msg_error', 'Too large message (max length 255)');
+    $response->sendResponse();
     exit;
 }
 
 // Create objects for messaging
-$dbIO = new MessageDataIO($connect);
+$dbIO = new MessageDataIO($pdo);
 $messenger = new Messenger($dbIO);
 
 // Request data
-$msg = (isset($_POST['msg'])) ? htmlspecialchars($_POST['msg']) : null;
 $action = (isset($_POST['action'])) ? htmlspecialchars($_POST['action']) : null;
 $lastMsgId = (isset($_POST['last_id'])) ? htmlspecialchars($_POST['last_id']) : 0;
 
 // Select action for messaging
 switch ($action) {
     case 'addMsg':
-        $message = new Message($_SESSION['user'], $msg);
+        $message = new Message($_SESSION['user'], $message);
         $messenger->addMessage($message);
-        header('Content-type: application/json');
-        echo json_encode($messenger->getMessages($lastMsgId));
-        break;
+        $response->responseData('success', '', $messenger->getMessages($lastMsgId));
+        $response->sendResponse();
+        exit;
     case 'getAllMsg':
-        header('Content-type: application/json');
-        echo json_encode($messenger->getMessages());
-        break;
+        $response->responseData('success', '', $messenger->getMessages());
+        $response->sendResponse();
+        exit;
     case 'update':
         $msgTable = [];
         if ($dbIO->isUpdatedTable($lastMsgId)){
             $msgTable = $messenger->getMessages($lastMsgId);
         }
-        header('Content-type: application/json');
-        echo json_encode($msgTable);
-        break;
+        $response->responseData('success', '', $msgTable);
+        $response->sendResponse();
+        exit;
 }

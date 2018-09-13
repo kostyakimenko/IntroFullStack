@@ -11,7 +11,7 @@ Before using the application, you need to create a database and necessary tables
 https://support.rackspace.com/how-to/installing-mysql-server-on-ubuntu/
 
 #### 2. Create tables
-Import file with sql script **chat_tables.sql** 
+Import file with sql script **sql/chat_tables.sql** 
 
 or 
 
@@ -55,9 +55,9 @@ create tables
   * length: 255
   * not null
 * column 3
-  * name: user
-  * type: varchar
-  * length: 30
+  * name: user_id
+  * type: int
+  * attributes: unsigned
   * not null
 * column 4
   * name: time
@@ -67,7 +67,7 @@ create tables
 
 #### 3. Change configuration data
 
-After database and tables creating you must make changes to the configuration file **config/config.php**
+After database and tables creating you must make changes to the configuration file **config/db-config.php**
 ```
 'database' => [
         'hostname' => 'localhost', 

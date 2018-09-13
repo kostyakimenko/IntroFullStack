@@ -2,7 +2,8 @@
 
 namespace app\services\message;
 
-use app\services\io\{DataIO, DBConnector};
+use app\services\DataIO;
+use PDO;
 
 /**
  * Class MessageDataIO.
@@ -15,32 +16,41 @@ class MessageDataIO implements DataIO
 
     /**
      * MessageDataIO constructor.
-     * @param DBConnector $conn Object for connection
+     * @param PDO $conn Object for connection to database
      */
-    public function __construct(DBConnector $conn)
+    public function __construct(PDO $conn)
     {
         $this->conn = $conn;
     }
 
     /**
      * Select data.
-     * @param int $lastMsgId Last message id
+     * @param int $lastMsgId Last updated message id
      * @return array Message data
      */
     public function selectData($lastMsgId)
     {
-        $sql = "SELECT * FROM messages WHERE id > $lastMsgId AND time > now() - INTERVAL 1 HOUR";
+        $sql = 'SELECT m.id, m.time, m.message, u.username
+            FROM messages m JOIN users u 
+            ON m.user_id = u.id
+            WHERE m.id > :lastMsgId
+            AND m.time > now() - INTERVAL 1 HOUR';
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute(['lastMsgId' => $lastMsgId]);
 
         $messages = [];
 
-        foreach ($this->conn->query($sql) as $row) {
+        foreach ($stmt as $row) {
             $message = [];
             $message['id'] = $row['id'];
             $message['time'] = $row['time'];
-            $message['user'] = $row['user'];
+            $message['user'] = $row['username'];
             $message['text'] = $row['message'];
             array_push($messages, $message);
         }
+
+        $stmt = null;
 
         return $messages;
     }
@@ -54,20 +64,29 @@ class MessageDataIO implements DataIO
         $user = $message->getUser();
         $msg = $message->getMsg();
 
-        $sql = "INSERT INTO messages (user, message) VALUES ('$user', '$msg')";
-        $this->conn->query($sql);
+        $sql = 'INSERT INTO messages (user_id, message)
+            SELECT id, :msg
+            FROM users
+            WHERE username = :user';
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute(['user' => $user, 'msg' => $msg]);
+        $stmt = null;
     }
 
     /**
      * Check updating of the message table.
-     * @param int $lastMsgId Last message id
+     * @param int $lastMsgId Last updated message id
      * @return bool Checking result
      */
     public function isUpdatedTable($lastMsgId)
     {
-        $sql = "SELECT COUNT(*) FROM messages WHERE id > $lastMsgId";
-        $statement = $this->conn->query($sql);
+        $sql = 'SELECT COUNT(*) FROM messages WHERE id > :lastMsgId';
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute(['lastMsgId' => $lastMsgId]);
+        $result = $stmt->fetchColumn() > 0;
+        $stmt = null;
 
-        return $statement->fetchColumn() > 0;
+        return $result;
     }
 }

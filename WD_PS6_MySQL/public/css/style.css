@@ -56,10 +56,16 @@ header > div {
     flex-direction: column;
     align-items: center;
     font-family: 'Montserrat', sans-serif;
+    position: relative;
 }
 
-.auth__form > div {
-    position: relative;
+.auth__input-block_user {
+    position: absolute;
+}
+
+.auth__input-block_pass {
+    position: absolute;
+    top: 85px;
 }
 
 .auth__input {
@@ -69,7 +75,6 @@ header > div {
     font-weight: bold;
     font-size: 16px;
     padding: 0 10px 0 10px;
-    margin-bottom: 25px;
     width: 240px;
     height: 35px;
 }
@@ -82,6 +87,12 @@ header > div {
     font-weight: bold;
 }
 
+.auth__btn-block {
+    position: absolute;
+    top: 180px;
+    text-align: center;
+}
+
 .auth__btn {
     background-color: #635960;
     color: #fffecd;
@@ -92,12 +103,13 @@ header > div {
     height: 37px;
     border: 0;
     padding: 0;
-    margin-top: 10px;
+    margin-bottom: 5px;
     font-family: 'Montserrat', sans-serif;
 }
 
 .auth__shadow {
-    position: relative;
+    position: absolute;
+    top: 217px;
     width: 262px;
     height: 150px;
     background: linear-gradient(to bottom, rgba(0,0,0,0.06), rgba(0,0,0,0));
@@ -106,22 +118,9 @@ header > div {
     z-index: -1;
 }
 
-.auth__error {
-    display: none;
-    position: absolute;
-    color: #c0392b;
-    font-size: 12px;
-    text-align: left;
-    top: 62px;
-    left: 1px;
-    width: 100%;
-    font-family: Arial, Helvetica, sans-serif;
-}
-
 .chat {
     display: flex;
     flex-direction: column;
-    align-items: center;
     width: 500px;
     position: relative;
 }
@@ -130,9 +129,10 @@ header > div {
     color: #635960;
     font-family: 'Montserrat', sans-serif;
     font-size: 18px;
-    /*font-weight: bold;*/
     position: absolute;
     top: -25px;
+    width: 500px;
+    text-align: center;
 }
 
 .chat__out {
@@ -180,44 +180,17 @@ header > div {
     font-family: 'Montserrat', sans-serif;
 }
 
-.chat__error {
+.error-msg {
     display: none;
     color: #c0392b;
-    font-size: 12px;
-    text-align: left;
-    width: 100%;
-    margin-top: 5px;
+    font-size: 13px;
+    margin-top: 2px;
     font-family: Arial, Helvetica, sans-serif;
-}
-
-.db-error {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.db-error__msg {
-    color: #d63031;
-    font-size: 16px;
-    font-family: 'Montserrat', sans-serif;
-    text-align: justify;
-    margin: 0 0 20px 0;
-    width: 400px;
-    word-break: break-word;
-}
-
-.db-error > img {
-    width: 150px;
-    height: 150px;
 }
 
 .emoji {
     width: 20px;
     height: 20px;
-}
-
-.border_red {
-    border: 1px solid #d63031;
 }
 
 [type=submit]:hover {

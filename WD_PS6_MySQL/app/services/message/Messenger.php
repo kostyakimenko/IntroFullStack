@@ -2,7 +2,7 @@
 
 namespace app\services\message;
 
-use app\services\io\DataIO;
+use app\services\DataIO;
 
 /**
  * Class Messenger.

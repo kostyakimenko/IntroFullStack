@@ -16,7 +16,7 @@ class User
      * @param string $username User name
      * @param string $password User password
      */
-    public function __construct($username, $password)
+    public function __construct(string $username, string $password)
     {
         $this->username = $username;
         $this->password = $password;

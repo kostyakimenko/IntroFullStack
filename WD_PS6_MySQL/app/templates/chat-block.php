@@ -12,5 +12,3 @@
 <form id="logout">
     <input class="logout__btn chat__btn" type="submit" value="Log Out">
 </form>
-
-<script src="js/chat.js"></script>

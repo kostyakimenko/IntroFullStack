@@ -2,7 +2,7 @@
 
 namespace app\services\user;
 
-use app\services\io\{DataIO, DBConnector};
+use app\services\DataIO;
 use PDO;
 
 /**
@@ -15,9 +15,9 @@ class UserDataIO implements DataIO
 
     /**
      * UserDataIO constructor.
-     * @param DBConnector $conn Object for connection
+     * @param PDO $conn Object for connection
      */
-    public function __construct(DBConnector $conn)
+    public function __construct(PDO $conn)
     {
         $this->conn = $conn;
     }
@@ -29,9 +29,11 @@ class UserDataIO implements DataIO
      */
     public function selectData($username)
     {
-        $sql = "SELECT * FROM users WHERE username = '$username'";
-        $statement = $this->conn->query($sql);
-        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        $sql = 'SELECT * FROM users WHERE username = :username';
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute(['username' => $username]);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $stmt = null;
 
         return $result;
     }
@@ -45,7 +47,9 @@ class UserDataIO implements DataIO
         $name = $user->getName();
         $pass = password_hash($user->getPass(), PASSWORD_DEFAULT);
 
-        $sql = "INSERT INTO users (username, password) VALUES ('$name', '$pass')";
-        $this->conn->query($sql);
+        $sql = 'INSERT INTO users (username, password) VALUES (:name, :pass)';
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute(['name' => $name, 'pass' => $pass]);
+        $stmt = null;
     }
 }
