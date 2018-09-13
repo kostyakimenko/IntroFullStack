@@ -5,14 +5,16 @@ session_start();
 use app\services\message\{Message, MessageDataIO, Messenger};
 
 // Check user authorization
-if (!isset($_SESSION['user'])) {
+$user = $_SESSION['user'] ?? false;
+
+if (!$user) {
     $response->responseData('user_error', 'Unauthorized');
     $response->sendResponse();
     exit;
 }
 
 // Check message
-$msg = (isset($_POST['msg'])) ? htmlspecialchars($_POST['msg']) : null;
+$msg = $_POST['msg'] ?? null;
 
 if ($msg !== null && empty(trim($msg))) {
     $response->responseData('msg_error', 'Empty message');
@@ -31,13 +33,13 @@ $dbIO = new MessageDataIO($pdo);
 $messenger = new Messenger($dbIO);
 
 // Request data
-$action = (isset($_POST['action'])) ? htmlspecialchars($_POST['action']) : null;
-$lastMsgId = (isset($_POST['last_id'])) ? htmlspecialchars($_POST['last_id']) : 0;
+$action = $_POST['action'] ?? null;
+$lastMsgId = $_POST['last_id'] ?? 0;
 
 // Select action for messaging
 switch ($action) {
     case 'addMsg':
-        $message = new Message($_SESSION['user'], $msg);
+        $message = new Message($user, htmlspecialchars($msg));
         $messenger->addMessage($message);
         $response->responseData('success', '', $messenger->getMessages($lastMsgId));
         $response->sendResponse();
