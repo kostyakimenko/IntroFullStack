@@ -32,9 +32,9 @@ class Authorizer
         $username = $user->getName();
         $password = $user->getPass();
 
-        $resp = $this->dataIO->selectData($username);
+        $userData = $this->dataIO->selectData($username);
 
-        if (password_verify($password, $resp['password'])) {
+        if (password_verify($password, $userData['password'])) {
             session_start();
             $_SESSION['user'] = $username;
             return true;
