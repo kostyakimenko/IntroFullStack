@@ -16,13 +16,13 @@ spl_autoload_register(function($class) {
 $response = new \app\services\Response();
 
 // Connect to the database
-$dns = "mysql:dbname={$database['dbname']};host={$database['hostname']}";
+$dsn = "mysql:dbname={$database['dbname']};host={$database['hostname']}";
 $user = $database['username'];
 $pass = $database['password'];
 $options = [PDO::ATTR_PERSISTENT => true];
 
 try {
-    $pdo = new PDO($dns, $user, $pass, $options);
+    $pdo = new PDO($dsn, $user, $pass, $options);
 } catch (PDOException $e) {
     $response->responseData('db_error', 'Database connect error');
     $response->sendResponse();
