@@ -1,0 +1,523 @@
+@import url('https://fonts.googleapis.com/css?family=Kaushan+Script');
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+@font-face {
+    font-family: "Black Jack";
+    src: url("fonts/BLACKJAR.TTF");
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    width: 100%;
+    font-family: "Montserrat", sans-serif;
+}
+
+h1 {
+    font-size: 70px;
+    color: #fff;
+    font-family: "Black Jack", sans-serif;
+    font-weight: 400;
+}
+
+h2 {
+    font-size: 40px;
+    font-weight: 300;
+    color: #545454;
+}
+
+a {
+    text-decoration: none;
+}
+
+.bold-cursive {
+    font-style: italic;
+    font-weight: 900;
+}
+
+.text-blue {
+    color: #5bd4f0;
+}
+
+.perth-button {
+    background: none;
+    color: #fff;
+    border: 2px solid #fff;
+    border-radius: 2px;
+    font-size: 14px;
+    font-family: "Montserrat", sans-serif;
+}
+
+button, .header__nav-icon, .footer__btn_up {
+    cursor: pointer;
+}
+
+/*
+Header section styles.
+----------------------
+Logo, navigation item,
+main header, slogan, download button
+and iphone image.
+*/
+
+header {
+    position: relative;
+    background-image: url('../img/blue-pattern.jpg');
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    transition: 0.5s;
+}
+
+.header__container {
+    position: relative;
+    width: 940px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    margin: 0 20px;
+}
+
+.header__top {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.header__logo {
+    width: 100px;
+    height: 100px;
+    background-color: #fff;
+    box-shadow: 0 4px #01abe8, 15px 15px #01b1ea;
+    font-size: 50px;
+    color: #0da9e5;
+    font-family: "Kaushan Script", cursive;
+    text-align: center;
+}
+
+.header__nav-icon {
+    z-index: 2;
+}
+
+.header__nav-icon > div {
+    width: 30px;
+    height: 4px;
+    background-color: #fff;
+    border-radius: 2px;
+    margin: 2px 0;
+    transition: 0.5s;
+}
+
+.change-icon .header__nav-icon_bar1 {
+    transform: rotate(-45deg) translate(-5px, 5px);
+}
+
+.change-icon .header__nav-icon_bar4 {
+    transform: rotate(45deg) translate(-8px, -8px);
+}
+
+.change-icon .header__nav-icon_bar2,
+.change-icon .header__nav-icon_bar3 {
+    opacity: 0;
+}
+
+.header__content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 100%;
+    margin-bottom: 230px;
+}
+
+.header__content > h1 {
+    margin: 50px -5px 0 0;
+}
+
+.header__content > p {
+    font-size: 32px;
+    color: #fff;
+    font-weight: 300;
+    margin: 20px 0 50px 0;
+}
+
+.header__content > button {
+    padding: 17px 25px;
+}
+
+.header__content > button > i {
+    margin-left: 10px;
+}
+
+.header__container > img {
+    position: absolute;
+    bottom: -215px;
+    left: 70px;
+}
+
+.header__nav {
+    position: absolute;
+    background-color: #f37779;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    z-index: -1;
+    transition: 0.5s;
+}
+
+.header__nav-list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.header__nav-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.header__nav-item > div {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: #4eacdd;
+    margin-right: 20px;
+}
+
+.change-nav {
+    opacity: 0.9;
+    z-index: 1;
+}
+
+/*
+'About me' section styles.
+--------------------------
+Header, 1st paragraph, 2nd paragraph,
+button and ipad image.
+*/
+.about-me {
+    background-color: #f3f3f3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.about-me__container {
+    position: relative;
+    width: 1260px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+}
+
+.about-me__content {
+    width: 940px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 135px 0 140px 0;
+}
+
+.about-me__content > h2 {
+    margin-bottom: 30px;
+}
+
+.about-me__content > p {
+    width: 60%;
+    font-size: 16px;
+    line-height: 25px;
+    color: #7e7e7e;
+}
+
+.about-me__content > p:nth-child(3) {
+    padding-left: 20px;
+    margin: 20px 0 70px 0;
+    border-left: 6px solid #4dabdd;
+    font-style: italic;
+}
+
+.about-me__content > button {
+    color: #14af8f;
+    border-color: #14af8f;
+    padding: 17px 30px;
+}
+
+.about-me__content > button > i {
+    margin-left: 15px;
+}
+
+.about-me__ipad {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 340px;
+    height: 500px;
+    overflow: hidden;
+}
+
+/*
+Portfolio section styles.
+-------------------------
+Header, 1st paragraph, 2nd paragraph,
+button and devices image.
+*/
+.portfolio {
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.portfolio__container {
+    position: relative;
+    width: 1260px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+}
+
+.portfolio__content {
+    width: 940px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin: 95px 0 240px 0;
+}
+
+.portfolio__content > div {
+    width: 410px;
+}
+
+.portfolio__content h2 {
+    margin-bottom: 30px;
+}
+
+.portfolio__content p:nth-child(2) {
+    font-size: 16px;
+    line-height: 25px;
+    color: #474e5d;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.portfolio__content p:nth-child(3) {
+    font-size: 16px;
+    line-height: 25px;
+    color: #7e7e7e;
+    margin: 25px 0 55px 0;
+}
+
+.portfolio__content button {
+    color: #e94b89;
+    border-color: #e94b89;
+    padding: 17px 25px;
+}
+
+.portfolio__content button i {
+    margin-left: 15px;
+}
+
+.portfolio__devices {
+    position: absolute;
+    bottom: -60px;
+    right: 480px;
+}
+
+/*
+Donate section styles.
+----------------------
+Header and button.
+*/
+.donate {
+    background-image: url("../img/green-pattern.jpg");
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.donate__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 90px 0 100px 0;
+}
+
+.donate__content > h2 {
+    color: #fff;
+    margin-bottom: 30px;
+}
+
+.donate__content > button {
+    padding: 18px 33px;
+}
+
+.donate__content > button > i {
+    margin-left: 20px;
+}
+
+/*
+Contact section styles.
+-----------------------
+Social icons, email form.
+*/
+.contact {
+    background-color: #f3f3f3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.contact__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 240px 0;
+
+}
+
+.contact__icons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.contact__icons > a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border: 3px solid #535353;
+    border-radius: 50%;
+    color: #535353;
+    font-size: 20px;
+    margin: 0 17px 70px 18px;
+}
+
+.contact__form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.contact__form > label {
+    font-size: 16px;
+    color: #545454;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.contact__input {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 43px;
+    border-width: 0;
+    border-radius: 10px;
+    background-color: #ffffff;
+    font-size: 15px;
+    margin-left: 20px;
+}
+
+.contact__input > [type=email] {
+    width: 140px;
+    border: none;
+    margin: 0 15px;
+    font-size: 14px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: bold;
+    outline: none;
+}
+
+.contact__input > [type=email]::placeholder {
+    font-size: 14px;
+    color: #d3d3d3;
+    font-family: "Montserrat", sans-serif;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.contact__border {
+    width: 1px;
+    height: 14px;
+    background-color: #e2e2e2;
+}
+
+.contact__input > button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    padding: 0 15px;
+    height: 100%;
+}
+
+.contact__input > button > i {
+    color: #6ec5ea;
+    font-size: 15px;
+}
+
+/*
+Footer section style.
+---------------------
+Paragraph and scroll-up button.
+*/
+footer {
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footer__container {
+    position: relative;
+    width: 1260px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer__container p {
+    font-size: 12px;
+    font-weight: bold;
+    color: #545454;
+    margin: 45px 0;
+}
+
+.footer__container div {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: #f3f3f3;
+    font-size: 15px;
+    color: #545454;
+    right: 60px;
+}

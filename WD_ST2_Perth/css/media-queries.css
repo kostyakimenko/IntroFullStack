@@ -1,0 +1,119 @@
+@media screen and (max-width: 1260px) {
+    .about-me__container, .portfolio__container, .footer__container {
+        width: 100%;
+    }
+
+    .portfolio__devices {
+        right: 35%;
+    }
+}
+
+@media screen and (max-width: 980px) {
+    .header__container, .about-me__content, .portfolio__content {
+        width: 95%;
+    }
+
+    .about-me__ipad {
+        width: 30%;
+    }
+}
+
+@media screen and (max-width: 810px) {
+    h1, h2 {
+        text-align: center;
+    }
+
+    .header__content, .about-me__content, .portfolio__content {
+        align-items: center;
+    }
+
+    .header__content {
+        margin-bottom: 300px;
+    }
+
+    .header__content p {
+        text-align: center;
+    }
+
+    .header__container img {
+        left: auto;
+    }
+
+    .about-me__content {
+        margin: 50px 0 40px 0;
+    }
+
+    .about-me__content p {
+        width: 90%;
+    }
+
+    .about-me__ipad {
+        position: relative;
+        width: auto;
+        height: 250px;
+    }
+
+    .about-me__ipad img {
+        width: 100%;
+    }
+
+    .portfolio__content {
+        margin: 50px 0 -20px 0;
+        align-items: center;
+    }
+
+    .portfolio__content > div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .portfolio__devices {
+        position: relative;
+        width: auto;
+        right: auto;
+        bottom: -50px;
+    }
+
+    .footer__container div {
+        position: relative;
+        right: auto;
+        bottom: 20px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .portfolio__content > div {
+        width: 90%;
+    }
+
+    .contact__icons div {
+        margin: 0 10px 50px 10px;
+    }
+
+    .contact__form {
+        flex-direction: column;
+    }
+
+    .contact__input {
+        margin: 10px 0 0 0;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .contact__content {
+        margin: 100px 0;
+    }
+
+    .contact__icons {
+        flex-direction: column;
+    }
+
+    .contact__icons > a {
+        margin: 0 0 20px 0;
+    }
+
+    .contact__form {
+        margin-top: 20px;
+    }
+}
