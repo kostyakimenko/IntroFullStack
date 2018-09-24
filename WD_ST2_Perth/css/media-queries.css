@@ -18,7 +18,7 @@
     }
 }
 
-@media screen and (max-width: 810px) {
+@media screen and (max-width: 830px) {
     h1, h2 {
         text-align: center;
     }
@@ -31,11 +31,11 @@
         margin-bottom: 300px;
     }
 
-    .header__content p {
+    .header__content > p {
         text-align: center;
     }
 
-    .header__container img {
+    .header__iphone {
         left: auto;
     }
 
@@ -43,7 +43,7 @@
         margin: 50px 0 40px 0;
     }
 
-    .about-me__content p {
+    .about-me__content > p {
         width: 90%;
     }
 
@@ -53,7 +53,7 @@
         height: 250px;
     }
 
-    .about-me__ipad img {
+    .about-me__ipad > img {
         width: 100%;
     }
 
@@ -75,7 +75,7 @@
         bottom: -50px;
     }
 
-    .footer__container div {
+    .footer__btn_up {
         position: relative;
         right: auto;
         bottom: 20px;
@@ -87,7 +87,7 @@
         width: 90%;
     }
 
-    .contact__icons div {
+    .contact__icons > a {
         margin: 0 10px 50px 10px;
     }
 
@@ -101,6 +101,18 @@
 }
 
 @media screen and (max-width: 375px) {
+    h1 {
+        font-size: 60px;
+    }
+
+    h2 {
+        font-size: 30px;
+    }
+
+    .header__content > p {
+        font-size: 25px;
+    }
+
     .contact__content {
         margin: 100px 0;
     }

@@ -29,7 +29,7 @@
                     DOWNLOAD<i class="fas fa-cloud-download-alt"></i>
                 </button>
             </div>
-            <img src="img/iphone.png" alt="iphone">
+            <img class="header__iphone" src="img/iphone.png" alt="iphone">
         </div>
         <div class="header__nav" id="nav">
             <div class="header__nav-list">
@@ -121,6 +121,7 @@
         </div>
     </section>
 
+    <!--Footer section-->
     <footer>
         <div class="footer__container">
             <p>© 2013 <span class="text-blue">Perth</span>. <span class="bold-cursive">Breeding pixels since the naughties.</span></p>
@@ -128,18 +129,6 @@
         </div>
     </footer>
 
-    <script>
-        function navigation() {
-            const navIcon = document.getElementById('nav-icon');
-            const nav = document.getElementById('nav');
-
-            navIcon.classList.toggle('change-icon');
-            nav.classList.toggle('change-nav');
-        }
-
-        function scrollUp() {
-            document.documentElement.scrollTop = 0;
-        }
-    </script>
+    <script src="js/script.js"></script>
 </body>
 </html>

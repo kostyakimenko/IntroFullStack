@@ -155,7 +155,7 @@ header {
     margin-left: 10px;
 }
 
-.header__container > img {
+.header__iphone {
     position: absolute;
     bottom: -215px;
     left: 70px;
@@ -331,7 +331,7 @@ button and devices image.
 .portfolio__content button {
     color: #e94b89;
     border-color: #e94b89;
-    padding: 17px 25px;
+    padding: 17px 24px;
 }
 
 .portfolio__content button i {
@@ -501,14 +501,14 @@ footer {
     align-items: center;
 }
 
-.footer__container p {
+.footer__container > p {
     font-size: 12px;
     font-weight: bold;
     color: #545454;
     margin: 45px 0;
 }
 
-.footer__container div {
+.footer__btn_up {
     position: absolute;
     display: flex;
     justify-content: center;
