@@ -1,20 +1,34 @@
 @media screen and (max-width: 1260px) {
-    .about-me__container, .portfolio__container, .footer__container {
-        width: 100%;
+    .about-me__container {
+        width: 110%;
     }
 
-    .portfolio__devices {
-        right: 35%;
+    .footer__container {
+        width: 100%;
     }
 }
 
 @media screen and (max-width: 980px) {
+    .about-me__container, .portfolio__container {
+        width: 100%;
+    }
+
     .header__container, .about-me__content, .portfolio__content {
         width: 95%;
     }
 
-    .about-me__ipad {
-        width: 30%;
+    .about-me__container {
+        background-position-x: 620px;
+    }
+
+    .portfolio__container {
+        background-position: bottom -60px right 340px;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .portfolio__container {
+        background-position: bottom -60px left -300px;
     }
 }
 
@@ -27,38 +41,49 @@
         align-items: center;
     }
 
+    .header__container {
+        background-position-x: center;
+    }
+
     .header__content {
-        margin-bottom: 300px;
+        margin-bottom: 100px;
     }
 
     .header__content > p {
         text-align: center;
+        margin-bottom: 150px;
     }
 
-    .header__iphone {
-        left: auto;
+    .about-me__container {
+        background-position: center;
+        background-size: contain;
+        margin: 20px 0;
     }
 
     .about-me__content {
-        margin: 50px 0 40px 0;
+        margin: 100px 0 100px 0;
+    }
+
+    .about-me__content > h2 {
+        font-size: 33px;
     }
 
     .about-me__content > p {
-        width: 90%;
+        width: 330px;
     }
 
-    .about-me__ipad {
-        position: relative;
-        width: auto;
-        height: 250px;
+    .about-me__content > p:nth-child(3) {
+        margin-bottom: 40px;
     }
 
-    .about-me__ipad > img {
-        width: 100%;
+    .portfolio__container {
+        background-position: center bottom -35px;
+        background-size: contain;
     }
 
     .portfolio__content {
-        margin: 50px 0 -20px 0;
+        margin-top: 50px;
+        margin-bottom: 50vw;
         align-items: center;
     }
 
@@ -66,13 +91,6 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-    }
-
-    .portfolio__devices {
-        position: relative;
-        width: auto;
-        right: auto;
-        bottom: -50px;
     }
 
     .footer__btn_up {
@@ -83,6 +101,23 @@
 }
 
 @media screen and (max-width: 500px) {
+    .about-me__container {
+        background-size: 150% 150%;
+        margin: 0;
+    }
+
+    .about-me__content {
+        margin: 50px 0;
+    }
+
+    .about-me__content > h2 {
+        font-size: 40px;
+    }
+
+    .about-me__content > p {
+        width: 90%;
+    }
+
     .portfolio__content > div {
         width: 90%;
     }
@@ -105,7 +140,7 @@
         font-size: 60px;
     }
 
-    h2 {
+    h2, .about-me__content > h2 {
         font-size: 30px;
     }
 

@@ -14,6 +14,7 @@
 body {
     width: 100%;
     font-family: "Montserrat", sans-serif;
+    overflow-x: hidden;
 }
 
 h1 {
@@ -74,6 +75,7 @@ header {
 }
 
 .header__container {
+    background: url("../img/iphone.png") no-repeat left 70px bottom -215px;
     position: relative;
     width: 940px;
     display: flex;
@@ -155,12 +157,6 @@ header {
     margin-left: 10px;
 }
 
-.header__iphone {
-    position: absolute;
-    bottom: -215px;
-    left: 70px;
-}
-
 .header__nav {
     position: absolute;
     background-color: #f37779;
@@ -219,15 +215,16 @@ button and ipad image.
     flex-direction: column;
     align-items: center;
     width: 100%;
+    overflow: hidden;
 }
 
 .about-me__container {
+    background: url("../img/ipad.png") no-repeat right 0 bottom -80px;
     position: relative;
-    width: 1260px;
+    width: 1400px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    overflow: hidden;
 }
 
 .about-me__content {
@@ -243,7 +240,7 @@ button and ipad image.
 }
 
 .about-me__content > p {
-    width: 60%;
+    width: 560px;
     font-size: 16px;
     line-height: 25px;
     color: #7e7e7e;
@@ -266,15 +263,6 @@ button and ipad image.
     margin-left: 15px;
 }
 
-.about-me__ipad {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    width: 340px;
-    height: 500px;
-    overflow: hidden;
-}
-
 /*
 Portfolio section styles.
 -------------------------
@@ -286,15 +274,16 @@ button and devices image.
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow: hidden;
 }
 
 .portfolio__container {
+    background: url("../img/devices.png") no-repeat left 0 bottom -60px;
     position: relative;
-    width: 1260px;
+    width: 1420px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    overflow: hidden;
 }
 
 .portfolio__content {
@@ -336,12 +325,6 @@ button and devices image.
 
 .portfolio__content button i {
     margin-left: 15px;
-}
-
-.portfolio__devices {
-    position: absolute;
-    bottom: -60px;
-    right: 480px;
 }
 
 /*

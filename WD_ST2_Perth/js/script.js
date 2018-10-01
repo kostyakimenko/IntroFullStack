@@ -1,9 +1,6 @@
 function navigation() {
-    const navIcon = document.getElementById('nav-icon');
-    const nav = document.getElementById('nav');
-
-    navIcon.classList.toggle('change-icon');
-    nav.classList.toggle('change-nav');
+    document.getElementById('nav-icon').classList.toggle('change-icon');
+    document.getElementById('nav').classList.toggle('change-nav');
 }
 
 function scrollUp() {
