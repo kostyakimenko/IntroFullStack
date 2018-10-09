@@ -1,4 +1,4 @@
-const MAX_TEXT_LENGTH = 50;
+const MAX_TEXT_LENGTH = 30;
 const INIT_BALLOON_WIDTH = 50;
 const INIT_BALLOON_HEIGHT = 20;
 const BALLOON_PADDING = 5;
@@ -79,7 +79,7 @@ mainContainer.click(function(e) {
     }
 });
 
-//Add draggable speech balloons
+// Add draggable speech balloons
 function addSpeechBalloon(id, xPos, yPos, text = '') {
     $(`<div class="speech-balloon" id=${id}>`)
         .css({
@@ -90,7 +90,8 @@ function addSpeechBalloon(id, xPos, yPos, text = '') {
             'top': yPos
         })
         .text(text)
-        .appendTo(mainContainer).draggable({
+        .appendTo(mainContainer)
+        .draggable({
             containment: 'parent',
             stop: function() {
                 const draggableDiv = $(this);
