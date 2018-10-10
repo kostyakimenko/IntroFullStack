@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="css/style.css" rel="stylesheet">
+    <title>Text search</title>
+</head>
+<body>
+
+    <h2>Text search with RegExp</h2>
+
+    <div class="container">
+
+        <form onsubmit="return false;" id="form">
+            <label for="text">Text:</label>
+            <textarea cols="50" rows="10" title="Text field" id="text"></textarea>
+            <div class="error text_error" id="text_err"></div>
+
+            <label for="regexp">Regular expression (/pattern/flags):</label>
+            <input type="text" title="regexp" id="regexp">
+            <div class="error regexp_error" id="regexp_err"></div>
+
+            <input type="button" onclick="search()" value="Get marked text">
+        </form>
+
+        <label for="output">Result:</label>
+        <div class="output" id="output"></div>
+
+    </div>
+
+    <script src="js/text-search.js"></script>
+
+</body>
+</html>

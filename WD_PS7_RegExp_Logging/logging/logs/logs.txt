@@ -1,0 +1,88 @@
+2018-10-10 16:14:11
+level=user_error
+service=authorization
+message=Invalid name length (range 1-30)
+userID=unknown
+clientIP=127.0.0.1
+
+
+2018-10-10 16:14:30
+level=user_error
+service=authorization
+message=Invalid name (allowed "a-z", "A-Z", "0-9", "_")
+userID=unknown
+clientIP=127.0.0.1
+
+
+2018-10-10 16:15:01
+level=pass_error
+service=authorization
+message=Invalid password
+userID=unknown
+clientIP=127.0.0.1
+
+
+2018-10-10 16:15:30
+level=success
+service=authorization
+message=User login
+userID=1
+clientIP=127.0.0.1
+
+
+2018-10-10 16:15:31
+level=success
+service=messaging
+message=Uploading message history
+userID=1
+clientIP=127.0.0.1
+
+
+2018-10-10 16:15:37
+level=msg_error
+service=messaging
+message=Empty message
+userID=1
+clientIP=127.0.0.1
+
+
+2018-10-10 16:15:47
+level=success
+service=messaging
+message=User send message
+userID=1
+clientIP=127.0.0.1
+
+
+2018-10-10 16:16:06
+level=success
+service=authorization
+message=User logout
+userID=1
+clientIP=127.0.0.1
+
+
+2018-10-10 16:16:34
+level=success
+service=authorization
+message=User login
+userID=1
+clientIP=127.0.0.1
+
+
+2018-10-10 16:16:34
+level=success
+service=messaging
+message=Uploading message history
+userID=1
+clientIP=127.0.0.1
+
+
+2018-10-10 16:16:53
+level=success
+service=authorization
+message=User logout
+userID=1
+clientIP=127.0.0.1
+
+

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="css/style.css" rel="stylesheet">
+    <title>Form validation</title>
+</head>
+<body>
+
+    <h1>Form validation</h1>
+
+    <form id="form" autocomplete="on">
+        <div class="form__input">
+            <label for="ip">IP-address</label>
+            <input name="ip" type="text" id="ip">
+        </div>
+        <div class="form__input">
+            <label for="url">URL (with protocol)</label>
+            <input name="url" type="text" id="url">
+        </div>
+        <div class="form__input">
+            <label for="email">E-mail</label>
+            <input name="email" type="text" id="email">
+        </div>
+        <div class="form__input">
+            <label for="date">Date (mm/dd/yyyy)</label>
+            <input name="date" type="text" id="date">
+        </div>
+        <div class="form__input">
+            <label for="time">Time (hh:mm:ss)</label>
+            <input name="time" type="text" id="time">
+        </div>
+        <input class="form__btn" type="submit" value="Submit">
+    </form>
+
+    <div class="success" id="valid">
+        <h3>Form is valid!</h3>
+        <button onclick="location.reload()">Back to form</button>
+    </div>
+
+    <script src="js/jquery-3.3.1.js"></script>
+    <script src="js/form-validate.js"></script>
+
+</body>
+</html>
